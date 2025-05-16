@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://fakestoreapi.com'
+    apiUrl: 'https://api.escuelajs.co/api/v1'
 };

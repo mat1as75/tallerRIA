@@ -1,0 +1,22 @@
+@use 'styles' as theme;
+
+hr {
+    opacity: 0.5;
+}
+
+.card-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+}
+  
+@media (max-width: 575.98px) {
+    .card-wrapper {
+        width: 50%;
+        padding: 0;
+    }
+  
+    .card-wrapper .card {
+        margin: 0 auto;
+    }
+}
+  

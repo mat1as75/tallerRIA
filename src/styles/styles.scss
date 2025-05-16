@@ -1,0 +1,21 @@
+@use 'variables' as theme;
+
+.bg-app-primary { 
+    background-color: theme.$primary-color !important;
+}
+
+.bg-app-secondary {
+    background-color: theme.$background-color !important;
+}
+
+.bg-custom {
+    background-color: theme.$border-color !important;
+}
+
+.border-custom {
+    border: 1px solid theme.$border-color !important;
+}
+
+.text-custom-gray {
+    color: theme.$text-color !important;
+}
