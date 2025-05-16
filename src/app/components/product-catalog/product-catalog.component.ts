@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductService } from '../../services/http/product.service';
+import { ProductService } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../interfaces/Product.interface';
 import { environment } from '../../../environments/environment.development';
@@ -28,10 +28,6 @@ export class ProductCatalogComponent implements OnInit {
   }
 
   trackByProducts(index: number, product: Product): number { return product.id; } 
-
-  trackById(index: number, product: any): number {
-    return product.id;
-  }
 
   getProductsList() {
     this.productService.getProducts()

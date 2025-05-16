@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { environment } from '../environments/environment.development';
-import { ProductService } from './services/http/product.service';
+import { ProductService } from './services/product/product.service';
 import { ProductCatalogComponent } from './components/product-catalog/product-catalog.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductCatalogComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
