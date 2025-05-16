@@ -3,9 +3,13 @@ export interface Product {
     title: string
     price: number
     description?: string
-    category?: {
-        id?: number
-        name?: string
+    category: {
+        id: number
+        name: string
+    }
+    brand: {
+        id: number;
+        name: string;
     }
     images?: string[]
 }

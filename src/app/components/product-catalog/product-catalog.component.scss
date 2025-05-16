@@ -19,4 +19,24 @@ hr {
         margin: 0 auto;
     }
 }
+
+.card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3 ease;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+form-check {
+    width: 16px;
+    max-width: 16px;
+}
   
