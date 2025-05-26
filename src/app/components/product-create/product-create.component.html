@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="mb-3">Alta Producto</h1>
+            <form [formGroup]="formReactivo" (ngSubmit)="onSubmit()">
+                <hr>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="nombreForm" placeholder="Nombre" formControlName="nombre">
+                    <label for="nombreForm">Nombre</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="precioForm" placeholder="Precio" formControlName="precio">
+                    <label for="precioForm">Precio</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="stockForm" placeholder="Stock" formControlName="stock">
+                    <label for="stockForm">Stock</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="marcaForm" placeholder="Marca" formControlName="marca">
+                    <label for="marcaForm">Marca</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="categoriaForm" formControlName="categoria" aria-label="Seleccionar categoría">
+                        <option disabled selected>Seleccionar categoría</option>
+                        <option value="1">Categoría 1</option>
+                        <option value="2">Categoría 2</option>
+                    </select>
+                    <label for="categoriaForm">Categoría</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="descripcionForm" placeholder="Descripción" style="height: 100px" formControlName="descripcion"></textarea>
+                    <label for="descripcionForm">Descripción</label>
+                </div>
+                <div class="mb-3">
+                    <label for="imagenForm" class="form-label">Imagen del producto</label>
+                    <input class="form-control" type="file" id="imagenForm" formControlName="imagen">
+                </div>
+                <hr>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                    <button type="reset" class="btn btn-outline-secondary">Cancelar</button>
+                </div>
+                <div *ngIf="activarMensaje" class="mb-3 alert alert-success alert-dismissible fade show" role="alert">
+                    {{ exito }}
+                    <button type="button" class="btn-close" (click)="activarMensaje = false" aria-label="Close"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
