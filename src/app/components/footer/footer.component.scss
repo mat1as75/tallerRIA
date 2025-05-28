@@ -1,0 +1,30 @@
+.footer {
+  background-color: #111;
+  color: #fff;
+  padding: 1rem 0;
+  border-top: 1px solid #333;
+  font-size: 0.875rem;
+
+  .nav-link {
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      color: #ccc;
+    }
+  }
+
+  .border-start {
+    border-left: 1px solid #444;
+    padding-left: 1rem;
+  }
+
+  hr {
+    border-color: #444;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
