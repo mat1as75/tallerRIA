@@ -1,0 +1,72 @@
+.about-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.about-container {
+  flex: 1;
+  padding: 6rem 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+    text-align: left;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: left;
+    max-width: 800px;
+  }
+
+  .benefits {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .benefit {
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: calc(25% - 1.125rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .benefit {
+      width: 100%;
+    }
+  }
+}
