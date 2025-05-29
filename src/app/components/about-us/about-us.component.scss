@@ -30,11 +30,10 @@
 
   .benefits {
     display: flex;
-    flex-wrap: nowrap; 
     justify-content: space-between;
     gap: 1.5rem;
     margin-top: 2.5rem;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
   }
 
   .benefit {
@@ -42,7 +41,7 @@
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 1.5rem;
-    width: calc(25% - 1.125rem); 
+    width: calc(25% - 1.125rem);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -66,13 +65,8 @@
   }
 
   @media (max-width: 768px) {
-  .benefits {
-    flex-wrap: wrap;
+    .benefit {
+      width: 100%;
+    }
   }
-
-  .benefit {
-    width: 100%;
-  }
-}
-
 }

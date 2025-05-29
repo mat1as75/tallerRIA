@@ -83,22 +83,19 @@
   }
 }
 
-.card {
-  transition: 0.2s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  }
-}
-
 .bestsellers-section .card {
+  transition: 0.2s ease;
   flex: 1 1 180px;
   min-width: 160px;
   max-width: 220px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .benefits-section .benefit-card {
