@@ -1,0 +1,5 @@
+@use 'variables' as theme;
+
+body {
+    background-color: theme.$background-color;
+}

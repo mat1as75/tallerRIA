@@ -1,83 +1,146 @@
-<div class="max-w-screen-xl mx-auto p-4">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <!-- Imagen del producto -->
-    <div class="relative">
-      <button class="absolute top-2 left-2 bg-white rounded-full p-2 shadow-md">
-        <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-          <path
-            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-          />
-        </svg>
-      </button>
-      <div
-        class="bg-gray-100 aspect-square flex items-center justify-center rounded-lg"
-      >
-        <span class="text-gray-400">Imagen del producto</span>
-      </div>
-    </div>
+<app-navbar></app-navbar>
 
-    <!-- Detalles del producto -->
-    <div class="flex flex-col gap-4">
-      <h2 class="text-xl font-semibold">Nombre del Producto</h2>
-      <p class="text-3xl font-bold text-gray-900">USD <span>50</span></p>
-      <p class="text-gray-500">
-        Disponibilidad:
-        <span class="font-medium text-black">5 disponibles</span>
-      </p>
-      <p class="text-gray-500">
-        Categoría: <span class="font-medium text-black">Notebooks</span>
-      </p>
-
-      <button
-        class="bg-purple-800 text-white py-2 px-6 rounded-full hover:bg-purple-700 transition-all w-fit"
-      >
-        AGREGAR AL CARRITO
-      </button>
-
-      <!-- Selector de cantidad -->
-      <div class="flex items-center gap-2 border rounded-full px-3 py-1 w-fit">
-        <button class="text-gray-600 text-lg font-bold">−</button>
-        <span class="px-2 text-gray-800">2</span>
-        <button class="text-gray-600 text-lg font-bold">+</button>
-      </div>
-
-      <!-- Descripción -->
-      <div class="border rounded-md p-3 text-sm text-gray-700 bg-white">
-        <details open>
-          <summary class="font-semibold cursor-pointer">Descripción</summary>
-          <p class="mt-2 text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua...
-          </p>
-        </details>
-      </div>
-    </div>
-  </div>
-
-  <!-- Últimas reseñas -->
-  <div class="mt-12">
-    <h3 class="text-lg font-semibold mb-4">Últimas reseña</h3>
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-    >
-      <!-- Card de reseña -->
-      <div class="border rounded-md p-4 bg-white">
-        <p class="italic text-gray-700">“Comentario”</p>
-        <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+<section class="bg-app-secondary mt-5">
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Imagen del producto -->
+      <div class="col-md-6">
+        <div class="position-relative border rounded bg-white p-3 text-center">
           <img
-            src="https://via.placeholder.com/24"
-            alt="Avatar"
-            class="w-6 h-6 rounded-full"
+            [src]="productDetails?.images?.[0]"
+            class="img-fluid"
+            alt="Producto"
           />
-          <div>
-            <p>Nombre del reseñador</p>
-            <p class="text-xs">Fecha</p>
-          </div>
         </div>
       </div>
 
-      <!-- Duplicar o mapear este bloque para más reseñas -->
-      <!-- ... -->
+      <!-- Detalles del producto -->
+      <div class="col-md-6">
+        <h5 class="fw-bold text-dark-gray">{{ productDetails?.title }}</h5>
+        <div class="d-flex align-items-baseline mb-5 fw-bold text-dark-gray">
+          <span class="me-1 text-uppercase">USD</span>
+          <span class="fs-2">{{ productDetails?.price }}</span>
+        </div>
+        <p class="text-muted mb-1">Disponibilidad: 5 disponibles</p>
+        <p class="text-muted mb-5">
+          Categoría: {{ productDetails?.category?.name }}
+        </p>
+
+        <button class="btn bg-app-primary mt-5 mb-4 w-400px rounded-pill">
+          <span class="fw-semibold text-extra-light-gray">
+            AGREGAR AL CARRITO</span
+          >
+        </button>
+
+        <!-- Contador -->
+        <div
+          class="d-flex align-items-center justify-content-between bg-white border border-light-gray rounded-pill px-2 mb-3 bg-app-secondary"
+          style="width: 80px; height: 34px"
+        >
+          <button
+            class="btn btn-sm p-0 border-0 shadow-none text-light-gray"
+            type="button"
+          >
+            −
+          </button>
+          <input
+            type="text"
+            class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary fw-bold text-light-gray"
+            style="width: 30px"
+            value="1"
+          />
+          <button
+            class="btn btn-sm p-0 border-0 shadow-none text-light-gray"
+            type="button"
+          >
+            +
+          </button>
+        </div>
+
+        <!-- Acordeón de descripción -->
+        <div class="accordion" id="accordionDescripcion">
+          <div class="accordion-item bg-app-secondary border border-light-gray">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button collapsed bg-app-secondary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseDescripcion"
+              >
+                <span class="fw-semibold text-dark-gray">Descripción</span>
+              </button>
+            </h2>
+            <div
+              id="collapseDescripcion"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionDescripcion"
+            >
+              <div class="accordion-body">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                ut aliquip ex ea commodo consequat.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reseñas -->
+    <div class="mt-5">
+      <h5 class="fw-semibold">Últimas reseña</h5>
+      <div class="row row-cols-1 row-cols-md-3 g-3 mt-2">
+        <!-- Reseña -->
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body bg-app-secondary rounded">
+              <blockquote class="text-dark-gray fw-semibold blockquote mb-2">
+                “Comentario”
+              </blockquote>
+              <div class="d-flex align-items-center text-light-gray">
+                <div>
+                  <div class="fw-bold small">Nombre del reseñador</div>
+                  <div class="text-muted small">Fecha</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Reseña -->
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body bg-app-secondary rounded">
+              <blockquote class="text-dark-gray fw-semibold blockquote mb-2">
+                “Comentario”
+              </blockquote>
+              <div class="d-flex align-items-center text-light-gray">
+                <div>
+                  <div class="fw-bold small">Nombre del reseñador</div>
+                  <div class="text-muted small">Fecha</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Reseña -->
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body bg-app-secondary rounded">
+              <blockquote class="text-dark-gray fw-semibold blockquote mb-2">
+                “Comentario”
+              </blockquote>
+              <div class="d-flex align-items-center text-light-gray">
+                <div>
+                  <div class="fw-bold small">Nombre del reseñador</div>
+                  <div class="text-muted small">Fecha</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<app-footer></app-footer>

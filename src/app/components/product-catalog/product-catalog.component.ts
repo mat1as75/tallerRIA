@@ -6,11 +6,13 @@ import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router';
 import { Category } from '../../interfaces/Category.interface';
 import { Brand } from '../../interfaces/Brand.interface';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-product-catalog',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent],
   templateUrl: './product-catalog.component.html',
   styleUrl: './product-catalog.component.scss'
 })

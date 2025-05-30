@@ -12,10 +12,18 @@
     background-color: theme.$border-color !important;
 }
 
-.border-custom {
+.border-light-gray {
     border: 1px solid theme.$border-color !important;
 }
 
-.text-custom-gray {
+.text-dark-gray {
     color: theme.$text-color !important;
+}
+
+.text-light-gray {
+    color: theme.$border-color !important;
+}
+
+.text-extra-light-gray {
+    color: theme.$background-color !important;
 }
