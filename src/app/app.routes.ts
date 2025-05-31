@@ -8,6 +8,8 @@ import { AboutComponent } from './components/about-us/about-us.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductOrdersComponent } from './components/product-orders/product-orders.component';
+import { AltaGestorComponent } from './components/alta-gestor/alta-gestor.component';
+import { ModificarPedidoComponent } from './components/modificar-pedido/modificar-pedido.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -19,5 +21,8 @@ export const routes: Routes = [
     {path: 'register', component: RegisterComponent},
     {path: 'altaProducto', component: ProductCreateComponent},
     {path: 'listaProducto', component: ProductListComponent},
-    {path: 'ordenesProducto', component: ProductOrdersComponent}
+    {path: 'ordenesProducto', component: ProductOrdersComponent},
+    {path: 'altaGestor', component: AltaGestorComponent},
+    {path: 'modificarPedido', component: ModificarPedidoComponent}
+
 ];
