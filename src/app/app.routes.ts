@@ -6,6 +6,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductOrdersComponent } from './components/product-orders/product-orders.component';
+import { ReuperarpasswordComponent } from './components/reuperarpassword/reuperarpassword.component';
+import { CambiarpasswordComponent } from './components/cambiarpassword/cambiarpassword.component';
 
 export const routes: Routes = [
     {path: 'catalogo', component: ProductCatalogComponent},
@@ -14,5 +16,7 @@ export const routes: Routes = [
     {path: 'register', component: RegisterComponent},
     {path: 'altaProducto', component: ProductCreateComponent},
     {path: 'listaProducto', component: ProductListComponent},
-    {path: 'ordenesProducto', component: ProductOrdersComponent}
+    {path: 'ordenesProducto', component: ProductOrdersComponent},
+    {path: 'recuprarpassword', component: ReuperarpasswordComponent},
+    {path: 'cambiopassword', component: CambiarpasswordComponent}
 ];
