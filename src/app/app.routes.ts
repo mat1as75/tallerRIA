@@ -11,6 +11,9 @@ import { ProductOrdersComponent } from './components/product-orders/product-orde
 import { ReuperarpasswordComponent } from './components/reuperarpassword/reuperarpassword.component';
 import { CambiarpasswordComponent } from './components/cambiarpassword/cambiarpassword.component';
 import { DetallesdecuentaComponent } from './components/detallesdecuenta/detallesdecuenta.component';
+import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
+import { SendDetailsComponent } from './components/send-details/send-details.component';
+
 
 export const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -26,4 +29,6 @@ export const routes: Routes = [
     {path: 'recuprarpassword', component: ReuperarpasswordComponent},
     {path: 'cambiopassword', component: CambiarpasswordComponent},
     {path: 'detallesdecuenta', component: DetallesdecuentaComponent}
+    {path: 'carrito', component: ShopCartComponent},
+    {path: 'detallesEnvio', component: SendDetailsComponent}
 ];
