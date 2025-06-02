@@ -1,0 +1,87 @@
+<body>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row">
+
+<!-- Sidebar izquierda -->
+<div class="col-12 col-md-3 col-lg-2 d-flex flex-column align-items-center pt-4 mt-5" style="min-height: 100vh;">
+  <div class="bg-light rounded-4 shadow-sm w-100 p-3" style="border: 1px solid #ddd;">
+    <ul class="nav flex-column">
+      <li class="nav-item mb-3">
+        <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i> Home</a>
+      </li>
+      <li class="nav-item mb-3">
+        <a class="nav-link" href="#"><i class="bi bi-person me-2"></i> Cuenta</a>
+      </li>
+      <li class="nav-item mb-3">
+        <a class="nav-link" href="#"><i class="bi bi-geo-alt me-2"></i> Direcciones</a>
+      </li>
+      <li class="nav-item mb-4">
+        <a class="nav-link" href="#"><i class="bi bi-star me-2"></i> Historial Pedidos</a>
+      </li>
+      <li class="nav-item mb-3">
+        <a class="nav-link text-danger" href="#"><i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger w-100"><i class="bi bi-trash me-2"></i>Desactivar Cuenta</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    <!-- Contenido principal -->
+    <div class="col-md-10 p-4 mt-5 mb-0">
+      <h1 class="fw-bold mb-4">Mi Cuenta</h1>
+        
+
+      <hr>
+      <!-- Info de usuario -->
+        <div class="col-md-8">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control" placeholder="Paola" disabled>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Apellido</label>
+              <input type="text" class="form-control" placeholder="Gonzalez" disabled>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Dirección de Correo Electrónico</label>
+              <input type="email" class="form-control" placeholder="PaoGonz@gmail.com" disabled>
+            </div>
+
+            <hr>
+            <div class="mt-5">
+            <h5 class="fw-bold">Cambio de Contraseña</h5>
+            <div class="bg-light p-3 rounded mb-4">
+              <div class="row g-3">
+                <div class="col-md-12">
+                  <label class="form-label">Contraseña actual</label>
+                  <input type="password" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nueva contraseña</label>
+                  <input type="password" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Confirmar nueva contraseña</label>
+                  <input type="password" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">
+              <i class="bi bi-save me-2"></i>Guardar Cambios
+            </button>
+            </div>
+            </div>
+            </form>
+        </div>
+  </div>
+  </div>
+  </div>
+<app-footer></app-footer>
+</body>
+
+
