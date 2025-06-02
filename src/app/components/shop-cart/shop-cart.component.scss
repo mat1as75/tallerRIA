@@ -1,0 +1,23 @@
+body {
+    font-family: 'public-sans', sans-serif;
+}
+
+.px-6 {
+    padding: 0 4rem 0;
+}
+
+.px-7 {
+    padding: 0 4.5rem 0;
+}
+
+.ms-6 {
+    margin-left: 4rem;
+}
+.ms-7 {
+    margin-left: 4.5rem;
+}
+
+.accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
