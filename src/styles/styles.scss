@@ -1,5 +1,9 @@
 @use 'variables' as theme;
 
+body {
+    background-color: theme.$background-color;
+}
+
 .bg-app-primary { 
     background-color: theme.$primary-color !important;
 }
@@ -14,6 +18,18 @@
 
 .border-light-gray {
     border: 1px solid theme.$border-color !important;
+}
+
+.border-bottom-primary {
+    border-bottom: 2px solid theme.$primary-color !important;
+}
+
+.border-bottom-secondary {
+    border-bottom: 2px solid theme.$border-color !important;
+}
+
+.text-primary {
+    color: theme.$primary-color !important;
 }
 
 .text-dark-gray {

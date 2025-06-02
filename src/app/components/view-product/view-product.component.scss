@@ -11,3 +11,8 @@
 .w-400px {
     width: 400px !important;
 }
+
+.accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
