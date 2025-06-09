@@ -1,1 +1,187 @@
-<p>send-details works!</p>
+<main>
+  <section>
+    <div class="container py-4">
+      <!-- Navegación de pasos -->
+      <div class="d-flex justify-content-start mb-4">
+        <h6
+          class="fw-bold text-light-gray border-bottom border-bottom-secondary pb-1 px-6"
+        >
+          1. Carrito
+        </h6>
+        <h6
+          class="fw-bold text-primary border-bottom border-bottom-primary px-6"
+        >
+          2. Detalles de envío
+        </h6>
+        <h6
+          class="fw-bold text-light-gray border-bottom border-bottom-secondary px-6"
+        >
+          3. Opciones de pago
+        </h6>
+      </div>
+
+      <div class="row">
+        <!-- Formulario de envío -->
+        <div class="col-md-7 mt-3 px-5">
+          <h6 class="fw-bold mb-3 ps-4 pb-2">Detalles de envío</h6>
+          <form>
+            <div class="row g-4">
+              <div class="col-md-5">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre"
+                  required
+                />
+              </div>
+              <div class="col-md-5">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Apellido"
+                  required
+                />
+              </div>
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Número de la casa y nombre de la calle"
+                  required
+                />
+              </div>
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Apartamento, habitación, etc. (opcional)"
+                />
+              </div>
+              <div class="col-md-5">
+                <select class="form-select" required>
+                  <option value="" disabled selected hidden>
+                    Departamento
+                  </option>
+                  <option *ngFor="let depto of ddepartaments" [value]="depto">
+                    {{ depto }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <input type="text" class="form-control" placeholder="Ciudad" />
+              </div>
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Teléfono"
+                />
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Método de envío -->
+            <div class="border rounded p-2 w-50 border-light-gray">
+              <div class="row g-0 align-items-start">
+                <!-- Columna del input -->
+                <div class="col-auto m-auto px-3">
+                  <input
+                    class="form-check-input mt-1"
+                    type="radio"
+                    name="envio"
+                    id="envioDAC"
+                    checked
+                  />
+                </div>
+
+                <!-- Columna del texto -->
+                <div class="col ps-2">
+                  <label class="form-check-label small" for="envioDAC">
+                    <strong class="text-dark">Enviar con DAC</strong><br />
+                    <span id="dac-info">
+                      Lunes a Viernes. El costo de DAC no está incluido. USD
+                      5.00
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+          </form>
+        </div>
+
+        <!-- Resumen del carrito -->
+        <div class="col-md-4 mt-3 ms-7">
+          <h6 class="fw-bold mb-3">Resumen del carrito</h6>
+          <hr class="m-0" />
+          <div class="small">
+            <!-- Producto 1 -->
+            <div class="d-flex mb-3 pt-3">
+              <div class="me-3">
+                <div
+                  class="bg-secondary"
+                  style="width: 50px; height: 50px"
+                ></div>
+              </div>
+              <div class="flex-grow-1">
+                <p class="mb-1 fw-bold">Nombre del Producto</p>
+                <p class="mb-0 text-muted small">CANTIDAD: 1</p>
+              </div>
+              <div class="text-end">
+                <p class="mb-0 fw-bold">USD 295.00</p>
+              </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="d-flex mb-3">
+              <div class="me-3">
+                <div
+                  class="bg-secondary"
+                  style="width: 50px; height: 50px"
+                ></div>
+              </div>
+              <div class="flex-grow-1">
+                <p class="mb-1 fw-bold">Nombre del Producto</p>
+                <p class="mb-0 text-muted small">CANTIDAD: 2</p>
+              </div>
+              <div class="text-end">
+                <p class="mb-0 fw-bold">USD 48.00</p>
+              </div>
+            </div>
+
+            <hr class="m-0" />
+            <div class="d-flex justify-content-between pt-3">
+              <span>Subtotal</span>
+              <span>USD 343.00</span>
+            </div>
+            <div class="d-flex justify-content-between py-3">
+              <span>Envío</span>
+              <span class="text-muted">Calculado en el siguiente paso</span>
+            </div>
+            <hr class="m-0" />
+            <div class="d-flex justify-content-between fw-bold py-3">
+              <span>Total</span>
+              <span>USD 343.00</span>
+            </div>
+            <div class="d-grid mt-3">
+              <button class="btn bg-app-primary rounded-pill my-2 py-2">
+                <span class="fw-semibold text-extra-light-gray">
+                  CONTINUAR CON EL PAGO
+                </span>
+              </button>
+              <button
+                class="btn border-light-gray rounded-pill bg-bord my-2 py-2"
+              >
+                <span class="fw-semibold text-dark-gray">
+                  VOLVER AL CARRITO
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Product } from '../../interfaces/Product.interface';
 import { ProductService } from '../../services/product/product.service';
 import { Router } from '@angular/router';
-import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
