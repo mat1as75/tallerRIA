@@ -28,7 +28,7 @@ export const routes: Routes = [
     {path: 'ordenesProducto', component: ProductOrdersComponent},
     {path: 'recuprarpassword', component: ReuperarpasswordComponent},
     {path: 'cambiopassword', component: CambiarpasswordComponent},
-    {path: 'detallesdecuenta', component: DetallesdecuentaComponent}
+    {path: 'detallesdecuenta', component: DetallesdecuentaComponent},
     {path: 'carrito', component: ShopCartComponent},
     {path: 'detallesEnvio', component: SendDetailsComponent}
 ];
