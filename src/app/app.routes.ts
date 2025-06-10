@@ -13,6 +13,7 @@ import { CambiarpasswordComponent } from './components/cambiarpassword/cambiarpa
 import { DetallesdecuentaComponent } from './components/detallesdecuenta/detallesdecuenta.component';
 import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { SendDetailsComponent } from './components/send-details/send-details.component';
+import { PaymentOptionsComponent } from './components/payment-options/payment-options.component';
 
 
 export const routes: Routes = [
@@ -30,5 +31,6 @@ export const routes: Routes = [
     {path: 'cambiopassword', component: CambiarpasswordComponent},
     {path: 'detallesdecuenta', component: DetallesdecuentaComponent},
     {path: 'carrito', component: ShopCartComponent},
-    {path: 'detallesEnvio', component: SendDetailsComponent}
+    {path: 'detallesEnvio', component: SendDetailsComponent},
+    {path: 'opcionesPago', component: PaymentOptionsComponent}
 ];
