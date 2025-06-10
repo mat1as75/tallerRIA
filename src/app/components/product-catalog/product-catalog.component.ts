@@ -2,17 +2,15 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../interfaces/Product.interface';
-import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router';
 import { Category } from '../../interfaces/Category.interface';
 import { Brand } from '../../interfaces/Brand.interface';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { FooterComponent } from '../footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-catalog',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-catalog.component.html',
   styleUrl: './product-catalog.component.scss'
 })
@@ -29,12 +27,14 @@ export class ProductCatalogComponent implements OnInit {
   categoryList: Category[] = []
   brandList: Brand[] = []
 
+  sortOption: string = 'nameAZ'; // Default value option
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.getProductList()
     this.getCategoryList()
-    //this.getBrandList()
+    this.getBrandList()
   }
 
   viewProduct(id: number) {
@@ -52,26 +52,43 @@ export class ProductCatalogComponent implements OnInit {
     this.applyFilters();
   }
 
-  // toggleBrand(brandId: number) {
-  //   const index = this.selectedBrandIds.indexOf(brandId);
+  toggleBrand(brandId: number) {
+    const index = this.selectedBrandIds.indexOf(brandId);
 
-  //   if (index > -1)
-  //     this.selectedBrandIds.splice(index, 1);
-  //   else
-  //     this.selectedBrandIds.push(brandId);
+    if (index > -1)
+      this.selectedBrandIds.splice(index, 1);
+    else
+      this.selectedBrandIds.push(brandId);
     
-  //   this.applyFilters();
-  // }
+    this.applyFilters();
+  }
   
   applyFilters() {
-    this.filteredProductList = this.productList.filter(product => {
+    let result = this.productList.filter(product => {
       const matchesCategory =
         this.selectedCategoryIds.length === 0 || this.selectedCategoryIds.includes(product.category.id);
-      // const matchesBrand =
-      //   this.selectedBrandIds.length === 0 || this.selectedBrandIds.includes(product.brand.id);
-      //return matchesCategory && matchesBrand;
-      return matchesCategory;
+      const matchesBrand =
+        this.selectedBrandIds.length === 0 || this.selectedBrandIds.includes(product.brand.id);
+    
+      return matchesCategory && matchesBrand;
     });
+
+    switch (this.sortOption) {
+      case 'nameAZ':
+        result.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'nameZA':
+        result.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case 'higherPrice':
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case 'lowerPrice':
+        result.sort((a, b) => a.price - b.price);
+        break;
+    }
+
+    this.filteredProductList = result;
   }
 
   trackByProducts(index: number, product: Product): number { return product.id; } 
@@ -102,17 +119,16 @@ export class ProductCatalogComponent implements OnInit {
     })
   }
 
-  // API PHP CON MODELO MARCA (NO HAY MARCA EN API DE PRUEBA)
-  // getBrandList() {
-  //   this.productService.getBrands()
-  //   .subscribe({
-  //     next: data => {
-  //       this.brandList = data as Brand[]
-  //       console.log('BRANDS: ' + this.brandList)
-  //     },
-  //     error: err => {
-  //       console.error(err)
-  //     }
-  //   })
-  // }
+  getBrandList() {
+    this.productService.getBrands()
+    .subscribe({
+      next: data => {
+        this.brandList = data as Brand[]
+        console.log('BRANDS: ' + this.brandList)
+      },
+      error: err => {
+        console.error(err)
+      }
+    })
+  }
 }
