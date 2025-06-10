@@ -1,0 +1,95 @@
+<div class="container py-4 mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="bg-white rounded shadow-sm p-5 text-center">
+        <!-- Icono -->
+        <div class="text-success mb-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="currentColor"
+            class="bi bi-check-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 11.03a.75.75 0 0 0 1.07 0l4.992-4.992a.75.75 0 1 0-1.06-1.06L7.5 9.44 5.53 7.47a.75.75 0 0 0-1.06 1.06l2.5 2.5z"
+            />
+          </svg>
+        </div>
+
+        <!-- Título -->
+        <h5 class="fw-bold">Proceso de pago finalizado</h5>
+
+        <!-- Texto explicativo -->
+        <p class="text-muted small">
+          Tu pedido ha sido registrado, quedará pendiente hasta que envíes el
+          comprobante de pago correspondiente. Disponés de 48 horas para enviar
+          una foto clara del comprobante. De no hacerlo dentro del plazo, la
+          compra será anulada automáticamente.
+        </p>
+
+        <!-- Datos bancarios -->
+        <div class="text-start mt-4 small">
+          <p class="fw-bold">
+            Datos bancarios (solo para métodos que lo requieran):
+          </p>
+
+          <!-- BROU -->
+          <p class="mb-1">→ <strong>Banco República (BROU)</strong></p>
+          <div class="row">
+            <div class="col-6">Titular:</div>
+            <div class="col-6 text-end">Juan Pérez</div>
+          </div>
+          <div class="row">
+            <div class="col-6">Cuenta en pesos</div>
+            <div class="col-6 text-end">0012345678</div>
+          </div>
+          <div class="row">
+            <div class="col-6">CBU</div>
+            <div class="col-6 text-end">01234567890123</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">Alias</div>
+            <div class="col-6 text-end">.perez.brou</div>
+          </div>
+
+          <!-- ITAÚ -->
+          <p class="mb-1">→ <strong>Banco ITAÚ</strong></p>
+          <div class="row">
+            <div class="col-6">Titular</div>
+            <div class="col-6 text-end">María Gómez</div>
+          </div>
+          <div class="row">
+            <div class="col-6">Caja de ahorro en pesos</div>
+            <div class="col-6 text-end">9876543210</div>
+          </div>
+          <div class="row">
+            <div class="col-6">CBU</div>
+            <div class="col-6 text-end">32109876543210</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">Alias</div>
+            <div class="col-6 text-end">maria.gomez.itau</div>
+          </div>
+
+          <!-- Abitab / RedPagos -->
+          <p class="mb-1">→ <strong>Depósitos en Abitab / RedPagos</strong></p>
+          <div class="row">
+            <div class="col-6">Nombre</div>
+            <div class="col-6 text-end">Tu Tienda Online</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">CI</div>
+            <div class="col-6 text-end">1.234.567-8</div>
+          </div>
+        </div>
+
+        <!-- Pie -->
+        <p class="text-muted small mt-4 mb-0">
+          Enviá el comprobante a: <strong>{{ email }}</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
