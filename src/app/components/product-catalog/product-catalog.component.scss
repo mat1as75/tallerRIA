@@ -1,4 +1,4 @@
-@use 'styles' as theme;
+@use 'variables' as theme;
 
 hr {
     opacity: 0.5;
@@ -39,4 +39,3 @@ form-check {
     width: 16px;
     max-width: 16px;
 }
-  
