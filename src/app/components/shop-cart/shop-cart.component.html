@@ -1,261 +1,257 @@
-<main>
-  <div class="container py-4">
-    <!-- Navegación de pasos -->
-    <div class="d-flex justify-content-start mb-4">
-      <h6
-        class="fw-bold text-primary border-bottom border-bottom-primary pb-1 px-6"
-      >
-        1. Carrito
-      </h6>
-      <h6
-        class="fw-bold text-light-gray border-bottom border-bottom-secondary px-6"
-      >
-        2. Detalles de envío
-      </h6>
-      <h6
-        class="fw-bold text-light-gray border-bottom border-bottom-secondary px-6"
-      >
-        3. Opciones de pago
-      </h6>
-    </div>
+<div class="container py-4 mt-4">
+  <!-- Navegación de pasos -->
+  <div class="d-flex justify-content-start mb-4">
+    <h6
+      class="fw-bold text-primary border-bottom border-bottom-primary pb-1 px-6"
+    >
+      1. Carrito
+    </h6>
+    <h6
+      class="fw-bold text-light-gray border-bottom border-bottom-secondary px-6"
+    >
+      2. Detalles de envío
+    </h6>
+    <h6
+      class="fw-bold text-light-gray border-bottom border-bottom-secondary px-6"
+    >
+      3. Opciones de pago
+    </h6>
+  </div>
 
-    <div class="row">
-      <!-- Columna izquierda: productos -->
-      <div class="col-md-7 mt-3 px-5">
-        <h6 class="fw-bold mb-3 ps-4">Productos en el carrito</h6>
-        <hr class="m-0" />
-        <!-- Producto 1 -->
-        <div class="d-flex py-3 px-4">
-          <!-- Imagen -->
-          <div
-            class="border rounded p-2 me-3"
-            style="width: 100px; height: 100px"
-          >
-            <img
-              src="https://via.placeholder.com/50"
-              class="img-fluid"
-              alt="Imagen"
-            />
-          </div>
-
-          <!-- Info del producto: nombre + contador + trash -->
-          <div class="flex-grow-1 d-flex flex-column">
-            <!-- Nombre del producto -->
-            <span class="fw-semibold mb-2 small">Nombre del Producto</span>
-
-            <!-- Contador y trash -->
-            <div class="d-flex align-items-center gap-2 mt-4">
-              <div
-                class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3"
-                style="width: 80px; height: 34px"
-              >
-                <button
-                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                  type="button"
-                >
-                  −
-                </button>
-                <input
-                  type="text"
-                  class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
-                  style="width: 30px"
-                  value="1"
-                />
-                <button
-                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                  type="button"
-                >
-                  +
-                </button>
-              </div>
-              <button class="btn btn-link text-light-gray p-0">
-                <i class="bi bi-trash3 fs-5"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Precio -->
-          <div class="fw-semibold ms-3">USD 295.00</div>
+  <div class="row">
+    <!-- Columna izquierda: productos -->
+    <div class="col-md-7 mt-3 px-5">
+      <h6 class="fw-bold mb-3 ps-4">Productos en el carrito</h6>
+      <hr class="m-0" />
+      <!-- Producto 1 -->
+      <div class="d-flex py-3 px-4">
+        <!-- Imagen -->
+        <div
+          class="border rounded p-2 me-3"
+          style="width: 100px; height: 100px"
+        >
+          <img
+            src="https://via.placeholder.com/50"
+            class="img-fluid"
+            alt="Imagen"
+          />
         </div>
 
-        <hr class="m-0" />
-        <!-- Producto 2 -->
-        <div class="d-flex py-3 px-4">
-          <!-- Imagen -->
-          <div
-            class="border rounded p-2 me-3"
-            style="width: 100px; height: 100px"
-          >
-            <img
-              src="https://via.placeholder.com/50"
-              class="img-fluid"
-              alt="Imagen"
-            />
-          </div>
+        <!-- Info del producto: nombre + contador + trash -->
+        <div class="flex-grow-1 d-flex flex-column">
+          <!-- Nombre del producto -->
+          <span class="fw-semibold mb-2 small">Nombre del Producto</span>
 
-          <!-- Info del producto: nombre + contador + trash -->
-          <div class="flex-grow-1 d-flex flex-column">
-            <!-- Nombre del producto -->
-            <span class="fw-semibold mb-2 small">Nombre del Producto</span>
-
-            <!-- Contador y trash -->
-            <div class="d-flex align-items-center gap-2 mt-4">
-              <div
-                class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3"
-                style="width: 80px; height: 34px"
+          <!-- Contador y trash -->
+          <div class="d-flex align-items-center gap-2 mt-4">
+            <div
+              class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3"
+              style="width: 80px; height: 34px"
+            >
+              <button
+                class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                type="button"
               >
-                <button
-                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                  type="button"
-                >
-                  −
-                </button>
-                <input
-                  type="text"
-                  class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
-                  style="width: 30px"
-                  value="1"
-                />
-                <button
-                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                  type="button"
-                >
-                  +
-                </button>
-              </div>
-              <button class="btn btn-link text-light-gray p-0">
-                <i class="bi bi-trash3 fs-5"></i>
+                −
+              </button>
+              <input
+                type="text"
+                class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
+                style="width: 30px"
+                value="1"
+              />
+              <button
+                class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                type="button"
+              >
+                +
               </button>
             </div>
+            <button class="btn btn-link text-light-gray p-0">
+              <i class="bi bi-trash3 fs-5"></i>
+            </button>
           </div>
-
-          <!-- Precio -->
-          <div class="fw-semibold ms-3">USD 295.00</div>
         </div>
-        <hr class="m-0" />
 
-        <!-- Información del pedido -->
-        <div class="mt-4">
-          <h6 class="fw-bold pt-3">Información del pedido</h6>
-          <hr class="m-0" />
-          <div class="accordion" id="accordionDevolucion">
-            <div class="accordion-item bg-app-secondary border-0">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button collapsed bg-app-secondary px-0 py-3"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseDevolucion"
-                >
-                  <p class="text-dark-gray small mb-0">
-                    Políticas de devolución
-                  </p>
-                </button>
-              </h2>
-              <div
-                id="collapseDevolucion"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionDevolucion"
+        <!-- Precio -->
+        <div class="fw-semibold ms-3">USD 295.00</div>
+      </div>
+
+      <hr class="m-0" />
+      <!-- Producto 2 -->
+      <div class="d-flex py-3 px-4">
+        <!-- Imagen -->
+        <div
+          class="border rounded p-2 me-3"
+          style="width: 100px; height: 100px"
+        >
+          <img
+            src="https://via.placeholder.com/50"
+            class="img-fluid"
+            alt="Imagen"
+          />
+        </div>
+
+        <!-- Info del producto: nombre + contador + trash -->
+        <div class="flex-grow-1 d-flex flex-column">
+          <!-- Nombre del producto -->
+          <span class="fw-semibold mb-2 small">Nombre del Producto</span>
+
+          <!-- Contador y trash -->
+          <div class="d-flex align-items-center gap-2 mt-4">
+            <div
+              class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3"
+              style="width: 80px; height: 34px"
+            >
+              <button
+                class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                type="button"
               >
-                <div class="accordion-body px-3 py-0">
-                  <p class="text-light-gray small">
-                    En Tecno Store, queremos que estés completamente satisfecho
-                    con tu compra. Si por alguna razón no estás conforme con un
-                    producto, puedes solicitar una devolución bajo las
-                    siguientes condiciones:
-                  </p>
-                  <ul class="text-light-gray small">
-                    <li class="pb-1">
-                      Tienes 14 días desde que recibes el pedidio para solicitar
-                      devolución.
-                    </li>
-                    <li class="pb-1">
-                      El producto debe estar sin usar, en su empaque original y
-                      con todos los accesorios.
-                    </li>
-                    <li class="pb-1">
-                      No se aceptan devoluciones de productos abiertos,
-                      software, licencias digitales o artículos personalizados.
-                    </li>
-                    <li class="pb-1">
-                      Para iniciar el proceso, escríbenos a
-                      {{ email }} con tu número de pedido y el motivo.
-                    </li>
-                    <li class="pb-1">
-                      Si el producto está en buen estado, te haremos el
-                      reembolso una vez lo recibamos.
-                    </li>
-                    <li class="pb-1">
-                      Los gastos de envío de la devolución corren por cuenta del
-                      cliente, salvo que el producto esté defectuoso o haya
-                      habido un error en el envío.
-                    </li>
-                  </ul>
-                </div>
+                −
+              </button>
+              <input
+                type="text"
+                class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
+                style="width: 30px"
+                value="1"
+              />
+              <button
+                class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                type="button"
+              >
+                +
+              </button>
+            </div>
+            <button class="btn btn-link text-light-gray p-0">
+              <i class="bi bi-trash3 fs-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Precio -->
+        <div class="fw-semibold ms-3">USD 295.00</div>
+      </div>
+      <hr class="m-0" />
+
+      <!-- Información del pedido -->
+      <div class="mt-4">
+        <h6 class="fw-bold pt-3">Información del pedido</h6>
+        <hr class="m-0" />
+        <div class="accordion" id="accordionDevolucion">
+          <div class="accordion-item bg-app-secondary border-0">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button collapsed bg-app-secondary px-0 py-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseDevolucion"
+              >
+                <p class="text-dark-gray small mb-0">Políticas de devolución</p>
+              </button>
+            </h2>
+            <div
+              id="collapseDevolucion"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionDevolucion"
+            >
+              <div class="accordion-body px-3 py-0">
+                <p class="text-light-gray small">
+                  En Tecno Store, queremos que estés completamente satisfecho
+                  con tu compra. Si por alguna razón no estás conforme con un
+                  producto, puedes solicitar una devolución bajo las siguientes
+                  condiciones:
+                </p>
+                <ul class="text-light-gray small">
+                  <li class="pb-1">
+                    Tienes 14 días desde que recibes el pedidio para solicitar
+                    devolución.
+                  </li>
+                  <li class="pb-1">
+                    El producto debe estar sin usar, en su empaque original y
+                    con todos los accesorios.
+                  </li>
+                  <li class="pb-1">
+                    No se aceptan devoluciones de productos abiertos, software,
+                    licencias digitales o artículos personalizados.
+                  </li>
+                  <li class="pb-1">
+                    Para iniciar el proceso, escríbenos a
+                    {{ email }} con tu número de pedido y el motivo.
+                  </li>
+                  <li class="pb-1">
+                    Si el producto está en buen estado, te haremos el reembolso
+                    una vez lo recibamos.
+                  </li>
+                  <li class="pb-1">
+                    Los gastos de envío de la devolución corren por cuenta del
+                    cliente, salvo que el producto esté defectuoso o haya habido
+                    un error en el envío.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-          <hr class="m-0" />
-          <div class="accordion" id="accordionEnvio">
-            <div class="accordion-item bg-app-secondary border-0">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed bg-app-secondary px-0 py-3"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseEnvio"
-                >
-                  <p class="text-dark-gray small mb-0">Opciones de envío</p>
-                </button>
-              </h2>
-              <div
-                id="collapseEnvio"
-                class="accordion-collapse collapse"
-                data-bs-parent="#accordionEnvio"
+        </div>
+        <hr class="m-0" />
+        <div class="accordion" id="accordionEnvio">
+          <div class="accordion-item bg-app-secondary border-0">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed bg-app-secondary px-0 py-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseEnvio"
               >
-                <div class="accordion-body px-3 py-0">
-                  <p class="text-light-gray small">
-                    Los envíos de nuestros productos son gestionados por DAC
-                    (Distribuidora de Artículos de Consumo), una empresa de
-                    mensajería confiable y eficiente. Recibirás un número de
-                    seguimiento para que puedas rastrear tu pedido en todo
-                    momento.
-                  </p>
-                </div>
+                <p class="text-dark-gray small mb-0">Opciones de envío</p>
+              </button>
+            </h2>
+            <div
+              id="collapseEnvio"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionEnvio"
+            >
+              <div class="accordion-body px-3 py-0">
+                <p class="text-light-gray small">
+                  Los envíos de nuestros productos son gestionados por DAC
+                  (Distribuidora de Artículos de Consumo), una empresa de
+                  mensajería confiable y eficiente. Recibirás un número de
+                  seguimiento para que puedas rastrear tu pedido en todo
+                  momento.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Columna derecha: resumen -->
-      <div class="col-md-4 mt-3 ms-7">
-        <h6 class="fw-bold mb-3">Resumen</h6>
+    <!-- Columna derecha: resumen -->
+    <div class="col-md-4 mt-3 ms-7">
+      <h6 class="fw-bold mb-3">Resumen</h6>
 
-        <div class="small">
-          <hr class="m-0" />
-          <div class="d-flex justify-content-between pt-3">
-            <span>Subtotal</span>
-            <span>USD 343.00</span>
-          </div>
-          <div class="d-flex justify-content-between py-3">
-            <span>Envío</span>
-            <span class="text-muted">Calculado en el tercer paso</span>
-          </div>
-          <hr class="m-0" />
-          <div class="d-flex justify-content-between py-3 fw-semibold">
-            <span>Total</span>
-            <span>USD 343.00</span>
-          </div>
-          <div class="d-grid mt-3">
-            <button class="btn bg-app-primary rounded-pill py-2">
-              <span class="fw-semibold text-extra-light-gray">
-                CONTINUAR CON EL ENVÍO
-              </span>
-            </button>
-          </div>
+      <div class="small">
+        <hr class="m-0" />
+        <div class="d-flex justify-content-between pt-3">
+          <span>Subtotal</span>
+          <span>USD 343.00</span>
+        </div>
+        <div class="d-flex justify-content-between py-3">
+          <span>Envío</span>
+          <span class="text-muted">Calculado en el tercer paso</span>
+        </div>
+        <hr class="m-0" />
+        <div class="d-flex justify-content-between py-3 fw-semibold">
+          <span>Total</span>
+          <span>USD 343.00</span>
+        </div>
+        <div class="d-grid mt-3">
+          <button class="btn bg-app-primary rounded-pill py-2">
+            <span class="fw-semibold text-extra-light-gray">
+              CONTINUAR CON EL ENVÍO
+            </span>
+          </button>
         </div>
       </div>
     </div>
   </div>
-</main>
+</div>

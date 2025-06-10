@@ -10,6 +10,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductOrdersComponent } from './components/product-orders/product-orders.component';
 import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { SendDetailsComponent } from './components/send-details/send-details.component';
+import { PaymentOptionsComponent } from './components/payment-options/payment-options.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -23,5 +24,6 @@ export const routes: Routes = [
     {path: 'listaProducto', component: ProductListComponent},
     {path: 'ordenesProducto', component: ProductOrdersComponent},
     {path: 'carrito', component: ShopCartComponent},
-    {path: 'detallesEnvio', component: SendDetailsComponent}
+    {path: 'detallesEnvio', component: SendDetailsComponent},
+    {path: 'opcionesPago', component: PaymentOptionsComponent}
 ];
