@@ -43,3 +43,7 @@ select::invalid {
     background-color: theme.$primary-color;
     border-color: theme.$primary-color;
 }
+
+hr {
+    opacity: 0.5;
+}
