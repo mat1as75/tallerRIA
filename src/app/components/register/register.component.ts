@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserServiceService } from '../../services/user/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,12 +19,13 @@ export class RegisterComponent {
     rol: 'cliente'
   };
 
-  constructor(private userService: UserServiceService) {}
+  constructor(private userService: UserServiceService, private router: Router) {}
 
   registrarse() {
     this.userService.postRegisterUser(this.usuario).subscribe({
       next: (respuesta) => {
         console.log('Usuario registrado:', respuesta);
+        this.router.navigate(['/home']);
 
       },
       error: (error) => {

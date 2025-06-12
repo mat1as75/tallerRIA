@@ -37,6 +37,14 @@ this.usrService.postIniciarSesion({email,password}).subscribe({
   next: (response) => {
         // Guardar token o datos de usuario si vienen en la respuesta
         // localStorage.setItem('token', response.token); // si tu backend lo manda
+            // Mostrar la cookie 'session_ID' en la consola:
+    const cookies = document.cookie; // Todas las cookies accesibles para la ruta y dominio actual
+    console.log('Cookies actuales:', cookies);
+
+    // Si quieres solo la cookie session_ID:
+    const sessionCookie = cookies.split('; ').find(row => row.startsWith('session_ID='));
+    console.log('Cookie session_ID:', sessionCookie);
+
         console.log('Login exitoso:', response);
         this.router.navigate(['/home']); // redirige a la página de inicio
       },
