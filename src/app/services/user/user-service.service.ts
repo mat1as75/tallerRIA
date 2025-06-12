@@ -13,19 +13,23 @@ export class UserServiceService {
 
 
   postRegisterUser(user : User) {
-    return this.http.post<User>(`${this.apiPhp}usuarios/register`, user)
+    return this.http.post<User>(`${this.apiPhp}usuarios`, user)
   }
 
   postIniciarSesion(user: {email: string, password: string}){
-    return this.http.post<any>(`${this.apiPhp}usuarios/login`, user)
+    return this.http.post<any>(`${this.apiPhp}inisiarsesion`, user, {withCredentials: true})
   }
 
   updatePassword(pass: {email: string, token: string, password: string}){
-    return this.http.put<any>(`${this.apiPhp}usuarios/cambiopassword`, pass)
+    return this.http.put<any>(`${this.apiPhp}cambiopassword`, pass)
   }
 
   recuperarPassword(email : {email: string}){
-    return this.http.put<any>(`${this.apiPhp}usuarios/recuperarpassword`, email)
+    return this.http.put<any>(`${this.apiPhp}recuperarpassword`, email)
+  }
+
+  verificarToken(token : {token: string}){
+    return this.http.post<{ valido: boolean }>(`${this.apiPhp}verificotoken`,token)
   }
 
 }

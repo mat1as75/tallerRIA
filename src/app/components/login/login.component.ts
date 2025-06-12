@@ -38,7 +38,7 @@ this.usrService.postIniciarSesion({email,password}).subscribe({
         // Guardar token o datos de usuario si vienen en la respuesta
         // localStorage.setItem('token', response.token); // si tu backend lo manda
         console.log('Login exitoso:', response);
-        this.router.navigate(['/inicio']); // redirige a la página de inicio
+        this.router.navigate(['/home']); // redirige a la página de inicio
       },
       error: (error) => {
         console.error('Error al iniciar sesión:', error);

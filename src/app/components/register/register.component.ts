@@ -14,7 +14,8 @@ export class RegisterComponent {
     nombre: '',
     apellido: '',
     email: '',
-    password: ''
+    password: '',
+    rol: 'cliente'
   };
 
   constructor(private userService: UserServiceService) {}
@@ -23,6 +24,7 @@ export class RegisterComponent {
     this.userService.postRegisterUser(this.usuario).subscribe({
       next: (respuesta) => {
         console.log('Usuario registrado:', respuesta);
+
       },
       error: (error) => {
         console.error('Error al registrar usuario:', error);
