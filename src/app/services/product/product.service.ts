@@ -10,6 +10,7 @@ import { Brand } from '../../interfaces/Brand.interface';
 })
 export class ProductService {
   private apiUrl = environment.apiUrl;
+  private apiphp = environment.apiphp;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class ProductService {
     return this.http.get<Category[]>(`${this.apiUrl}/categories`)
   }
 
-  // getBrands() {
-  //   return this.http.get<Brand[]>(`${this.apiUrl}/brands`) 
-  // }
+  getBrands() {
+    return this.http.get<Brand[]>(`${this.apiphp}/marcas`) 
+  }
 }

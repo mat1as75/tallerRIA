@@ -1,122 +1,116 @@
-<app-navbar></app-navbar>
+<div class="container-fluid p-4">
+  <!-- Contenedor principal -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-9 col-md-3 mb-3">
+        <div
+          class="bg-white border h-100 rounded-3 bg-app-secondary border-light-gray"
+        >
+          <p class="m-0 p-3 fw-semibold">Filtros</p>
+          <hr class="p-0 m-0" />
 
-<section class="bg-app-secondary mt-5">
-  <div class="container-fluid p-4">
-    <!-- Contenedor principal -->
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Sidebar -->
-        <div class="col-9 col-md-3 mb-3">
-          <div
-            class="bg-white border h-100 rounded-3 bg-app-secondary border-custom"
-          >
-            <p class="m-0 p-3 fw-semibold">Filtros</p>
-            <hr class="p-0 m-0" />
-
-            <div class="my-1 p-3 small">
-              <p class="fw-semibold">Precio</p>
-              <hr />
-              <input type="range" class="form-range" min="0" max="100" />
-              <div class="d-flex justify-content-between small">
-                <span>USD 0</span><span>USD 100</span>
-              </div>
+          <div class="my-1 p-3 small">
+            <p class="fw-semibold">Precio</p>
+            <hr />
+            <input type="range" class="form-range" min="0" max="100" />
+            <div class="d-flex justify-content-between small">
+              <span>USD 0</span><span>USD 100</span>
             </div>
+          </div>
 
-            <div class="mb-1 p-3 small">
-              <p class="fw-semibold">Categoria</p>
-              <hr />
-              <div
-                class="form-check"
-                *ngFor="let category of categoryList"
-                (click)="toggleCategory(category.id)"
-                [class.active]="selectedCategoryIds.includes(category.id)"
-                styles="cursor: pointer;"
-              >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  [checked]="selectedCategoryIds.includes(category.id)"
-                  (click)="$event.stopPropagation()"
-                />
-                <label class="form-check-label">{{ category.name }}</label>
-              </div>
+          <div class="mb-1 p-3 small">
+            <p class="fw-semibold">Categoria</p>
+            <hr />
+            <div
+              class="form-check"
+              *ngFor="let category of categoryList"
+              (click)="toggleCategory(category.id)"
+              [class.active]="selectedCategoryIds.includes(category.id)"
+              styles="cursor: pointer;"
+            >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [checked]="selectedCategoryIds.includes(category.id)"
+              />
+              <label class="form-check-label">{{ category.name }}</label>
             </div>
+          </div>
 
-            <!-- <div class="mb-1 p-3 small">
-              <p class="fw-semibold">Marca</p>
-              <hr />
-              <div
-                class="form-check"
-                *ngFor="let brand of brandList"
-                (click)="toggleBrand(brand.id)"
-                [class.avtive]="selectedBrandIds.includes(brand.id)"
-                styles="cursor: pointer;"
-              >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  [checked]="selectedBrandIds.includes(brand.id)"
-                  (click)="$event.stopPropagation()"
-                />
-                <label class="form-check-label">{{ brand.name }}</label>
-              </div>
-            </div> -->
+          <div class="mb-1 p-3 small">
+            <p class="fw-semibold">Marca</p>
+            <hr />
+            <div
+              class="form-check"
+              *ngFor="let brand of brandList"
+              (click)="toggleBrand(brand.ID)"
+              [class.avtive]="selectedBrandIds.includes(brand.ID)"
+              styles="cursor: pointer;"
+            >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [checked]="selectedBrandIds.includes(brand.ID)"
+              />
+              <label class="form-check-label">{{ brand.Nombre }}</label>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Contenido principal -->
-        <div class="col-12 col-md-9">
-          <!-- Contenedor centrado para filtros y cards -->
-          <div class="d-flex flex-column align-items-center">
-            <!-- Ordenar y hr -->
-            <div class="d-flex w-100 align-items-center flex-wrap gap-2 mb-3">
-              <hr class="my-0 mb-1 w-100" />
-              <span class="small">Ordenar por:</span>
-              <select
-                class="p-1 rounded-3 bg-app-secondary small"
-                style="max-width: 200px"
-                aria-label="Default select example"
-              >
-                <option selected>Nombre de la A la Z</option>
-                <option value="nombreAZ">Nombre de la Z la A</option>
-                <option value="nombreAZ">Mayor precio</option>
-                <option value="nombreAZ">Menor precio</option>
-              </select>
-            </div>
-            <!-- Cards -->
-            <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
+      <!-- Contenido principal -->
+      <div class="col-12 col-md-9">
+        <!-- Contenedor centrado para filtros y cards -->
+        <div class="d-flex flex-column align-items-center">
+          <!-- Ordenar y hr -->
+          <div class="d-flex w-100 align-items-center flex-wrap gap-2 mb-3">
+            <hr class="my-0 mb-1 w-100" />
+            <span class="small">Ordenar por:</span>
+            <select
+              class="p-1 rounded-3 bg-app-secondary small"
+              style="max-width: 200px"
+              aria-label="Default select example"
+              [(ngModel)]="sortOption"
+              (change)="applyFilters()"
+            >
+              <option value="nameAZ">Nombre de la A la Z</option>
+              <option value="nameZA">Nombre de la Z la A</option>
+              <option value="higherPrice">Mayor precio</option>
+              <option value="lowerPrice">Menor precio</option>
+            </select>
+          </div>
+          <!-- Cards -->
+          <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
+            <div
+              *ngFor="let product of filteredProductList; trackByProducts"
+              class="card bg-app-secondary border-custom"
+              style="width: 200px"
+              (click)="viewProduct(product.id)"
+            >
               <div
-                *ngFor="let product of filteredProductList; trackByProducts"
-                class="card bg-app-secondary border-custom"
-                style="width: 200px"
-                (click)="viewProduct(product.id)"
+                class="d-flex align-items-center justify-content-center"
+                style="aspect-ratio: 1 / 1"
               >
-                <div
-                  class="d-flex align-items-center justify-content-center"
-                  style="aspect-ratio: 1 / 1"
-                >
-                  <img
-                    [src]="product.images?.[0]"
-                    alt="Product"
-                    class="img-fluid"
-                    style="max-height: 100%; object-fit: contain"
-                  />
-                </div>
-                <div class="card-body p-3 small">
-                  <p class="card-title mb-1">{{ product.title }}</p>
-                  <p class="card-primary fw-semibold mb-0">
-                    USD {{ product.price }}
-                  </p>
-                </div>
+                <img
+                  [src]="product.images?.[0]"
+                  alt="Product"
+                  class="img-fluid"
+                  style="max-height: 100%; object-fit: contain"
+                />
+              </div>
+              <div class="card-body p-3 small">
+                <p class="card-title mb-1">{{ product.title }}</p>
+                <p class="card-primary fw-semibold mb-0">
+                  USD {{ product.price }}
+                </p>
               </div>
             </div>
-            <!-- Fin cards -->
           </div>
-          <!-- Fin contenedor general centrado -->
+          <!-- Fin cards -->
         </div>
+        <!-- Fin contenedor general centrado -->
       </div>
     </div>
   </div>
-</section>
-
-<app-footer></app-footer>
+</div>

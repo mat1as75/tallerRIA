@@ -2,13 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../interfaces/Product.interface';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-view-product',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent],
+  imports: [],
   templateUrl: './view-product.component.html',
   styleUrl: './view-product.component.scss'
 })

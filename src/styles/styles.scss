@@ -1,4 +1,10 @@
-@use 'variables' as theme;
+@use '_variables.scss' as theme;
+
+main {
+    margin-top: 64px;
+    font-family: 'public-sans', sans-serif;
+    background-color: theme.$background-color;
+}
 
 body {
     background-color: theme.$background-color;
