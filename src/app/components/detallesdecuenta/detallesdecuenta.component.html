@@ -1,7 +1,5 @@
-
 <app-navbar></app-navbar>
-<div class="container-fluid ">
-
+<div class="container-fluid">
   <div class="row">
     <!-- Sidebar izquierda -->
     <div
@@ -33,13 +31,21 @@
               ><i class="bi bi-star me-2"></i> Historial Pedidos</a
             >
           </li>
+          <li class="nav-item mb-3 p-5"></li>
+          <li class="nav-item mb-3 p-5"></li>
           <li class="nav-item mb-3">
-            <a class="nav-link text-danger" href="#"
+            <a
+              class="nav-link text-danger"
+              href="javascript:void(0)"
+              (click)="cerrarsesion()"
               ><i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión</a
             >
           </li>
           <li class="nav-item">
-            <button class="btn btn-danger w-100">
+            <button
+              class="btn btn-danger w-100 rounded-pill"
+              (click)="desactivacuenta()"
+            >
               <i class="bi bi-trash me-2"></i>Desactivar Cuenta
             </button>
           </li>
@@ -60,7 +66,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Paola"
+              [value]="usuario?.Nombre"
               disabled
             />
           </div>
@@ -69,7 +75,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Gonzalez"
+              [value]="usuario?.Apellido"
               disabled
             />
           </div>
@@ -78,7 +84,7 @@
             <input
               type="email"
               class="form-control"
-              placeholder="PaoGonz@gmail.com"
+              [value]="usuario?.Email"
               disabled
             />
           </div>
@@ -90,7 +96,7 @@
               <div class="row g-3">
                 <div class="col-md-12">
                   <label class="form-label">Contraseña actual</label>
-                  <input type="password" class="form-control" />
+                  <input type="text" class="form-control" />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Nueva contraseña</label>
@@ -111,4 +117,5 @@
         </form>
       </div>
     </div>
+  </div>
 </div>

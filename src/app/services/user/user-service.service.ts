@@ -13,7 +13,7 @@ export class UserServiceService {
 
 
   postRegisterUser(user : User) {
-    return this.http.post<User>(`${this.apiPhp}/usuarios`, user)
+    return this.http.post<User>(`${this.apiPhp}/usuarios`, user, {withCredentials: true})
   }
 
   postIniciarSesion(user: {email: string, password: string}){
@@ -31,5 +31,20 @@ export class UserServiceService {
   verificarToken(token : {token: string}){
     return this.http.post<{ valido: boolean }>(`${this.apiPhp}/verificotoken`,token)
   }
+
+  ObtenerUsuario(id: string){
+    return this.http.get<User>(`${this.apiPhp}/usuarios/${id}`,{withCredentials: true})
+  }
+
+  cerrarsesion(id: string){
+     return this.http.post<any>(`${this.apiPhp}/cerrarsesion/${id}`,{withCredentials: true})    
+
+  }
+
+   deleteuser(id: string){
+     return this.http.post<any>(`${this.apiPhp}/desactivarcuenta/${id}`,{withCredentials: true})    
+  }
+
+
 
 }
