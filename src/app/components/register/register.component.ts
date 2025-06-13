@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   usuario = {
-    nombre: '',
-    apellido: '',
-    email: '',
-    password: '',
-    rol: 'cliente'
+    Nombre: '',
+    Apellido: '',
+    Email: '',
+    Password: '',
+    Rol: 'cliente'
   };
 
   constructor(private userService: UserServiceService, private router: Router) {}
