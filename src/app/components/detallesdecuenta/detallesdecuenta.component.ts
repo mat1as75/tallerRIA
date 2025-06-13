@@ -55,7 +55,7 @@ constructor(private router: Router, private servicecookie: CookieService, privat
         this.servicecookie.borrarCookie('session_ID');
         this.servicecookie.borrarCookie('PHPSESSID');
       // Redirigir al login
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
     },
     error: (err) => {
       console.error('Error al cerrar sesión', err);
