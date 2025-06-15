@@ -1,29 +1,19 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule, NgModel } from '@angular/forms';
 import { CookieService } from '../../services/cookies/cookie.service';
 import { UserServiceService } from '../../services/user/user-service.service';
-import { User } from '../../interfaces/User.interface';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
-
+import { Pedido } from '../../interfaces/Pedido.interface';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-detallesdecuenta',
-  imports: [FormsModule, NavbarComponent, RouterLink],
-  templateUrl: './detallesdecuenta.component.html',
-  styleUrl: './detallesdecuenta.component.scss'
+  selector: 'app-historia-compras',
+  imports: [RouterLink, CommonModule, NgFor,NgIf],
+  templateUrl: './historia-compras.component.html',
+  styleUrl: './historia-compras.component.scss'
 })
-export class DetallesdecuentaComponent {
-  usuario: User | null = null; 
+export class HistoriaComprasComponent {
 
-  usuario: User | null = null; 
-
-  
-  passwordActual: string = '';
-  passwordNueva: string = '';
-  confirmarPassword: string = '';
-
+  compras: Pedido[]=[];
 
 
 constructor(private router: Router, private servicecookie: CookieService, private userservice: UserServiceService){}
@@ -39,10 +29,10 @@ constructor(private router: Router, private servicecookie: CookieService, privat
     return;
   }
 
-  this.userservice.ObtenerUsuario(session).subscribe({
-    next: (userData) => {
-      this.usuario = userData; // Asegurate de tener la propiedad `usuario: User | null = null;`
-      console.log("Datos del usuario:", userData);
+  this.userservice.ObtenerCompras(session).subscribe({
+    next: (compraData: Pedido []) => {
+      this.compras = (compraData as any)["pedidos"];// Asegurate de tener la propiedad `compras: Pedido | null = null;`
+      console.log("Pedidos del usuario:", compraData);
     },
     error: (err) => {
       console.error("Error al obtener el usuario:", err);
@@ -50,6 +40,11 @@ constructor(private router: Router, private servicecookie: CookieService, privat
     }
   });
  }
+
+
+
+
+
 
 
  cerrarsesion() {
@@ -105,46 +100,5 @@ constructor(private router: Router, private servicecookie: CookieService, privat
  }
 
 
-
-cambiopass() {
-  if (!this.usuario || !this.usuario.Email) {
-    alert("El usuario no está cargado aún. Por favor, esperá unos segundos o recargá la página.");
-    return;
-  }
-
-  if (this.passwordNueva !== this.confirmarPassword) {
-    alert('Las contraseñas nuevas no coinciden');
-    return;
-  }
-
-  const data = {
-    email: this.usuario.Email,
-    password: this.passwordActual,
-    nuevapass: this.passwordNueva
-  };
-
-  this.userservice.cambiopassDetalle(data).subscribe({
-    next: (res) => {
-      console.log('Contraseña cambiada correctamente', res);
-      alert('Contraseña actualizada con éxito');
-      // Opcional: limpiar campos
-      this.passwordActual = '';
-      this.passwordNueva = '';
-      this.confirmarPassword = '';
-    },
-    error: (err) => {
-      console.log('DATOS:', data);
-      console.error('Error al cambiar la contraseña', err);
-      alert('Ocurrió un error al cambiar la contraseña');
-    }
-  });
 }
-
-
-}
-
-
-
-
-
 

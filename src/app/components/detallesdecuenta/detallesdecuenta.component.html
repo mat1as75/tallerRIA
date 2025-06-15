@@ -12,40 +12,53 @@
       >
         <ul class="nav flex-column">
           <li class="nav-item mb-3">
-            <a class="nav-link" href="#"
+            <a class="nav-link" [routerLink]="['/home']"
               ><i class="bi bi-house-door me-2"></i> Home</a
             >
+            <hr>
           </li>
           <li class="nav-item mb-3">
-            <a class="nav-link" href="#"
+            <a class="nav-link" [routerLink]="['/detallesdecuenta']"
               ><i class="bi bi-person me-2"></i> Cuenta</a
             >
-          </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link" href="#"
-              ><i class="bi bi-geo-alt me-2"></i> Direcciones</a
-            >
-          </li>
           <li class="nav-item mb-4">
-            <a class="nav-link" href="#"
+            <a class="nav-link" [routerLink]="['/MisCompras']"
               ><i class="bi bi-star me-2"></i> Historial Pedidos</a
+
             >
           </li>
-          <li class="nav-item mb-3 p-5"></li>
-          <li class="nav-item mb-3 p-5"></li>
+
+         
+           <li class="nav-item mb-3 pt-5">
+          </li>
+
+           <li class="nav-item mb-3 pt-5">
+          </li>
+
+          <li class="nav-item mb-3 pt-4">
+          </li>
+
+          <li class="nav-item mb-3 pt-4">
+          </li>
+
+          <li class="nav-item mb-3 pt-4">
+          </li>
+        
+          <li class="nav-item mb-3 pt-4">
+          </li>
+         
+          <li class="nav-item mb-3 pt-4">
+          </li>
           <li class="nav-item mb-3">
-            <a
-              class="nav-link text-danger"
-              href="javascript:void(0)"
-              (click)="cerrarsesion()"
+            <a class="nav-link text-danger" href="javascript:void(0)" (click)="cerrarsesion()"
+
               ><i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión</a
             >
           </li>
           <li class="nav-item">
-            <button
-              class="btn btn-danger w-100 rounded-pill"
-              (click)="desactivacuenta()"
-            >
+
+            <button class="btn btn-danger w-100" (click)="desactivacuenta()">
+
               <i class="bi bi-trash me-2"></i>Desactivar Cuenta
             </button>
           </li>
@@ -88,23 +101,26 @@
               disabled
             />
           </div>
-
+        </form>
           <hr />
+         <form (ngSubmit)="cambiopass()">
           <div class="mt-5">
             <h5 class="fw-bold">Cambio de Contraseña</h5>
             <div class="bg-light p-3 rounded mb-4">
               <div class="row g-3">
                 <div class="col-md-12">
                   <label class="form-label">Contraseña actual</label>
-                  <input type="text" class="form-control" />
+
+                  <input type="text" class="form-control" [(ngModel)]="passwordActual" name="passwordactual" />
+
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Nueva contraseña</label>
-                  <input type="password" class="form-control" />
+                  <input type="password" class="form-control" [(ngModel)]="passwordNueva" name="passwordnueva" />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Confirmar nueva contraseña</label>
-                  <input type="password" class="form-control" />
+                  <input type="password" class="form-control" [(ngModel)]="confirmarPassword" name="confirmarPassword" />
                 </div>
               </div>
             </div>
@@ -115,6 +131,7 @@
             </div>
           </div>
         </form>
+
       </div>
     </div>
   </div>

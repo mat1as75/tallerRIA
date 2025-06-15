@@ -15,6 +15,7 @@ import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { SendDetailsComponent } from './components/send-details/send-details.component';
 import { PaymentOptionsComponent } from './components/payment-options/payment-options.component';
 import { PaymentConfirmationComponent } from './components/payment-confirmation/payment-confirmation.component';
+import { HistoriaComprasComponent } from './components/historia-compras/historia-compras.component';
 
 
 export const routes: Routes = [
@@ -34,5 +35,6 @@ export const routes: Routes = [
     {path: 'carrito', component: ShopCartComponent},
     {path: 'detallesEnvio', component: SendDetailsComponent},
     {path: 'opcionesPago', component: PaymentOptionsComponent},
-    {path: 'confirmacionPago', component: PaymentConfirmationComponent}
+    {path: 'confirmacionPago', component: PaymentConfirmationComponent},
+    {path: 'MisCompras', component: HistoriaComprasComponent}
 ];

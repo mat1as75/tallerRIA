@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../interfaces/User.interface';
+import { Pedido } from '../../interfaces/Pedido.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,12 @@ export class UserServiceService {
   }
 
 
+    ObtenerCompras(id: string){
+    return this.http.get<Pedido[]>(`${this.apiPhp}/historialcompras/${id}`,{withCredentials: true})
+  }
 
+  cambiopassDetalle(pass: {email: string, password: string, nuevapass: string}){
+    return this.http.put<any>(`${this.apiPhp}/cambiopassdesdedetalles`, pass)
+    
+  }
 }
