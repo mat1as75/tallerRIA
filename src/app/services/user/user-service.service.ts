@@ -46,6 +46,7 @@ export class UserServiceService {
      return this.http.post<any>(`${this.apiPhp}/desactivarcuenta/${id}`,{withCredentials: true})    
   }
 
+
     ObtenerCompras(id: string){
     return this.http.get<Pedido[]>(`${this.apiPhp}/historialcompras/${id}`,{withCredentials: true})
   }

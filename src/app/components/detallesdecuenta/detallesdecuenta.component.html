@@ -1,7 +1,5 @@
-
 <app-navbar></app-navbar>
-<div class="container-fluid ">
-
+<div class="container-fluid">
   <div class="row">
     <!-- Sidebar izquierda -->
     <div
@@ -29,6 +27,7 @@
 
             >
           </li>
+
          
            <li class="nav-item mb-3 pt-5">
           </li>
@@ -52,11 +51,14 @@
           </li>
           <li class="nav-item mb-3">
             <a class="nav-link text-danger" href="javascript:void(0)" (click)="cerrarsesion()"
+
               ><i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión</a
             >
           </li>
           <li class="nav-item">
+
             <button class="btn btn-danger w-100" (click)="desactivacuenta()">
+
               <i class="bi bi-trash me-2"></i>Desactivar Cuenta
             </button>
           </li>
@@ -108,7 +110,9 @@
               <div class="row g-3">
                 <div class="col-md-12">
                   <label class="form-label">Contraseña actual</label>
+
                   <input type="text" class="form-control" [(ngModel)]="passwordActual" name="passwordactual" />
+
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Nueva contraseña</label>
@@ -130,4 +134,5 @@
 
       </div>
     </div>
+  </div>
 </div>

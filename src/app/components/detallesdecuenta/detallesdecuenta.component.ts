@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router, RouterLink } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CookieService } from '../../services/cookies/cookie.service';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { User } from '../../interfaces/User.interface';
-import { FormsModule, NgModel } from '@angular/forms';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+
 
 @Component({
   selector: 'app-detallesdecuenta',
@@ -13,6 +15,7 @@ import { FormsModule, NgModel } from '@angular/forms';
   styleUrl: './detallesdecuenta.component.scss'
 })
 export class DetallesdecuentaComponent {
+  usuario: User | null = null; 
 
   usuario: User | null = null; 
 
@@ -139,6 +142,7 @@ cambiopass() {
 
 
 }
+
 
 
 
