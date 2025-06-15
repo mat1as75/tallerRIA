@@ -17,7 +17,7 @@ import { LocalStorageService } from '../../services/local-storage/local-storage.
 export class DetallesdecuentaComponent {
   usuario: User | null = null; 
 
-  usuario: User | null = null; 
+
 
   
   passwordActual: string = '';
