@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Route, Router, RouterLink } from '@angular/router';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { AlertService } from '../../services/alert/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ import { LocalStorageService } from '../../services/local-storage/local-storage.
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+
+
+  private alertService = inject(AlertService);
 
 loginForm: FormGroup;
 
@@ -40,7 +44,6 @@ const{email, password} = this.loginForm.value;
 this.usrService.postIniciarSesion({email,password}).subscribe({
   next: (response) => {
         // Guardar token o datos de usuario si vienen en la respuesta
-        // localStorage.setItem('token', response.token); // si tu backend lo manda
         // Mostrar la cookie 'session_ID' en la consola:
         const cookies = document.cookie; // Todas las cookies accesibles para la ruta y dominio actual
         console.log('Cookies actuales:', cookies);
@@ -54,11 +57,13 @@ this.usrService.postIniciarSesion({email,password}).subscribe({
         this.localStorageService.setItem('session_ID', sessionID);
 
         console.log('Login exitoso:', response);
+        this.alertService.AlertTopCorner('Succes','Iniciaste secion exitosamente');
         this.router.navigate(['/home']);
      },
       error: (error) => {
         console.error('Error al iniciar sesión:', error);
-        alert('Correo o contraseña incorrectos');
+        const msg = error.error?.Mensaje;
+        this.alertService.showError('Error',msg);
     }
   });
   
