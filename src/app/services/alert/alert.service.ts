@@ -60,4 +60,16 @@ export class AlertService {
   closeAlert() {
     Swal.close()
   }
+
+  AlertTopCorner(title: string, text: string){
+Swal.fire({
+  position: "top-end",
+  icon: 'success',
+  title: title,
+  text: text,
+  showConfirmButton: false,
+  timer: 1500
+});
+}
+
 }

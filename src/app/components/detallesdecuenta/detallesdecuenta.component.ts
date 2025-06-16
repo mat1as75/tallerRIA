@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule, NgModel } from '@angular/forms';
 import { CookieService } from '../../services/cookies/cookie.service';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { User } from '../../interfaces/User.interface';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
-
+import { FormsModule, NgModel } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { AlertService } from '../../services/alert/alert.service';
 
 @Component({
   selector: 'app-detallesdecuenta',
@@ -15,9 +15,10 @@ import { LocalStorageService } from '../../services/local-storage/local-storage.
   styleUrl: './detallesdecuenta.component.scss'
 })
 export class DetallesdecuentaComponent {
+
+  private alertService = inject(AlertService);
+
   usuario: User | null = null; 
-
-
 
   
   passwordActual: string = '';
@@ -65,10 +66,12 @@ constructor(private router: Router, private servicecookie: CookieService, privat
         this.servicecookie.borrarCookie('session_ID');
         this.servicecookie.borrarCookie('PHPSESSID');
       // Redirigir al login
-      this.router.navigate(['/login']);
+      this.alertService.AlertTopCorner('Cerrado','Cerraste sesion')
+      this.router.navigate(['/home']);
     },
     error: (err) => {
       console.error('Error al cerrar sesión', err);
+      this.alertService.showError('Error','Error al cerrar sesion')
     },
     complete: () => {
       console.log('Request de cierre de sesión completado.');
@@ -86,20 +89,9 @@ constructor(private router: Router, private servicecookie: CookieService, privat
   localStorage.clear();
   sessionStorage.clear();
 
-  this.userservice.deleteuser(sessionId!).subscribe({
-    next: (res) => {
-      console.log('Sesión dado de baja correctamente', res);
+  
+this.borraruser(sessionId);
 
-      // Redirigir al login
-      this.router.navigate(['/login']);
-    },
-    error: (err) => {
-      console.error('Error al dar de baja usuario', err);
-    },
-    complete: () => {
-      console.log('Request de dar de baja Usuario completado.');
-    }
-  });
 
 
  }
@@ -126,7 +118,9 @@ cambiopass() {
   this.userservice.cambiopassDetalle(data).subscribe({
     next: (res) => {
       console.log('Contraseña cambiada correctamente', res);
-      alert('Contraseña actualizada con éxito');
+
+      this.alertService.showSuccess('Exito','Cambio la password exitosamente')
+
       // Opcional: limpiar campos
       this.passwordActual = '';
       this.passwordNueva = '';
@@ -135,14 +129,67 @@ cambiopass() {
     error: (err) => {
       console.log('DATOS:', data);
       console.error('Error al cambiar la contraseña', err);
-      alert('Ocurrió un error al cambiar la contraseña');
+      this.alertService.showError('Error','Error al cambiar la password')
+
     }
   });
 }
 
 
-}
 
+  borraruser(sessionId: any){
+    const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-success",
+    cancelButton: "btn btn-danger"
+  },
+  buttonsStyling: false
+});
+swalWithBootstrapButtons.fire({
+  title: "Esta seguro?",
+  text: "No es revercible",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonText: "Dar de baja",
+  cancelButtonText: "Cancelar!",
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+  this.userservice.deleteuser(sessionId!).subscribe({
+    next: (res) => {
+      console.log('Sesión dado de baja correctamente', res);
+
+      // Redirigir al login
+      this.router.navigate(['/login']);
+    },
+    error: (err) => {
+      console.error('Error al dar de baja usuario', err);
+    },
+    complete: () => {
+      console.log('Request de dar de baja Usuario completado.');
+      swalWithBootstrapButtons.fire({
+      title: "Deleted!",
+      text: "Usuario dado de baja",
+      icon: "success"
+    });
+    }
+  });
+
+    
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire({
+      title: "Cancelado",
+      text: "Se cancelo la desactivasion del usuario",
+      icon: "error"
+    });
+  }
+});
+  }
+
+}
 
 
 
