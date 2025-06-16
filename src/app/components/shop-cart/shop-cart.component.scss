@@ -25,3 +25,114 @@ body {
 hr {
     opacity: 0.5;
 }
+
+img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+    background-color: #fff;
+}
+
+h6 {
+    text-wrap: nowrap;
+}
+
+@media (max-width: 768px) {
+
+    .producto-truncado {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: left !important;
+      }
+    /* Imagen centrada */
+    .producto-truncado .border {
+      margin-bottom: 1rem;
+    }
+  
+    /* Nombre del producto truncado */
+    .nombre-truncado {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 320px; /* Móvil */
+    }
+  
+    /* Paso de columnas a filas */
+    .resumen-truncado,
+    .info-pedido-truncado {
+      margin-left: 0 !important;
+      margin-top: 2rem !important;
+    }
+  
+    .container-truncado .row {
+      flex-direction: column;
+    }
+  
+    /* Navegación pasos responsive */
+    .container-truncado .d-flex.justify-content-start {
+      flex-wrap: nowrap;
+      //gap: 0.5rem;
+    }
+  
+    .container-truncado h6 {
+      font-size: 14px;
+      padding-left: .7rem;
+      padding-right: .7rem;
+      text-wrap: nowrap;
+    }
+  
+    .container-truncado {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+  }
+  
+  /* Estilos para tablets (entre 768px y 992px) */
+  @media (min-width: 769px) and (max-width: 992px) {
+    .producto-truncado .border {
+      width: 90px;
+      height: 90px;
+    }
+
+    .container-truncado h6 {
+        font-size: 14px;
+        padding-left: 1.75rem;
+        padding-right: 1.75rem;
+    }
+  
+    .nombre-truncado {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 170px; /* Móvil */
+    }
+  
+    .resumen-truncado,
+    .info-pedido-truncado {
+      margin-left: 3.5rem !important;
+      margin-top: 2rem !important;
+    }
+  
+    .container-truncado
+    .producto-truncado {
+        margin: 0;
+        padding: auto;
+      
+    }
+  }
+  
+  /* Full width en pantallas muy pequeñas */
+  @media (max-width: 576px) {
+    .producto-truncado {
+      padding: 1rem 1rem !important;
+    }
+    .resumen-truncado,
+    .info-pedido-truncado {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+  }
+  

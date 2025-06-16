@@ -1,6 +1,6 @@
 <div class="container py-4 mt-4">
   <!-- Navegación de pasos -->
-  <div class="d-flex justify-content-start mb-4">
+  <div class="d-flex justify-content-start mb-4 step-indicators text-nowrap">
     <h6
       class="fw-bold text-light-gray border-bottom border-bottom-secondary pb-1 px-6"
     >
@@ -18,54 +18,169 @@
 
   <div class="row">
     <!-- Formulario de envío -->
-    <div class="col-md-7 mt-3 px-5">
+    <div class="col-12 col-md-7 mt-3 px-5 shipping-form">
       <h6 class="fw-bold mb-3 ps-4 pb-2">Detalles de envío</h6>
-      <form>
+      <form
+        [formGroup]="shippingDataForm"
+        (ngSubmit)="advanceToPayment()"
+        id="shippingForm"
+      >
         <div class="row g-4">
           <div class="col-md-5">
             <input
               type="text"
               class="form-control"
               placeholder="Nombre"
+              name="name"
+              formControlName="name"
               required
             />
+            <div
+              *ngIf="
+                shippingDataForm.get('name')?.invalid &&
+                shippingDataForm.get('name')?.touched
+              "
+              class="text-danger small"
+            >
+              <span
+                *ngIf="shippingDataForm.get('name')?.errors?.['required']"
+                class="small"
+              >
+                Campo requerido.
+              </span>
+            </div>
           </div>
           <div class="col-md-5">
             <input
               type="text"
               class="form-control"
               placeholder="Apellido"
+              name="last_name"
+              formControlName="last_name"
               required
             />
+            <div
+              *ngIf="
+                shippingDataForm.get('last_name')?.invalid &&
+                shippingDataForm.get('last_name')?.touched
+              "
+              class="text-danger small"
+            >
+              <span
+                *ngIf="shippingDataForm.get('last_name')?.errors?.['required']"
+                class="small"
+              >
+                Campo requerido.
+              </span>
+            </div>
           </div>
           <div class="col-10">
             <input
               type="text"
               class="form-control"
-              placeholder="Número de la casa y nombre de la calle"
+              placeholder="Dirección de domicilio"
+              name="address"
+              formControlName="address"
               required
             />
+            <div
+              *ngIf="
+                shippingDataForm.get('address')?.invalid &&
+                shippingDataForm.get('address')?.touched
+              "
+              class="text-danger small"
+            >
+              <span
+                *ngIf="shippingDataForm.get('address')?.errors?.['required']"
+                class="small"
+              >
+                Campo requerido.
+              </span>
+            </div>
           </div>
           <div class="col-10">
             <input
               type="text"
               class="form-control"
               placeholder="Apartamento, habitación, etc. (opcional)"
+              name="room"
+              formControlName="room"
             />
           </div>
           <div class="col-md-5">
-            <select class="form-select" required>
+            <select
+              class="form-select"
+              name="departament"
+              formControlName="departament"
+              required
+            >
               <option value="" disabled selected hidden>Departamento</option>
-              <option *ngFor="let depto of ddepartaments" [value]="depto">
+              <option *ngFor="let depto of departaments" [value]="depto">
                 {{ depto }}
               </option>
             </select>
+            <div
+              *ngIf="
+                shippingDataForm.get('departament')?.invalid &&
+                shippingDataForm.get('departament')?.touched
+              "
+              class="text-danger small"
+            >
+              <span
+                *ngIf="shippingDataForm.get('departament')?.errors?.['required']"
+                class="small"
+              >
+                Campo requerido.
+              </span>
+            </div>
           </div>
           <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="Ciudad" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ciudad"
+              name="city"
+              formControlName="city"
+              required
+            />
+            <div
+              *ngIf="
+                shippingDataForm.get('city')?.invalid &&
+                shippingDataForm.get('city')?.touched
+              "
+              class="text-danger small"
+            >
+              <span
+                *ngIf="shippingDataForm.get('city')?.errors?.['required']"
+                class="small"
+              >
+                Campo requerido.
+              </span>
+            </div>
           </div>
           <div class="col-10">
-            <input type="text" class="form-control" placeholder="Teléfono" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Teléfono"
+              name="phone"
+              formControlName="phone"
+              required
+            />
+            <div
+              *ngIf="
+                shippingDataForm.get('phone')?.invalid &&
+                shippingDataForm.get('phone')?.touched
+              "
+              class="text-danger small"
+            >
+              <span
+                *ngIf="shippingDataForm.get('phone')?.errors?.['required']"
+                class="small"
+              >
+                Campo requerido.
+              </span>
+            </div>
           </div>
         </div>
 
@@ -102,42 +217,42 @@
     </div>
 
     <!-- Resumen del carrito -->
-    <div class="col-md-4 mt-3 ms-7">
+    <div class="col-12 col-md-4 mt-3 ms-7 cart-summary">
       <h6 class="fw-bold mb-3">Resumen del carrito</h6>
       <hr class="m-0" />
       <div class="small">
-        <!-- Producto 1 -->
-        <div class="d-flex mb-3 pt-3">
-          <div class="me-3">
-            <div class="bg-secondary" style="width: 50px; height: 50px"></div>
+        <!-- Productos -->
+        <div
+          class="d-flex mb-3 pt-3 small"
+          *ngFor="let product of cartProductList; trackByProducts"
+        >
+          <div
+            class="border rounded me-3"
+            style="
+              width: 50px;
+              height: 50px;
+              box-sizing: content-box;
+              overflow: hidden;
+              flex-shrink: 0;
+            "
+          >
+            <img [src]="product.URL_Imagen" class="img-fluid" alt="Imagen" />
           </div>
           <div class="flex-grow-1">
-            <p class="mb-1 fw-bold">Nombre del Producto</p>
-            <p class="mb-0 text-muted small">CANTIDAD: 1</p>
+            <p class="mb-1 fw-bold">{{ product.Nombre }}</p>
+            <p class="mb-0 text-muted small">
+              CANTIDAD: {{ product.Cantidad }}
+            </p>
           </div>
-          <div class="text-end">
-            <p class="mb-0 fw-bold">USD 295.00</p>
-          </div>
-        </div>
-
-        <!-- Producto 2 -->
-        <div class="d-flex mb-3">
-          <div class="me-3">
-            <div class="bg-secondary" style="width: 50px; height: 50px"></div>
-          </div>
-          <div class="flex-grow-1">
-            <p class="mb-1 fw-bold">Nombre del Producto</p>
-            <p class="mb-0 text-muted small">CANTIDAD: 2</p>
-          </div>
-          <div class="text-end">
-            <p class="mb-0 fw-bold">USD 48.00</p>
+          <div class="text-nowrap">
+            <p class="mb-0 fw-bold">USD {{ product.Precio }}</p>
           </div>
         </div>
 
         <hr class="m-0" />
         <div class="d-flex justify-content-between pt-3">
           <span>Subtotal</span>
-          <span>USD 343.00</span>
+          <span>USD {{ calculateTotalCartPrice() }}</span>
         </div>
         <div class="d-flex justify-content-between py-3">
           <span>Envío</span>
@@ -146,15 +261,22 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between fw-bold py-3">
           <span>Total</span>
-          <span>USD 343.00</span>
+          <span>USD {{ calculateTotalCartPrice() }}</span>
         </div>
         <div class="d-grid mt-3">
-          <button class="btn bg-app-primary rounded-pill my-2 py-2">
+          <button
+            type="submit"
+            form="shippingForm"
+            class="btn bg-app-primary rounded-pill my-2 py-2"
+          >
             <span class="fw-semibold text-extra-light-gray">
               CONTINUAR CON EL PAGO
             </span>
           </button>
-          <button class="btn border-light-gray rounded-pill bg-bord my-2 py-2">
+          <button
+            class="btn border-light-gray rounded-pill my-2 py-2"
+            (click)="returnToCart()"
+          >
             <span class="fw-semibold text-dark-gray"> VOLVER AL CARRITO </span>
           </button>
         </div>
