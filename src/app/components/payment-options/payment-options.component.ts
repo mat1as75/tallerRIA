@@ -1,12 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart/cart.service';
-import { ProductCart } from '../../interfaces/ProductCart.interface';
-import { ShippingInfo } from '../../interfaces/ShippingInfo.interface';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CartProduct } from '../../interfaces/CartProduct.interface';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { AlertService } from '../../services/alert/alert.service';
+import { Order } from '../../interfaces/Order.interface';
+import { OrderService } from '../../services/order/order.service';
+import { EmailHelperService } from '../../services/email-helper/email-helper.service';
+import { OrderConfirmation } from '../../interfaces/OrderConfirmation.interface';
+import { UserServiceService } from '../../services/user/user-service.service';
 
 @Component({
   selector: 'app-payment-options',
@@ -17,15 +21,21 @@ import { AlertService } from '../../services/alert/alert.service';
 })
 export class PaymentOptionsComponent implements OnInit {
   private cartService = inject(CartService)
+  private orderService = inject(OrderService)
   private alertService = inject(AlertService)
+  private userService = inject(UserServiceService)
+  private emailHelperService = inject(EmailHelperService)
   private localStorageService = inject(LocalStorageService)
 
-  cartProductList: ProductCart[] = []
+  cartProductList: CartProduct[] = []
   sessionClientId: number = 0
+  email: string = ''
+  clientName: string = ''
 
   paymentDataForm: FormGroup
-  shippingInfo: ShippingInfo
+  shippingInfo: any
   shippingCost: number = 5.00
+  newOrderId: number = 0
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +49,7 @@ export class PaymentOptionsComponent implements OnInit {
       paymentMethod: this.formBuilder.control('creditCard', Validators.required),
       card_number: this.formBuilder.control('', Validators.required),
       card_maturity: this.formBuilder.control('', Validators.required),
-      card_verification_code: this.formBuilder.control('', Validators.required),
+      card_verification_code: this.formBuilder.control('', [Validators.required, this.cvvValidator]),
       card_holder: this.formBuilder.control('', Validators.required)
     })
 
@@ -75,6 +85,8 @@ export class PaymentOptionsComponent implements OnInit {
     // Shipping Data Info
     const shippingData = this.cartService.getShippingInfo()
 
+    this.getClientEmail()
+
     if (!shippingData) {
       const localShippingInfo = this.localStorageService.getItem('shippingInfo')
       if (localShippingInfo) {
@@ -93,13 +105,46 @@ export class PaymentOptionsComponent implements OnInit {
     this.toggleCardFieldsValidation(initialValue === 'creditCard')
   }
 
-  trackByProducts(index: number, product: ProductCart): number { return product.ID_Producto } 
+  trackByProducts(index: number, product: CartProduct): number { return product.ID_Producto } 
 
   calculateTotalCartPrice(): number {
     return this.cartProductList.reduce((total, product) => {
       const precio = parseFloat(product.Precio)
       return total + (precio * product.Cantidad)
-    }, 0)
+    }, this.shippingCost)
+  }
+
+  onCardNumberInput() {
+    const control = this.paymentDataForm.get('card_number')
+    let value = control?.value?.replace(/\D/g, '') || ''
+    value = value.match(/.{1,4}/g)?.join(' ') || ''
+    control?.setValue(value, { emitEvent: false })
+  }
+
+  onCardMaturityImput() {
+    const control = this.paymentDataForm.get('card_maturity')
+    let value = control?.value || '';
+
+    value = value.replace(/\D/g, '');
+
+    if (value.length >= 3) {
+      value = value.slice(0, 2) + '/' + value.slice(2, 4)
+    }
+
+    control?.setValue(value, { emitEvent: false })
+  }
+
+  cvvValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    const isValid = /^[0-9]{3,4}$/.test(value);
+    return isValid ? null : { invalidCvv: true };
+  }
+
+  onCvvInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+  input.value = input.value.replace(/\D/g, '')
+
+  this.paymentDataForm.get('card_verification_code')?.setValue(input.value, { emitEvent: false })
   }
 
   onPaymentChange(method: string) {
@@ -120,6 +165,19 @@ export class PaymentOptionsComponent implements OnInit {
     })
   }
 
+  getClientEmail() {
+    this.userService.ObtenerUsuario(String(this.sessionClientId))
+    .subscribe({
+      next: data => {
+        this.email = data.Email
+        this.clientName = data.Nombre
+      },
+      error: err => {
+        console.error('Error al obtener datos de Cliente: ' + err)
+      }
+    })
+  }
+
   private toggleCardFieldsValidation(enable: boolean) {
     const controls = ['card_number', 'card_maturity', 'card-verification_code', 'card_holder']
     
@@ -135,6 +193,86 @@ export class PaymentOptionsComponent implements OnInit {
       }
 
       control?.updateValueAndValidity()
+    })
+  }
+
+  createDataOrder(): Order {                                                                                              
+    return {
+      ID_Cliente: this.sessionClientId,
+      Total: this.cartProductList.reduce((total, product) => {
+        return total + parseFloat(product.Precio) * product.Cantidad
+      }, this.shippingCost),
+      Estado: 'pendiente',
+      datosEnvio: {
+        telefonoCliente: this.shippingInfo.TelefonoCliente,
+        direccionCliente: this.shippingInfo.DireccionCliente,
+        departamentoCliente: this.shippingInfo.DepartamentoCliente,
+        ciudadCliente: this.shippingInfo.CiudadCliente
+      },
+      productos: this.cartProductList.map(product => ({
+        id_producto: product.ID_Producto,
+        cantidad: product.Cantidad,
+        precio: parseFloat(product.Precio)
+      }))
+    };
+  }
+
+  postCreateOrderDB() {
+    this.orderService.createOrder(this.createDataOrder())
+    .subscribe({
+      next: data => {
+        const res = JSON.parse(String(data))
+        this.newOrderId = res.ID_Pedido
+        console.log('Pedido creado ID: ' + res.ID_Pedido)
+
+        // Envio Mail Confirmando
+        this.sendEmailConfirmation()
+
+        this.localStorageService.removeItem('shippingInfo')
+        this.clearCart(this.sessionClientId)
+    
+        this.router.navigate(['/confirmacionPago'])
+      },
+      error: err => {
+        console.error('Error al crear pedido: ' + err.error)
+      }
+    })
+  }
+
+  createDataConfirmation(): OrderConfirmation {
+    return {
+      Email: this.email,
+      Nombre: this.clientName,
+      ID_Pedido: this.newOrderId,
+      Total: this.calculateTotalCartPrice(),
+      MetodoPago: this.paymentDataForm.get('paymentMethod')?.value,
+      FechaPedido: new Date().toISOString().split('T')[0],
+      productos: this.cartProductList.map(product => ({
+        Nombre: product.Nombre,
+        Cantidad: product.Cantidad
+      }))
+    };
+  }
+
+  sendEmailConfirmation() {
+    console.log('EMAIL - ' + this.createDataConfirmation().Email)
+    console.log('NOMBRE - ' + this.createDataConfirmation().Nombre)
+    console.log('ID_Pedido - ' + this.createDataConfirmation().ID_Pedido)
+    console.log('Total - ' + this.createDataConfirmation().Total)
+    console.log('MetodoPago - ' + this.createDataConfirmation().MetodoPago)
+    console.log('FechaPedido - ' + this.createDataConfirmation().FechaPedido)
+    console.log('Productos - ' + this.createDataConfirmation().productos.map((p => console.log(p.Nombre + ' - ' + p.Cantidad))))
+
+    this.emailHelperService.sendEmail(this.createDataConfirmation())
+    .subscribe({
+      next: data => {
+        //const resJSON = JSON.parse(data)
+        console.log(data)
+      },
+      error: err => {
+        console.error('ERROR AL ENVIAR MAIL: ' + err.error)
+        console.log(err.error)
+      }
     })
   }
 
@@ -167,13 +305,8 @@ export class PaymentOptionsComponent implements OnInit {
     await this.waitForProcessingTime(5000)
     this.alertService.closeAlert()
 
-    // [ ] Crear pedido en DB
-    // [ ] Enviar mail confirmando pedido
-
-    this.localStorageService.removeItem('shippingInfo')
-    this.clearCart(this.sessionClientId)
-    
-    this.router.navigate(['/confirmacionPago'])
+    // Crear pedido en DB
+    this.postCreateOrderDB()
   }
 
   waitForProcessingTime(ms: number): Promise<void> {

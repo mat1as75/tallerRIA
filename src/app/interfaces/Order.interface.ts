@@ -1,3 +1,4 @@
+import { OrderProduct } from "./OrderProduct.interface"
 import { ShippingInfo } from "./ShippingInfo.interface"
 
 export interface Order {
@@ -5,11 +6,5 @@ export interface Order {
     Total: number
     Estado: string
     datosEnvio: ShippingInfo
-    productos: [
-        {
-            ID_Producto: number
-            Cantidad: number
-            Precio: number
-        }
-    ]
+    productos: OrderProduct[]
 }

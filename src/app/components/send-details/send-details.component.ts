@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductCart } from '../../interfaces/ProductCart.interface';
+import { CartProduct } from '../../interfaces/CartProduct.interface';
 import { CartService } from '../../services/cart/cart.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class SendDetailsComponent implements OnInit {
   private alertService = inject(AlertService)
   private localStorageService = inject(LocalStorageService)
 
-  cartProductList: ProductCart[] = []
+  cartProductList: CartProduct[] = []
   sessionClientId?: number | null
 
   shippingDataForm: FormGroup
@@ -70,7 +70,7 @@ export class SendDetailsComponent implements OnInit {
     }
   }
 
-  trackByProducts(index: number, product: ProductCart): number { return product.ID_Producto } 
+  trackByProducts(index: number, product: CartProduct): number { return product.ID_Producto } 
 
   calculateTotalCartPrice(): number {
     return this.cartProductList.reduce((total, product) => {
@@ -100,7 +100,7 @@ export class SendDetailsComponent implements OnInit {
     const address = form.get('address')?.value || ''
     const completeAddress = `${address} - ${room}`.trim()
 
-    const shippingInfo: ShippingInfo = {
+    const shippingInfo: any = {
       Nombre: form.get('name')?.value || '',
       Apellido: form.get('last_name')?.value || '',
       TelefonoCliente: form.get('phone')?.value || '',

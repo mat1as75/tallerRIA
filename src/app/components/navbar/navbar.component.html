@@ -4,7 +4,7 @@
   >
     <!-- IZQUIERDA: Logo -->
     <div
-      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1"
+      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1 ms-5"
     >
       <a class="navbar-brand fw-bold text-white mb-0" href="#">MNJ Tecno</a>
     </div>
@@ -34,7 +34,7 @@
 
     <!-- DERECHA: Iconos perfil y carrito -->
     <div
-      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1"
+      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-5"
     >
       <a
         (click)="checkCookieRedirect('detallesdecuenta')"
@@ -48,8 +48,9 @@
       >
         <i class="bi bi-bag fs-5"></i>
         <span
-          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark mt-2"
         >
+          <!-- {{ this.quantityProductsCart }} -->
         </span>
       </a>
     </div>

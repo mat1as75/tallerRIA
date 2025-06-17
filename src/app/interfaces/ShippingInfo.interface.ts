@@ -1,8 +1,6 @@
 export interface ShippingInfo {
-    Nombre: string
-    Apellido: string
-    TelefonoCliente: string
-    DireccionCliente: string
-    DepartamentoCliente: string
-    CiudadCliente: string
+    telefonoCliente: string
+    direccionCliente: string
+    departamentoCliente: string
+    ciudadCliente: string
 }

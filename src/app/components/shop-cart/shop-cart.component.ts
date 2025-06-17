@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductCart } from '../../interfaces/ProductCart.interface';
+import { CartProduct } from '../../interfaces/CartProduct.interface';
 import { CartService } from '../../services/cart/cart.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
@@ -18,20 +18,27 @@ export class ShopCartComponent implements OnInit{
   localStorageService = inject(LocalStorageService)
 
   email = 'soporte@tecnostore.com'
-  cartProductList: ProductCart[] = []
+  cartProductList: CartProduct[] = []
 
   sessionClientId?: number | null
+  quantityProductsCart: number = 0
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Cart Data Products
     this.sessionClientId = this.localStorageService.getItem('session_ID')
-    if (this.sessionClientId)
+    if (this.sessionClientId) {
       this.getCartProductByClientId(this.sessionClientId)
+      this.cartService.updateQuantity(this.sessionClientId)
+    }
+      
+    this.cartService.quantity$.subscribe(count => {
+      this.quantityProductsCart = count;
+    });
   }
 
-  trackByProducts(index: number, product: ProductCart): number { return product.ID_Producto } 
+  trackByProducts(index: number, product: CartProduct): number { return product.ID_Producto } 
 
   calculateTotalCartPrice(): number {
     return this.cartProductList.reduce((total, product) => {
@@ -55,19 +62,39 @@ export class ShopCartComponent implements OnInit{
   }
 
   updateQuantity(product_id: number, quantity: number) {
+    // Quantity = 0
     if (quantity === 0) {
-      this.removeProductCart(product_id)
+      this.cartService.removeCartProduct({
+        ID_Cliente: this.sessionClientId,
+        ID_Producto: product_id,
+        Cantidad: 0
+      }).subscribe({
+        next: data => {
+          if (this.sessionClientId) {
+            this.getCartProductByClientId(this.sessionClientId)
+            this.cartService.updateQuantity(this.sessionClientId)
+          }
+          console.log('Cantidad de producto ' + product_id + 'actualizada!')
+        },
+        error: err => {
+          console.error(err)
+          console.log("Cantidad de producto no actualizada!")
+        }
+      })
       return
     }
 
+    // Quantity > 0
     this.cartService.updateProductQuantity({
       ID_Cliente: this.sessionClientId,
       ID_Producto: product_id,
       Cantidad: quantity
     }).subscribe({
       next: data => {
-        if (this.sessionClientId)
+        if (this.sessionClientId) {
           this.getCartProductByClientId(this.sessionClientId)
+          this.cartService.updateQuantity(this.sessionClientId)
+        }
         console.log('Cantidad de producto ' + product_id + 'actualizada!')
       },
       error: err => {
@@ -77,14 +104,16 @@ export class ShopCartComponent implements OnInit{
     })
   }
 
-  removeProductCart(product_id: number) {
-    this.cartService.removeProductCart({
+  removeCartProduct(product_id: number) {
+    this.cartService.removeCartProduct({
       ID_Cliente: this.sessionClientId,
       ID_Producto: product_id
     }).subscribe({
       next: data => {
-        if (this.sessionClientId)
+        if (this.sessionClientId) {
           this.getCartProductByClientId(this.sessionClientId)
+          this.cartService.updateQuantity(this.sessionClientId)
+        }
         console.log('Producto ' + product_id + ' eliminado del carrito!')
       },
       error: err => {
@@ -98,7 +127,7 @@ export class ShopCartComponent implements OnInit{
     this.router.navigate(['/catalogo'])
   }
 
-  advanceShippingDetails(cartProductList: ProductCart[]) {
+  advanceShippingDetails(cartProductList: CartProduct[]) {
     this.router.navigate(['/detallesEnvio'])
   }
 }
