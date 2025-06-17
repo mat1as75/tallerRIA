@@ -7,6 +7,7 @@ import { User } from '../../interfaces/User.interface';
 import { FormsModule, NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AlertService } from '../../services/alert/alert.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-detallesdecuenta',
@@ -27,7 +28,12 @@ export class DetallesdecuentaComponent {
 
 
 
-constructor(private router: Router, private servicecookie: CookieService, private userservice: UserServiceService){}
+  constructor(
+    private router: Router, 
+    private servicecookie: CookieService, 
+    private localStorageService: LocalStorageService, 
+    private userservice: UserServiceService
+  ) {}
 
 
 
@@ -52,12 +58,8 @@ constructor(private router: Router, private servicecookie: CookieService, privat
   });
  }
 
-
  cerrarsesion() {
   const sessionId = this.servicecookie.getCookie('session_ID');
-
-
-
 
   this.userservice.cerrarsesion(sessionId!).subscribe({
     next: (res) => {
@@ -65,6 +67,7 @@ constructor(private router: Router, private servicecookie: CookieService, privat
         // Limpiar almacenamiento local
         this.servicecookie.borrarCookie('session_ID');
         this.servicecookie.borrarCookie('PHPSESSID');
+        this.localStorageService.clear();
       // Redirigir al login
       this.alertService.AlertTopCorner('Cerrado','Cerraste sesion')
       this.router.navigate(['/home']);

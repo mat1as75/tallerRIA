@@ -60,9 +60,11 @@
               <div class="col-md-6">
                 <input
                   type="text"
+                  maxlength="19"
                   class="form-control"
                   placeholder="0000 0000 0000 0000"
                   formControlName="card_number"
+                  (input)="onCardNumberInput()"
                 />
                 <div
                   *ngIf="
@@ -82,9 +84,11 @@
               <div class="col-md-3">
                 <input
                   type="text"
+                  maxlength="5"
                   class="form-control"
                   placeholder="MM / YY"
                   formControlName="card_maturity"
+                  (input)="onCardMaturityImput()"
                 />
                 <div
                   *ngIf="
@@ -105,8 +109,12 @@
                 <input
                   type="text"
                   class="form-control"
+                  maxlength="3"
+                  pattern="[0-9]*"
+                  inputmode="numeric"
                   placeholder="CVV"
                   formControlName="card_verification_code"
+                  (input)="onCvvInput($event)"
                 />
                 <div
                   *ngIf="
