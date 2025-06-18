@@ -15,7 +15,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get<Product[]>(`${this.apiUrl}/products`)
+    return this.http.get<Product[]>(`${this.apiphp}/productos`)
   }
 
   getProductById(id: number) {
@@ -23,7 +23,7 @@ export class ProductService {
   }
 
   getCategories() {
-    return this.http.get<Category[]>(`${this.apiUrl}/categories`)
+    return this.http.get<Category[]>(`${this.apiphp}/categorias`)
   }
 
   getBrands() {

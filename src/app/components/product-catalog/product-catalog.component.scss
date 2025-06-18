@@ -39,3 +39,27 @@ form-check {
     width: 16px;
     max-width: 16px;
 }
+
+ngx-slider .ngx-slider {
+    height: 20px; /* reduce la altura total */
+  }
+  
+  ngx-slider .ngx-slider-bar {
+    height: 4px; /* reduce el grosor del "track" */
+  }
+  
+  ngx-slider .ngx-slider-pointer {
+    width: 12px;
+    height: 12px;
+    top: -4px; /* ajusta la posición vertical del "thumb" */
+  }
+  
+  ngx-slider .ngx-slider-bubble {
+    font-size: 0.7rem; /* cambia el tamaño del texto del valor */
+    padding: 2px 4px;
+  }
+  
+  ngx-slider .ngx-slider-selection {
+    height: 4px; /* misma altura que la barra base */
+  }
+  

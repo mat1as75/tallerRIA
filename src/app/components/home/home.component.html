@@ -50,8 +50,8 @@
         *ngFor="let product of bestsellers.slice(0, 5)"
         class="col-6 col-sm-4 col-md-3 col-lg-2"
       >
-        <div
-          class="card bg-app-secondary border-custom h-100"
+        <!-- <div
+          class="card bg-app-secondary border-custom overflow-hidden h-100"
           style="cursor: pointer"
           (click)="viewProduct(product.id)"
         >
@@ -70,7 +70,7 @@
             <p class="card-title mb-1">{{ product.title }}</p>
             <p class="card-primary fw-semibold mb-0">USD {{ product.price }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
