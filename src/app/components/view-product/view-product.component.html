@@ -4,7 +4,7 @@
     <div class="col-md-6">
       <div class="position-relative border rounded bg-white p-3 text-center">
         <img
-          [src]="productDetails?.images?.[0]"
+          [src]="productDetails?.URL_Imagen"
           class="img-fluid"
           alt="Producto"
         />
@@ -13,14 +13,14 @@
 
     <!-- Detalles del producto -->
     <div class="col-md-6">
-      <h5 class="fw-bold text-dark-gray">{{ productDetails?.title }}</h5>
+      <h5 class="fw-bold text-dark-gray">{{ productDetails?.Nombre }}</h5>
       <div class="d-flex align-items-baseline mb-5 fw-bold text-dark-gray">
         <span class="me-1 text-uppercase">USD</span>
-        <span class="fs-2">{{ productDetails?.price }}</span>
+        <span class="fs-2">{{ productDetails?.Precio }}</span>
       </div>
       <p class="text-muted mb-1">Disponibilidad: 5 disponibles</p>
       <p class="text-muted mb-5">
-        Categoría: {{ productDetails?.category?.name }}
+        Categoría: {{ productDetails?.ID_Categoria }}
       </p>
 
       <button class="btn bg-app-primary mt-5 mb-4 w-400px rounded-pill">

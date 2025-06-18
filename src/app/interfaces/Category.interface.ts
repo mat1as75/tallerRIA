@@ -1,5 +1,5 @@
 export interface Category {
-    id: number;
-    name: string;
-    description?: string;
+    ID: string;
+    Nombre: string;
+    Descripcion: string;
 }

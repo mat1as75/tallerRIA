@@ -49,3 +49,35 @@ body {
 .text-extra-light-gray {
     color: theme.$background-color !important;
 }
+
+ngx-slider .ngx-slider-bubble {
+    font-size: 14px !important;
+    padding: 2px 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #333 !important;
+  }
+  
+  ngx-slider .ngx-slider {
+    height: 20px !important;
+    margin-top: 5px !important;
+  }
+  
+  ngx-slider .ngx-slider-pointer {
+    width: 12px !important;
+    height: 12px !important;
+    top: -4px !important;
+    background-color: theme.$primary-color !important;
+    border: 2px solid theme.$placeholder-color !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+  }
+  
+  ngx-slider .ngx-slider-bar {
+    height: 4px !important;
+    background: #ddd !important;
+  }
+
+ngx-slider .ngx-slider-pointer:after {
+  display: none !important; /* elimina el halo blanco duplicado */
+}
+
