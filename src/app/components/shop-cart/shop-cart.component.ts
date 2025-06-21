@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PriceFormatPipe } from '../../shared/price-format.pipe';
 
 @Component({
   selector: 'app-shop-cart',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PriceFormatPipe],
   templateUrl: './shop-cart.component.html',
   styleUrl: './shop-cart.component.scss'
 })

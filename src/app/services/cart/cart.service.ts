@@ -26,6 +26,12 @@ export class CartService {
     return this.http.get<any>(`${this.apiphp}/carrito/cantidadProductos/${sessionId}`)
   }
 
+  addProductToCart(data: any) {
+    return this.http.post<any>(`${this.apiphp}/carrito/agregar`, data, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
   updateQuantity(sessionId: number) {
     this.getQuantityProductsCart(sessionId)
     .subscribe({

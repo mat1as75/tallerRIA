@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { ShippingInfo } from '../../interfaces/ShippingInfo.interface';
 import { AlertService } from '../../services/alert/alert.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { PriceFormatPipe } from '../../shared/price-format.pipe';
 
 @Component({
   selector: 'app-send-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, PriceFormatPipe],
   templateUrl: './send-details.component.html',
   styleUrl: './send-details.component.scss'
 })

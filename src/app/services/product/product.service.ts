@@ -19,11 +19,15 @@ export class ProductService {
   }
 
   getProductById(id: number) {
-    return this.http.get<Product>(`${this.apiUrl}/products/${id}`)
+    return this.http.get<Product>(`${this.apiphp}/productos/${id}`)
   }
 
   getCategories() {
     return this.http.get<Category[]>(`${this.apiphp}/categorias`)
+  }
+
+  getCategoryById(id: number) {
+    return this.http.get<Category>(`${this.apiphp}/categorias/${id}`)
   }
 
   getBrands() {

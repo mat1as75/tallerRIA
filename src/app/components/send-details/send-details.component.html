@@ -227,7 +227,7 @@
           *ngFor="let product of cartProductList; trackByProducts"
         >
           <div
-            class="border rounded me-3"
+            class="border-light-gray rounded me-3"
             style="
               width: 50px;
               height: 50px;
@@ -236,7 +236,11 @@
               flex-shrink: 0;
             "
           >
-            <img [src]="product.URL_Imagen" class="img-fluid" alt="Imagen" />
+            <img
+              [src]="product.URL_Imagen"
+              class="img-fluid bg-app-secondary"
+              alt="Imagen"
+            />
           </div>
           <div class="flex-grow-1">
             <p class="mb-1 fw-bold">{{ product.Nombre }}</p>
@@ -252,7 +256,7 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between pt-3">
           <span>Subtotal</span>
-          <span>USD {{ calculateTotalCartPrice() }}</span>
+          <span>USD {{ calculateTotalCartPrice() | priceFormat }}</span>
         </div>
         <div class="d-flex justify-content-between py-3">
           <span>Envío</span>
@@ -261,7 +265,7 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between fw-bold py-3">
           <span>Total</span>
-          <span>USD {{ calculateTotalCartPrice() }}</span>
+          <span>USD {{ calculateTotalCartPrice() | priceFormat }}</span>
         </div>
         <div class="d-grid mt-3">
           <button
