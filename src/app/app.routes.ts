@@ -8,6 +8,8 @@ import { AboutComponent } from './components/about-us/about-us.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductOrdersComponent } from './components/product-orders/product-orders.component';
+import { AltaGestorComponent } from './components/alta-gestor/alta-gestor.component';
+import { ModificarPedidoComponent } from './components/modificar-pedido/modificar-pedido.component';
 import { ReuperarpasswordComponent } from './components/reuperarpassword/reuperarpassword.component';
 import { CambiarpasswordComponent } from './components/cambiarpassword/cambiarpassword.component';
 import { DetallesdecuentaComponent } from './components/detallesdecuenta/detallesdecuenta.component';
@@ -29,6 +31,8 @@ export const routes: Routes = [
     {path: 'altaProducto', component: ProductCreateComponent},
     {path: 'listaProducto', component: ProductListComponent},
     {path: 'ordenesProducto', component: ProductOrdersComponent},
+    {path: 'altaGestor', component: AltaGestorComponent},
+    {path: 'modificarPedido', component: ModificarPedidoComponent},
     {path: 'recuprarpassword', component: ReuperarpasswordComponent},
     {path: 'cambiopassword', component: CambiarpasswordComponent},
     {path: 'detallesdecuenta', component: DetallesdecuentaComponent},
@@ -37,4 +41,5 @@ export const routes: Routes = [
     {path: 'opcionesPago', component: PaymentOptionsComponent},
     {path: 'confirmacionPago', component: PaymentConfirmationComponent},
     {path: 'MisCompras', component: HistoriaComprasComponent}
+
 ];
