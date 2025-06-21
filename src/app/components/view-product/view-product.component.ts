@@ -20,10 +20,9 @@ export class ViewProductComponent implements OnInit{
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    if (this.productId !== undefined)
-      this.getProductDetails(this.productId)
-    else
-      console.error('Product ID is undefined');
+    this.productId = parseInt(this.route.snapshot.paramMap.get('id')!);
+    console.error('Product ID: ', this.productId);
+    this.getProductDetails(this.productId);
   }
 
   getProductDetails(id: number) {

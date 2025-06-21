@@ -1,0 +1,88 @@
+@use 'variables' as theme;
+
+.px-6 {
+    padding: 0 4rem 0;
+}
+
+.px-7 {
+    padding: 0 4.5rem 0;
+}
+
+.ms-6 {
+    margin-left: 4rem;
+}
+.ms-7 {
+    margin-left: 4.5rem;
+}
+
+input,
+textarea {
+    background-color: theme.$background-color;
+    border-color: theme.$border-color;
+    color: theme.$text-color;
+}
+
+input::placeholder,
+select::placeholder {
+    color: theme.$placeholder-color;
+}
+
+select::invalid {
+    color: theme.$placeholder-color;
+}
+
+.placeholderDepartamento {
+    color: theme.$placeholder-color;
+}
+
+#dac-info {
+    color: theme.$placeholder-color;
+}
+
+.form-check-input:checked {
+    background-color: theme.$primary-color;
+    border-color: theme.$primary-color;
+}
+
+hr {
+    opacity: 0.5;
+}
+
+img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+    background-color: #fff;
+}
+
+/* Estilos responsive para pantallas menores */
+@media (max-width: 768px) {
+    .shipping-form,
+    .cart-summary {
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+    }
+  
+    .step-indicators h6 {
+      font-size: 14px;
+      padding: 0.5rem !important;
+    }
+  
+    .w-50 {
+      width: 100% !important;
+    }
+  
+    .px-6 {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+  
+    .ms-7 {
+      margin-left: 0 !important;
+    }
+  
+    .container {
+      padding: 2rem !important;
+    }
+  }

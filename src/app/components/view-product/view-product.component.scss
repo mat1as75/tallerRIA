@@ -1,2 +1,18 @@
 @use 'styles' as theme;
 
+.h-10px {
+    height: 10px !important;
+}
+
+.w-50px {
+    width: 100px !important;
+}
+
+.w-400px {
+    width: 400px !important;
+}
+
+.accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}

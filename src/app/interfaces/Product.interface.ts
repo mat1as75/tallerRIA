@@ -1,15 +1,11 @@
 export interface Product {
-    id: number
-    title: string
-    price: number
-    description?: string
-    category: {
-        id: number
-        name: string
-    }
-    brand: {
-        id: number;
-        name: string;
-    }
-    images?: string[]
+    ID: number
+    Nombre: string
+    Descripcion: string
+    Precio: string
+    Stock: number
+    ID_Categoria: number
+    ID_Marca: number
+    URL_Imagen: string
+    CreatedAt: string
 }

@@ -1,4 +1,14 @@
-@use 'variables' as theme;
+@use '_variables.scss' as theme;
+
+main {
+    margin-top: 64px;
+    font-family: 'public-sans', sans-serif;
+    background-color: theme.$background-color;
+}
+
+body {
+    background-color: theme.$background-color;
+}
 
 .bg-app-primary { 
     background-color: theme.$primary-color !important;
@@ -12,10 +22,62 @@
     background-color: theme.$border-color !important;
 }
 
-.border-custom {
+.border-light-gray {
     border: 1px solid theme.$border-color !important;
 }
 
-.text-custom-gray {
+.border-bottom-primary {
+    border-bottom: 2px solid theme.$primary-color !important;
+}
+
+.border-bottom-secondary {
+    border-bottom: 2px solid theme.$border-color !important;
+}
+
+.text-primary {
+    color: theme.$primary-color !important;
+}
+
+.text-dark-gray {
     color: theme.$text-color !important;
 }
+
+.text-light-gray {
+    color: theme.$border-color !important;
+}
+
+.text-extra-light-gray {
+    color: theme.$background-color !important;
+}
+
+ngx-slider .ngx-slider-bubble {
+    font-size: 14px !important;
+    padding: 2px 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #333 !important;
+  }
+  
+  ngx-slider .ngx-slider {
+    height: 20px !important;
+    margin-top: 5px !important;
+  }
+  
+  ngx-slider .ngx-slider-pointer {
+    width: 12px !important;
+    height: 12px !important;
+    top: -4px !important;
+    background-color: theme.$primary-color !important;
+    border: 2px solid theme.$placeholder-color !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+  }
+  
+  ngx-slider .ngx-slider-bar {
+    height: 4px !important;
+    background: #ddd !important;
+  }
+
+ngx-slider .ngx-slider-pointer:after {
+  display: none !important; /* elimina el halo blanco duplicado */
+}
+

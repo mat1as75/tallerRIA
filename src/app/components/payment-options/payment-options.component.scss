@@ -1,0 +1,48 @@
+@use 'variables' as theme;
+
+.px-6 {
+    padding: 0 4rem 0;
+}
+
+.px-7 {
+    padding: 0 4.5rem 0;
+}
+
+.ms-6 {
+    margin-left: 4rem;
+}
+.ms-7 {
+    margin-left: 4.5rem;
+}
+
+#creditCardInfo,
+#transferInfo,
+#depositInfo {
+    color: theme.$placeholder-color;
+}
+
+input {
+    background-color: theme.$background-color;
+    border-color: theme.$border-color;
+    color: theme.$text-color;
+}
+
+input::placeholder {
+    color: theme.$placeholder-color;
+}
+
+.form-check-input:checked {
+    background-color: theme.$primary-color;
+    border-color: theme.$primary-color;
+}
+
+hr {
+    opacity: 0.5;
+}
+
+img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+    background-color: #fff;
+}

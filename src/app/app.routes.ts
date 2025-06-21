@@ -10,6 +10,15 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductOrdersComponent } from './components/product-orders/product-orders.component';
 import { AltaGestorComponent } from './components/alta-gestor/alta-gestor.component';
 import { ModificarPedidoComponent } from './components/modificar-pedido/modificar-pedido.component';
+import { ReuperarpasswordComponent } from './components/reuperarpassword/reuperarpassword.component';
+import { CambiarpasswordComponent } from './components/cambiarpassword/cambiarpassword.component';
+import { DetallesdecuentaComponent } from './components/detallesdecuenta/detallesdecuenta.component';
+import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
+import { SendDetailsComponent } from './components/send-details/send-details.component';
+import { PaymentOptionsComponent } from './components/payment-options/payment-options.component';
+import { PaymentConfirmationComponent } from './components/payment-confirmation/payment-confirmation.component';
+import { HistoriaComprasComponent } from './components/historia-compras/historia-compras.component';
+
 
 export const routes: Routes = [
     {path: 'home', component: HomeComponent},
@@ -23,6 +32,14 @@ export const routes: Routes = [
     {path: 'listaProducto', component: ProductListComponent},
     {path: 'ordenesProducto', component: ProductOrdersComponent},
     {path: 'altaGestor', component: AltaGestorComponent},
-    {path: 'modificarPedido', component: ModificarPedidoComponent}
+    {path: 'modificarPedido', component: ModificarPedidoComponent},
+    {path: 'recuprarpassword', component: ReuperarpasswordComponent},
+    {path: 'cambiopassword', component: CambiarpasswordComponent},
+    {path: 'detallesdecuenta', component: DetallesdecuentaComponent},
+    {path: 'carrito', component: ShopCartComponent},
+    {path: 'detallesEnvio', component: SendDetailsComponent},
+    {path: 'opcionesPago', component: PaymentOptionsComponent},
+    {path: 'confirmacionPago', component: PaymentConfirmationComponent},
+    {path: 'MisCompras', component: HistoriaComprasComponent}
 
 ];

@@ -1,14 +1,22 @@
 <nav class="navbar shadow-sm px-3">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
-
+  <div
+    class="container-fluid d-flex justify-content-between align-items-center"
+  >
     <!-- IZQUIERDA: Logo -->
-    <div class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1">
+    <div
+      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1 ms-5"
+    >
       <a class="navbar-brand fw-bold text-white mb-0" href="#">MNJ Tecno</a>
     </div>
 
     <!-- CENTRO: Barra de búsqueda -->
-    <form class="search-bar d-none d-lg-flex justify-content-center flex-grow-2 mx-3">
-      <div class="input-group rounded-pill overflow-hidden w-100" style="max-width: 600px;">
+    <form
+      class="search-bar d-none d-lg-flex justify-content-center flex-grow-2 mx-3"
+    >
+      <div
+        class="input-group rounded-pill overflow-hidden w-100"
+        style="max-width: 600px"
+      >
         <span class="input-group-text bg-light border-0">
           <i class="bi bi-list"></i>
         </span>
@@ -25,20 +33,26 @@
     </form>
 
     <!-- DERECHA: Iconos perfil y carrito -->
-    <div class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1">
-      <a href="#" class="btn text-white me-2">
+    <div
+      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-5"
+    >
+      <a
+        (click)="checkCookieRedirect('detallesdecuenta')"
+        class="btn text-white me-2"
+      >
         <i class="bi bi-person fs-5"></i>
       </a>
-      <a href="#" class="btn text-white position-relative">
+      <a
+        (click)="checkCookieRedirect('carrito')"
+        class="btn text-white position-relative"
+      >
         <i class="bi bi-bag fs-5"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark">
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark mt-2"
+        >
+          <!-- {{ this.quantityProductsCart }} -->
         </span>
       </a>
     </div>
-
   </div>
 </nav>
-
-
-
-

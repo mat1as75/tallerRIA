@@ -1,0 +1,103 @@
+
+
+<div class="container-fluid ">
+
+  <div class="row">
+    <!-- Sidebar izquierda -->
+    <div
+      class="col-12 col-md-3 col-lg-2 d-flex flex-column align-items-center pt-4 mt-5"
+      style="min-height: 100vh"
+    >
+      <div
+        class="bg-light rounded-4 shadow-sm w-100 p-3"
+        style="border: 1px solid #ddd"
+      >
+        <ul class="nav flex-column">
+          <li class="nav-item mb-3">
+            <a class="nav-link" [routerLink]="['/home']"
+              ><i class="bi bi-house-door me-2"></i> Home</a
+            >
+            <hr>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link" [routerLink]="['/detallesdecuenta']"
+              ><i class="bi bi-person me-2"></i> Cuenta</a
+            >
+          <li class="nav-item mb-4">
+            <a class="nav-link" href="#"
+              ><i class="bi bi-star me-2"></i> Historial Pedidos</a
+
+            >
+          </li>
+         
+           <li class="nav-item mb-3 pt-5">
+          </li>
+
+           <li class="nav-item mb-3 pt-5">
+          </li>
+
+          <li class="nav-item mb-3 pt-4">
+          </li>
+
+          <li class="nav-item mb-3 pt-4">
+          </li>
+
+          <li class="nav-item mb-3 pt-4">
+          </li>
+        
+          <li class="nav-item mb-3 pt-4">
+          </li>
+         
+          <li class="nav-item mb-3 pt-4">
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-danger" href="javascript:void(0)" (click)="cerrarsesion()"
+              ><i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión</a
+            >
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-danger w-100" (click)="desactivacuenta()">
+              <i class="bi bi-trash me-2"></i>Desactivar Cuenta
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+      <!-- Contenido principal -->
+    <div class="col-md-10 p-4 mt-5 mb-0">
+        <h3>Mis Compras</h3>
+        <hr>
+        <div>
+        <div class="table-responsive">
+  <table class="table table-striped table-hover mt-4">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Valor</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let compra of compras">
+        <td>{{ compra.ID }}</td>
+        <td>{{ compra.CreatedAt| date:'short' }}</td>
+        <td>{{ compra.Estado }}</td>
+        <td>{{ compra.Total }}</td>
+        <td><a>Detalles</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="compras.length === 0" class="alert alert-info">
+    No se encontraron compras para este usuario.
+  </div>
+</div>
+        </div>
+
+
+
+</div>
+

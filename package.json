@@ -6,10 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "clear-cache": "rm -rf .angular/cache && echo 'Angular cache cleared!'"
   },
   "private": true,
   "dependencies": {
+    "@angular-slider/ngx-slider": "^19.0.0",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -17,9 +19,11 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.22.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
