@@ -11,7 +11,7 @@ import { LocalStorageService } from '../../services/local-storage/local-storage.
 
 @Component({
   selector: 'app-detallesdecuenta',
-  imports: [FormsModule, NavbarComponent, RouterLink],
+  imports: [FormsModule, RouterLink],
   templateUrl: './detallesdecuenta.component.html',
   styleUrl: './detallesdecuenta.component.scss'
 })

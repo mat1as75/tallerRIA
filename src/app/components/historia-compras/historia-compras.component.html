@@ -1,103 +1,169 @@
-
-
-<div class="container-fluid ">
-
+<div class="container-fluid">
   <div class="row">
-    <!-- Sidebar izquierda -->
-    <div
-      class="col-12 col-md-3 col-lg-2 d-flex flex-column align-items-center pt-4 mt-5"
+    <!-- Botón para abrir el menú en móvil -->
+    <div class="d-md-none p-4 pb-0 text-end">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#sidebarOffcanvas"
+        aria-controls="sidebarOffcanvas"
+      >
+        <i class="bi bi-list fs-5"></i>
+      </button>
+    </div>
+
+    <!-- Sidebar en pantallas md en adelante -->
+    <aside
+      class="col-9 col-md-3 col-lg-2 d-none d-md-flex flex-column align-items-center mt-md-5 pt-4"
       style="min-height: 100vh"
     >
       <div
-        class="bg-light rounded-4 shadow-sm w-100 p-3"
-        style="border: 1px solid #ddd"
+        class="bg-app-secondary border-light-gray rounded-3 w-100 p-3 h-75 d-flex flex-column"
       >
-        <ul class="nav flex-column">
+        <ul class="nav flex-column flex-grow-1 d-flex h-100">
+          <!-- Enlaces de navegación -->
           <li class="nav-item mb-3">
-            <a class="nav-link" [routerLink]="['/home']"
-              ><i class="bi bi-house-door me-2"></i> Home</a
-            >
-            <hr>
+            <a class="nav-link rounded-pill btn-hover" [routerLink]="['/home']">
+              <i class="bi bi-house-door me-2"></i> Home
+            </a>
           </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link" [routerLink]="['/detallesdecuenta']"
-              ><i class="bi bi-person me-2"></i> Cuenta</a
+          <hr class="m-0" />
+
+          <li class="nav-item mt-3 mb-3">
+            <a
+              class="nav-link mt-1 rounded-pill btn-hover"
+              [routerLink]="['/detallesdecuenta']"
             >
+              <i class="bi bi-person me-2"></i> Cuenta
+            </a>
+          </li>
           <li class="nav-item mb-4">
-            <a class="nav-link" href="#"
-              ><i class="bi bi-star me-2"></i> Historial Pedidos</a
-
+            <a
+              class="nav-link rounded-pill btn-hover"
+              [routerLink]="['/MisCompras']"
             >
-          </li>
-         
-           <li class="nav-item mb-3 pt-5">
-          </li>
-
-           <li class="nav-item mb-3 pt-5">
+              <i class="bi bi-star me-2"></i> Historial Pedidos
+            </a>
           </li>
 
-          <li class="nav-item mb-3 pt-4">
-          </li>
+          <!-- Separador para empujar el resto -->
+          <li class="flex-grow-1"></li>
 
-          <li class="nav-item mb-3 pt-4">
-          </li>
-
-          <li class="nav-item mb-3 pt-4">
-          </li>
-        
-          <li class="nav-item mb-3 pt-4">
-          </li>
-         
-          <li class="nav-item mb-3 pt-4">
-          </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link text-danger" href="javascript:void(0)" (click)="cerrarsesion()"
-              ><i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión</a
+          <!-- Acciones finales abajo -->
+          <li class="nav-item mb-3 mt-auto">
+            <a
+              class="nav-link text-danger rounded-pill btn-hover-danger"
+              href="javascript:void(0)"
+              (click)="cerrarsesion()"
             >
+              <i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión
+            </a>
           </li>
           <li class="nav-item">
-            <button class="btn btn-danger w-100" (click)="desactivacuenta()">
+            <button
+              class="btn btn-danger w-100 rounded-pill btn-hover-danget-trash py-2"
+              (click)="desactivacuenta()"
+            >
+              <i class="bi bi-trash me-2"></i>Desactivar Cuenta
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="col-12 col-md-9 col-lg-10 p-4 mt-0 mt-md-5">
+      <h1 class="fw-semibold mb-4">Mis Compras</h1>
+      <hr />
+      <div class="col-12 col-md-8 pt-2">
+        <table class="table table-striped table-hover mt-4">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Valor</th>
+              <th>Detalles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let compra of compras">
+              <td>{{ compra.ID }}</td>
+              <td>{{ compra.CreatedAt | date : "short" }}</td>
+              <td>{{ compra.Estado }}</td>
+              <td>{{ compra.Total }}</td>
+              <td><a>Detalles</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="compras.length === 0" class="alert alert-info">
+          No se encontraron compras para este usuario.
+        </div>
+      </div>
+    </main>
+
+    <!-- Offcanvas para móvil -->
+    <div
+      class="offcanvas offcanvas-start d-md-none"
+      tabindex="-1"
+      id="sidebarOffcanvas"
+      aria-labelledby="sidebarOffcanvasLabel"
+    >
+      <div class="offcanvas-header mt-2 ms-3">
+        <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menú</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+
+      <!-- Aplica flexbox y 100% de alto -->
+      <div class="offcanvas-body d-flex flex-column h-100 pt-0">
+        <hr class="m-0" />
+        <ul class="nav flex-column flex-grow-1 d-flex mt-2">
+          <li class="nav-item mb-3 pt-2">
+            <a class="nav-link" [routerLink]="['/home']">
+              <i class="bi bi-house-door me-2"></i> Home
+            </a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link" [routerLink]="['/detallesdecuenta']">
+              <i class="bi bi-person me-2"></i> Cuenta
+            </a>
+          </li>
+          <li class="nav-item mb-4">
+            <a class="nav-link" [routerLink]="['/MisCompras']">
+              <i class="bi bi-star me-2"></i> Historial Pedidos
+            </a>
+          </li>
+
+          <!-- Separador flexible -->
+          <li class="flex-grow-1"></li>
+          <hr />
+          <!-- Acciones abajo -->
+          <li class="nav-item mb-3 mt-auto">
+            <a
+              class="nav-link text-danger"
+              href="javascript:void(0)"
+              (click)="cerrarsesion()"
+            >
+              <i class="bi bi-box-arrow-left me-2"></i> Cerrar Sesión
+            </a>
+          </li>
+          <li class="nav-item">
+            <button
+              class="btn btn-danger w-100 rounded-pill py-2"
+              (click)="desactivacuenta()"
+            >
               <i class="bi bi-trash me-2"></i>Desactivar Cuenta
             </button>
           </li>
         </ul>
       </div>
     </div>
-
-      <!-- Contenido principal -->
-    <div class="col-md-10 p-4 mt-5 mb-0">
-        <h3>Mis Compras</h3>
-        <hr>
-        <div>
-        <div class="table-responsive">
-  <table class="table table-striped table-hover mt-4">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-        <th>Valor</th>
-        <th>Detalles</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let compra of compras">
-        <td>{{ compra.ID }}</td>
-        <td>{{ compra.CreatedAt| date:'short' }}</td>
-        <td>{{ compra.Estado }}</td>
-        <td>{{ compra.Total }}</td>
-        <td><a>Detalles</a></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div *ngIf="compras.length === 0" class="alert alert-info">
-    No se encontraron compras para este usuario.
   </div>
 </div>
-        </div>
-
-
-
-</div>
-
