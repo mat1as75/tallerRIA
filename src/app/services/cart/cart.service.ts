@@ -3,13 +3,17 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CartProduct } from '../../interfaces/CartProduct.interface';
 import { ShippingInfo } from '../../interfaces/ShippingInfo.interface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private apiphp = environment.apiphp;
+
+  private cartDataSubject = new BehaviorSubject<CartProduct[]>([])
+  cartData$ = this.cartDataSubject.asObservable();
+
   private quantitySubject = new BehaviorSubject<number>(0)
   quantity$ = this.quantitySubject.asObservable()
 
@@ -18,12 +22,18 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  getCartProducts(client_id: number) {
-    return this.http.get<CartProduct[]>(`${this.apiphp}/carritoDetallado/${client_id}`)
+  getCartProducts(clientId: number): Observable<CartProduct[]> {
+    return this.http.get<CartProduct[]>(`${this.apiphp}/carritoDetallado/${clientId}`);
   }
 
   getQuantityProductsCart(sessionId: number) {
     return this.http.get<any>(`${this.apiphp}/carrito/cantidadProductos/${sessionId}`)
+  }
+
+  addProductToCart(data: any) {
+    return this.http.post<any>(`${this.apiphp}/carrito/agregar`, data, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   updateQuantity(sessionId: number) {
@@ -36,6 +46,10 @@ export class CartService {
         this.quantitySubject.next(0);
       }
     });
+  }
+
+  resetQuantity() {
+    this.quantitySubject.next(0);
   }
 
   updateProductQuantity(data: any) {
@@ -58,6 +72,7 @@ export class CartService {
 
   setCartData(data: CartProduct[]) {
     this.cartData = data
+    this.cartDataSubject.next(data)
   }
 
   getCartData(): CartProduct[] {

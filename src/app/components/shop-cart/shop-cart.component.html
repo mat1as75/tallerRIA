@@ -23,14 +23,14 @@
     <div class="col-md-7 mt-3 px-5 producto-truncado">
       <h6 class="fw-bold mb-3 ps-4">Productos en el carrito</h6>
       <hr class="m-0" />
-      <!-- Producto 1 -->
+      <!-- Productos -->
       <div
         class="d-flex py-3 px-4 producto-truncado"
         *ngFor="let product of cartProductList; trackByProducts"
       >
         <!-- Imagen -->
         <div
-          class="border rounded me-3"
+          class="border-light-gray rounded me-3"
           style="
             width: 100px;
             height: 100px;
@@ -39,15 +39,23 @@
             flex-shrink: 0;
           "
         >
-          <img [src]="product.URL_Imagen" class="img-fluid" alt="Imagen" />
+          <a href="{{ '/producto/' + product.ID_Producto }}">
+            <img
+              [src]="product.URL_Imagen"
+              class="img-fluid bg-app-secondary cursor-pointer"
+              alt="Imagen"
+            />
+          </a>
         </div>
 
         <!-- Info del producto: nombre + contador + trash -->
         <div class="flex-grow-1 d-flex flex-column">
           <!-- Nombre del producto -->
-          <span class="fw-semibold mb-2 small nombre-truncado">
-            {{ product.Nombre }}
-          </span>
+          <a href="{{ '/producto/' + product.ID_Producto }}">
+            <span class="cursor-pointer fw-semibold mb-2 small nombre-truncado">
+              {{ product.Nombre }}
+            </span>
+          </a>
 
           <!-- Contador y trash -->
           <div class="d-flex align-items-center gap-2 mt-4">
@@ -96,8 +104,8 @@
         >
           USD {{ product.Precio }}
         </div>
+        <hr class="m-0" />
       </div>
-      <hr class="m-0" />
     </div>
 
     <!-- Columna derecha: resumen -->
@@ -108,7 +116,7 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between pt-3">
           <span>Subtotal</span>
-          <span>USD {{ calculateTotalCartPrice() }}</span>
+          <span>USD {{ calculateTotalCartPrice() | priceFormat }}</span>
         </div>
         <div class="d-flex justify-content-between py-3">
           <span>Envío</span>
@@ -117,7 +125,7 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between py-3 fw-semibold">
           <span>Total</span>
-          <span>USD {{ calculateTotalCartPrice() }}</span>
+          <span>USD {{ calculateTotalCartPrice() | priceFormat }}</span>
         </div>
         <div class="d-grid mt-3">
           <button

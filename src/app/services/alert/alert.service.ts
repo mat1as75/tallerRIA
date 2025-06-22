@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -6,14 +7,17 @@ import Swal from 'sweetalert2';
 })
 export class AlertService {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   showError(title: string, text: string) {
     Swal.fire({
       icon: 'error',
       title,
       text,
-      confirmButtonColor: '#d33'
+      showConfirmButton: true,
+      confirmButtonColor: '#d33',
+      customClass: {
+        confirmButton: 'rounded-pill'}
     });
   }
 
@@ -22,7 +26,7 @@ export class AlertService {
       icon: 'success',
       title,
       text,
-      confirmButtonColor: '#3085d6'
+      confirmButtonColor: '#2c007f',
     });
   }
 
@@ -31,7 +35,7 @@ export class AlertService {
       icon: 'warning',
       title,
       text,
-      confirmButtonColor: '#f0ad4e'
+      confirmButtonColor: '#2c007f'
     });
   }
 
@@ -40,7 +44,7 @@ export class AlertService {
       icon: 'info',
       title,
       text,
-      confirmButtonColor: '#17a2b8'
+      confirmButtonColor: '#2c007f'
     });
   }
 
@@ -62,14 +66,36 @@ export class AlertService {
   }
 
   AlertTopCorner(title: string, text: string){
-Swal.fire({
-  position: "top-end",
-  icon: 'success',
-  title: title,
-  text: text,
-  showConfirmButton: false,
-  timer: 1500
-});
-}
+    Swal.fire({
+      position: "top-end",
+      icon: 'success',
+      title: title,
+      text: text,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  AlertProductAddedToCart(title: string, text: string) {
+    Swal.fire({
+      icon: 'success',
+      title: title,
+      text: text,
+      confirmButtonColor: '#2c007f',
+      showConfirmButton: true,
+      confirmButtonText: 'Ir al carrito',
+      showCancelButton: true,
+      cancelButtonText: 'Seguir comprando',
+      customClass: {
+        confirmButton: 'rounded-pill',
+        cancelButton: 'rounded-pill'
+      },
+    }).then((result) => {
+      if (result.isConfirmed)
+        this.router.navigate(['/carrito'])
+      else
+        this.router.navigate(['/catalogo'])
+    })
+  }
 
 }
