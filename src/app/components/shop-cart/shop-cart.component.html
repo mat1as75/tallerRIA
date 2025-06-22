@@ -39,7 +39,7 @@
             flex-shrink: 0;
           "
         >
-          <a href="{{ '/producto/' + product.ID_Producto }}">
+          <a [routerLink]="'/producto/' + product.ID_Producto">
             <img
               [src]="product.URL_Imagen"
               class="img-fluid bg-app-secondary cursor-pointer"
@@ -48,64 +48,66 @@
           </a>
         </div>
 
-        <!-- Info del producto: nombre + contador + trash -->
-        <div class="flex-grow-1 d-flex flex-column">
+        <!-- Info del producto: nombre + contador + trash + precio -->
+        <div class="flex-grow-1 d-flex flex-column justify-content-center">
           <!-- Nombre del producto -->
-          <a href="{{ '/producto/' + product.ID_Producto }}">
-            <span class="cursor-pointer fw-semibold mb-2 small nombre-truncado">
+          <a [routerLink]="'/producto/' + product.ID_Producto">
+            <span
+              class="cursor-pointer fw-semibold mb-2 mt-2 mt-md-0 small nombre-truncado"
+            >
               {{ product.Nombre }}
             </span>
           </a>
 
-          <!-- Contador y trash -->
-          <div class="d-flex align-items-center gap-2 mt-4">
-            <div
-              class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3"
-              style="width: 80px; height: 34px"
-            >
-              <button
-                class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                type="button"
-                (click)="
-                  updateQuantity(product.ID_Producto, product.Cantidad - 1)
-                "
+          <!-- Contador + Trash + Precio alineado a la derecha -->
+          <div class="d-flex align-items-center mt-0 mt-md-4 flex-wrap w-100">
+            <!-- Contador + Trash (izquierda) -->
+            <div class="d-flex align-items-center gap-2">
+              <div
+                class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3 my-auto"
+                style="width: 80px; height: 34px"
               >
-                −
-              </button>
-              <input
-                type="text"
-                class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
-                style="width: 30px"
-                [value]="product.Cantidad"
-              />
+                <button
+                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                  type="button"
+                  (click)="
+                    updateQuantity(product.ID_Producto, product.Cantidad - 1)
+                  "
+                >
+                  −
+                </button>
+                <input
+                  type="text"
+                  class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
+                  style="width: 30px"
+                  [value]="product.Cantidad"
+                />
+                <button
+                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                  type="button"
+                  (click)="
+                    updateQuantity(product.ID_Producto, product.Cantidad + 1)
+                  "
+                >
+                  +
+                </button>
+              </div>
               <button
-                class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                type="button"
-                (click)="
-                  updateQuantity(product.ID_Producto, product.Cantidad + 1)
-                "
+                class="btn btn-link text-light-gray p-0"
+                (click)="removeCartProduct(product.ID_Producto)"
               >
-                +
+                <i class="bi bi-trash3 fs-5"></i>
               </button>
             </div>
-            <button
-              class="btn btn-link text-light-gray p-0"
-              (click)="removeCartProduct(product.ID_Producto)"
-            >
-              <i class="bi bi-trash3 fs-5"></i>
-            </button>
+
+            <!-- Precio (alineado a la derecha) -->
+            <div class="ms-auto fw-semibold text-nowrap mt-0 mt-md-0">
+              USD {{ product.Precio }}
+            </div>
           </div>
         </div>
-
-        <!-- Precio -->
-        <div
-          class="fw-semibold ms-3 text-end precio-truncado"
-          style="white-space: nowrap; flex-shrink: 0"
-        >
-          USD {{ product.Precio }}
-        </div>
-        <hr class="m-0" />
       </div>
+      <hr class="m-0" />
     </div>
 
     <!-- Columna derecha: resumen -->
