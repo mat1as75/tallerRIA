@@ -8,6 +8,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AlertService } from '../../services/alert/alert.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-detallesdecuenta',
@@ -18,6 +19,7 @@ import { LocalStorageService } from '../../services/local-storage/local-storage.
 export class DetallesdecuentaComponent {
 
   private alertService = inject(AlertService);
+  private cartService = inject(CartService)
 
   usuario: User | null = null; 
 
@@ -68,6 +70,8 @@ export class DetallesdecuentaComponent {
         this.servicecookie.borrarCookie('session_ID');
         this.servicecookie.borrarCookie('PHPSESSID');
         this.localStorageService.clear();
+        this.cartService.clearCartData();
+        this.cartService.resetQuantity();
       // Redirigir al login
       this.alertService.AlertTopCorner('Cerrado','Cerraste sesion')
       this.router.navigate(['/home']);

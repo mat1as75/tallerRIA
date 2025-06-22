@@ -155,7 +155,7 @@ export class PaymentOptionsComponent implements OnInit {
   getCartProductByClientId(client_id: number) {
     this.cartService.getCartProducts(client_id)
     .subscribe({
-      next: data => {
+      next: (data: CartProduct[]) => {
         this.cartProductList = data
         console.log("OPCIONES PAGO: Productos carrito cargados!")
       },
@@ -231,6 +231,7 @@ export class PaymentOptionsComponent implements OnInit {
 
         this.localStorageService.removeItem('shippingInfo')
         this.clearCart(this.sessionClientId)
+        this.cartService.resetQuantity()
     
         this.router.navigate(['/confirmacionPago'])
       },

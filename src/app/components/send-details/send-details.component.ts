@@ -83,7 +83,7 @@ export class SendDetailsComponent implements OnInit {
   getCartProductByClientId(client_id: number) {
     this.cartService.getCartProducts(client_id)
     .subscribe({
-      next: data => {
+      next: (data: CartProduct[]) => {
         this.cartProductList = data
         console.log("DETALLES DE ENVIO: Productos carrito cargados!")
       },

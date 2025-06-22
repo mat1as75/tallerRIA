@@ -14,121 +14,104 @@ import { PriceFormatPipe } from '../../shared/price-format.pipe';
   templateUrl: './shop-cart.component.html',
   styleUrl: './shop-cart.component.scss'
 })
-export class ShopCartComponent implements OnInit{
-  cartService = inject(CartService)
-  localStorageService = inject(LocalStorageService)
+export class ShopCartComponent implements OnInit {
+  private cartService = inject(CartService);
+  private localStorageService = inject(LocalStorageService);
+  private router = inject(Router);
 
   email = 'soporte@tecnostore.com'
-  cartProductList: CartProduct[] = []
-
-  sessionClientId?: number | null
-  quantityProductsCart: number = 0
-
-  constructor(private router: Router) {}
+  cartProductList: CartProduct[] = [];
+  quantityProductsCart = 0;
+  sessionClientId?: number;
 
   ngOnInit(): void {
-    // Cart Data Products
-    this.sessionClientId = this.localStorageService.getItem('session_ID')
-    if (this.sessionClientId) {
-      this.getCartProductByClientId(this.sessionClientId)
-      this.cartService.updateQuantity(this.sessionClientId)
+    const session = this.localStorageService.getItem('session_ID');
+
+    if (session) {
+      this.sessionClientId = Number(session);
+
+      // Cargar carrito
+      this.loadCartData(this.sessionClientId);
+      this.cartService.updateQuantity(this.sessionClientId);
     }
-      
+
+    this.cartService.cartData$.subscribe(data => {
+      this.cartProductList = data;
+    });
+
     this.cartService.quantity$.subscribe(count => {
       this.quantityProductsCart = count;
     });
   }
 
-  trackByProducts(index: number, product: CartProduct): number { return product.ID_Producto } 
+  loadCartData(clientId: number) {
+    this.cartService.getCartProducts(clientId).subscribe({
+      next: (data: CartProduct[]) => {
+        console.log("PRODUCTOS DEL CARRITO:", data);
+        this.cartService.setCartData(data);
+      },
+      error: err => {
+        console.error("Error al obtener productos del carrito:", err);
+        this.cartService.setCartData([]);
+      }
+    });
+  }
 
   calculateTotalCartPrice(): number {
-    return this.cartProductList.reduce((total, product) => {
-      const precio = parseFloat(product.Precio)
-      return total + (precio * product.Cantidad)
-    }, 0)
+    return Array.isArray(this.cartProductList)
+      ? this.cartProductList.reduce((total, product) => {
+          const precio = parseFloat(product.Precio);
+          return total + (precio * product.Cantidad);
+        }, 0)
+      : 0;
   }
 
-  getCartProductByClientId(client_id: number) {
-    this.cartService.getCartProducts(client_id)
-    .subscribe({
-      next: data => {
-        this.cartProductList = data
-        console.log("CARRITO: Productos carrito cargados!")
+  updateQuantity(productId: number, quantity: number) {
+    if (!this.sessionClientId) return;
+
+    const action = quantity === 0
+      ? this.cartService.removeCartProduct({ ID_Cliente: this.sessionClientId, ID_Producto: productId, Cantidad: 0 })
+      : this.cartService.updateProductQuantity({ ID_Cliente: this.sessionClientId, ID_Producto: productId, Cantidad: quantity });
+
+    action.subscribe({
+      next: () => {
+        this.loadCartData(this.sessionClientId!);
+        this.cartService.updateQuantity(this.sessionClientId!);
+        console.log(`Cantidad actualizada para producto ${productId}`);
       },
       error: err => {
-        console.error(err)
-        console.log("CARRITO: Productos carrito no cargados!")
+        console.error(`Error al actualizar producto ${productId}:`, err);
       }
-    })
+    });
   }
 
-  updateQuantity(product_id: number, quantity: number) {
-    // Quantity = 0
-    if (quantity === 0) {
-      this.cartService.removeCartProduct({
-        ID_Cliente: this.sessionClientId,
-        ID_Producto: product_id,
-        Cantidad: 0
-      }).subscribe({
-        next: data => {
-          if (this.sessionClientId) {
-            this.getCartProductByClientId(this.sessionClientId)
-            this.cartService.updateQuantity(this.sessionClientId)
-          }
-          console.log('Cantidad de producto ' + product_id + 'actualizada!')
-        },
-        error: err => {
-          console.error(err)
-          console.log("Cantidad de producto no actualizada!")
-        }
-      })
-      return
-    }
+  removeCartProduct(productId: number) {
+    if (!this.sessionClientId) return;
 
-    // Quantity > 0
-    this.cartService.updateProductQuantity({
-      ID_Cliente: this.sessionClientId,
-      ID_Producto: product_id,
-      Cantidad: quantity
-    }).subscribe({
-      next: data => {
-        if (this.sessionClientId) {
-          this.getCartProductByClientId(this.sessionClientId)
-          this.cartService.updateQuantity(this.sessionClientId)
-        }
-        console.log('Cantidad de producto ' + product_id + 'actualizada!')
-      },
-      error: err => {
-        console.error(err)
-        console.log("Cantidad de producto no actualizada!")
-      }
-    })
-  }
-
-  removeCartProduct(product_id: number) {
     this.cartService.removeCartProduct({
       ID_Cliente: this.sessionClientId,
-      ID_Producto: product_id
+      ID_Producto: productId
     }).subscribe({
-      next: data => {
-        if (this.sessionClientId) {
-          this.getCartProductByClientId(this.sessionClientId)
-          this.cartService.updateQuantity(this.sessionClientId)
-        }
-        console.log('Producto ' + product_id + ' eliminado del carrito!')
+      next: () => {
+        this.loadCartData(this.sessionClientId!);
+        this.cartService.updateQuantity(this.sessionClientId!);
+        console.log(`Producto ${productId} eliminado del carrito`);
       },
       error: err => {
-        console.error(err)
-        console.log("Producto no eliminado del carrito!")
+        console.error("Error al eliminar producto del carrito:", err);
       }
-    })
+    });
   }
 
   returnToShop() {
-    this.router.navigate(['/catalogo'])
+    this.router.navigate(['/catalogo']);
   }
 
   advanceShippingDetails(cartProductList: CartProduct[]) {
-    this.router.navigate(['/detallesEnvio'])
+    this.router.navigate(['/detallesEnvio']);
+  }
+
+  trackByProducts(index: number, product: CartProduct): number {
+    return product.ID_Producto;
   }
 }

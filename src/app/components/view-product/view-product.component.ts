@@ -8,6 +8,7 @@ import { CookieService } from '../../services/cookies/cookie.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AlertService } from '../../services/alert/alert.service';
+import { CartProduct } from '../../interfaces/CartProduct.interface';
 
 @Component({
   selector: 'app-view-product',
@@ -38,7 +39,6 @@ export class ViewProductComponent implements OnInit {
     this.productId = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.getProductDetails(this.productId);
 
-    // Validar contra stock una vez cargado el producto
     this.quantityControl.valueChanges.subscribe(value => {
       if (this.productDetails?.Stock && value! > this.productDetails.Stock) {
         this.quantityControl.setValue(this.productDetails.Stock, { emitEvent: false });
@@ -53,25 +53,24 @@ export class ViewProductComponent implements OnInit {
     }
   }
 
-  loadCategoryNameById(categoryId: number) {
-    this.productService.getCategoryById(categoryId).subscribe({
-      next: data => {
-        this.categoryName = data.Nombre;
-      },
-      error: err => {
-        console.error('Error obteniendo categoría:', err);
-        this.categoryName = 'Categoría no disponible';
-      }
-    });
-  }
+  // loadCategoryNameById(categoryId: number) {
+  //   this.productService.getCategoryById(categoryId).subscribe({
+  //     next: data => {
+  //       this.categoryName = data.Nombre;
+  //     },
+  //     error: err => {
+  //       console.error('Error obteniendo categoría:', err);
+  //       this.categoryName = 'Categoría no disponible';
+  //     }
+  //   });
+  // }
 
   getProductDetails(id: number) {
     this.productService.getProductById(id).subscribe({
       next: data => {
         this.productDetails = data;
-        this.loadCategoryNameById(this.productDetails.ID_Categoria);
+        //this.loadCategoryNameById(this.productDetails.ID_Categoria);
 
-        // Agregar validador dinámico de stock
         this.quantityControl.addValidators(Validators.max(this.productDetails.Stock));
         this.quantityControl.updateValueAndValidity();
 
@@ -87,8 +86,9 @@ export class ViewProductComponent implements OnInit {
 
   getCartProductByClientId(clientId: number) {
     this.cartService.getCartProducts(clientId).subscribe({
-      next: data => {
-        const prod = data.find((item: any) => item.ID_Producto === this.productId);
+      next: (data: CartProduct[]) => {
+        const products = data
+        const prod = products.find((item: any) => item.ID_Producto === this.productId);
         if (prod) {
           this.quantityProductOnCart = prod.Cantidad;
         }
@@ -113,6 +113,14 @@ export class ViewProductComponent implements OnInit {
     }
   }
 
+  handleCartUpdate(message: string) {
+    this.cartService.updateQuantity(this.sessionId);
+    this.alertService.AlertProductAddedToCart(
+      'Producto agregado al carrito',
+      message
+    );
+  }
+
   updateQuantityProductCart(quantity: number) {
     const total = this.quantityProductOnCart + quantity;
     if (total <= this.productDetails.Stock) {
@@ -123,8 +131,11 @@ export class ViewProductComponent implements OnInit {
       };
 
       this.cartService.updateProductQuantity(cartProduct).subscribe({
-        next: () => {
-          this.getCartProductByClientId(this.sessionId);
+        next: (data) => {
+          this.cartService.setCartData(data)
+          this.cartService.updateQuantity(this.sessionId)
+          this.getCartProductByClientId(this.sessionId)
+          this.handleCartUpdate(`El producto ${this.productDetails.Nombre} ha sido agregado a tu carrito.`)
         },
         error: err => {
           console.error('Error al actualizar cantidad en el carrito:', err);
@@ -141,25 +152,26 @@ export class ViewProductComponent implements OnInit {
       return;
     }
 
+    const cartProduct = {
+      ID_Cliente: this.sessionId,
+      ID_Producto: this.productDetails.ID,
+      Cantidad: cantidad
+    };
+
     if (this.quantityProductOnCart > 0) {
       this.updateQuantityProductCart(cantidad);
     } else {
-      const cartProduct = {
-        ID_Cliente: this.sessionId,
-        ID_Producto: this.productDetails.ID,
-        Cantidad: cantidad
-      };
-
       this.cartService.addProductToCart(cartProduct).subscribe({
-        next: () => {
+        next: (data) => {
+          this.cartService.setCartData(data)
+          this.cartService.updateQuantity(this.sessionId);
           this.getCartProductByClientId(this.sessionId);
+          this.handleCartUpdate(`El producto ${this.productDetails.Nombre} ha sido agregado a tu carrito.`);
         },
         error: err => {
           console.error("Error al agregar al carrito: ", err);
         }
       });
     }
-
-    this.alertService.AlertProductAddedToCart('Producto agregado al carrito', `El producto ${this.productDetails.Nombre} ha sido agregado a tu carrito.`);
   }
 }
