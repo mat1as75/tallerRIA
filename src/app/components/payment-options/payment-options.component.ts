@@ -11,11 +11,12 @@ import { OrderService } from '../../services/order/order.service';
 import { EmailHelperService } from '../../services/email-helper/email-helper.service';
 import { OrderConfirmation } from '../../interfaces/OrderConfirmation.interface';
 import { UserServiceService } from '../../services/user/user-service.service';
+import { PriceFormatPipe } from '../../shared/price-format.pipe';
 
 @Component({
   selector: 'app-payment-options',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, PriceFormatPipe],
   templateUrl: './payment-options.component.html',
   styleUrl: './payment-options.component.scss'
 })
@@ -154,7 +155,7 @@ export class PaymentOptionsComponent implements OnInit {
   getCartProductByClientId(client_id: number) {
     this.cartService.getCartProducts(client_id)
     .subscribe({
-      next: data => {
+      next: (data: CartProduct[]) => {
         this.cartProductList = data
         console.log("OPCIONES PAGO: Productos carrito cargados!")
       },
@@ -230,6 +231,7 @@ export class PaymentOptionsComponent implements OnInit {
 
         this.localStorageService.removeItem('shippingInfo')
         this.clearCart(this.sessionClientId)
+        this.cartService.resetQuantity()
     
         this.router.navigate(['/confirmacionPago'])
       },

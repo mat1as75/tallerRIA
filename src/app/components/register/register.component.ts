@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert/alert.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { CookieService } from '../../services/cookies/cookie.service';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +16,8 @@ import { AlertService } from '../../services/alert/alert.service';
 export class RegisterComponent {
 
   private alertService = inject(AlertService)
+  private cookieService = inject(CookieService)
+  private localStorageService = inject(LocalStorageService)
 
 
 
