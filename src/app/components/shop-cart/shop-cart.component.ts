@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartProduct } from '../../interfaces/CartProduct.interface';
 import { CartService } from '../../services/cart/cart.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { PriceFormatPipe } from '../../shared/price-format.pipe';
 @Component({
   selector: 'app-shop-cart',
   standalone: true,
-  imports: [CommonModule, FormsModule, PriceFormatPipe],
+  imports: [RouterLink, CommonModule, FormsModule, PriceFormatPipe],
   templateUrl: './shop-cart.component.html',
   styleUrl: './shop-cart.component.scss'
 })
