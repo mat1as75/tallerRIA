@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../interfaces/User.interface';
+import { Gestor } from '../../interfaces/Gestor.interface';
 import { Pedido } from '../../interfaces/Pedido.interface';
 
 @Injectable({
@@ -55,4 +56,23 @@ export class UserServiceService {
     return this.http.put<any>(`${this.apiPhp}/cambiopassdesdedetalles`, pass)
     
   }
+
+  //ALTA GESTOR
+  postRegisterGestor(gestor : Gestor) {
+
+    return this.http.post<Gestor>(`${this.apiPhp}/usuarios`, gestor, {withCredentials: true})
+  
+  }
+
+   //MODIFICAR GESTOR
+  postModifciarGestor(gestor : Gestor) {
+
+    return this.http.put<Gestor>(`${this.apiPhp}/modificarGestor`, gestor, {withCredentials: true})
+    //http://localhost/php/tallerPHP/public/index.php/modificarGestor
+    
+  
+  }
+
+
+
 }
