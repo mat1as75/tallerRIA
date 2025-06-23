@@ -18,6 +18,7 @@ import { SendDetailsComponent } from './components/send-details/send-details.com
 import { PaymentOptionsComponent } from './components/payment-options/payment-options.component';
 import { PaymentConfirmationComponent } from './components/payment-confirmation/payment-confirmation.component';
 import { HistoriaComprasComponent } from './components/historia-compras/historia-compras.component';
+import { GestorUpdateComponent } from './components/gestor-update/gestor-update.component';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
     {path: 'listaProducto', component: ProductListComponent},
     {path: 'ordenesProducto', component: ProductOrdersComponent},
     {path: 'altaGestor', component: AltaGestorComponent},
+    {path: 'modificarGestor', component: GestorUpdateComponent},
     {path: 'modificarPedido', component: ModificarPedidoComponent},
     {path: 'recuprarpassword', component: ReuperarpasswordComponent},
     {path: 'cambiopassword', component: CambiarpasswordComponent},
