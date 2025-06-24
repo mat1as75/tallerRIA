@@ -10,27 +10,76 @@
     </div>
 
     <!-- CENTRO: Barra de búsqueda -->
-    <form
+    <div
       class="search-bar d-none d-lg-flex justify-content-center flex-grow-2 mx-3"
     >
       <div
-        class="input-group rounded-pill overflow-hidden w-100"
+        class="position-relative w-100"
         style="max-width: 600px"
+        #menuContainer
       >
-        <span class="input-group-text bg-light border-0">
-          <i class="bi bi-list"></i>
-        </span>
-        <input
-          type="text"
-          class="form-control border-0 bg-light"
-          placeholder="Buscar productos..."
-          aria-label="Buscar productos"
-        />
-        <span class="input-group-text bg-light border-0">
-          <i class="bi bi-search"></i>
-        </span>
+        <div
+          class="input-group rounded-pill overflow-hidden w-100"
+          style="max-width: 600px"
+        >
+          <span
+            class="input-group-text bg-light border-0 ms-1"
+            style="cursor: pointer"
+            (click)="toggleCategoryMenu()"
+          >
+            <i class="bi bi-list fs-5"></i>
+          </span>
+          <input
+            type="text"
+            name="search"
+            [(ngModel)]="searchText"
+            class="form-control border-0 bg-light px-1"
+            placeholder="Buscar productos..."
+            aria-label="Buscar productos"
+            (keydown.enter)="onSearch()"
+          />
+          <button
+            type="button"
+            class="input-group-text bg-light border-0 me-1"
+            (click)="onSearch()"
+          >
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+
+        <ul
+          *ngIf="showCategoryList"
+          class="list-group position-absolute z-3 bg-white small animate__animated animate__fadeIn"
+          style="
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+          "
+        >
+          <li
+            class="list-group-item animate__animated animate__fadeInLeft"
+            style="cursor: pointer"
+            name="list-group-item"
+            [ngStyle]="{ 'animation-delay': '0ms' }"
+            (click)="navigateToCategory(null)"
+          >
+            Todas
+          </li>
+          <li
+            class="list-group-item animate__animated animate__fadeInLeft"
+            style="cursor: pointer"
+            name="list-group-item"
+            *ngFor="let cat of categories; let i = index"
+            [ngStyle]="{ 'animation-delay': i * 100 + 'ms' }"
+            (click)="navigateToCategory(+cat.ID)"
+          >
+            {{ cat.Nombre }}
+          </li>
+        </ul>
       </div>
-    </form>
+    </div>
 
     <!-- DERECHA: Iconos perfil y carrito -->
     <div
