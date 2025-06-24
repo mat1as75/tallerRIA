@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { FooterComponent } from '../footer/footer.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -10,7 +9,7 @@ import { UserServiceService } from '../../services/user/user-service.service';
 
 @Component({
   selector: 'app-alta-gestor',
-  imports: [NavbarComponent, FooterComponent, FormsModule],
+  imports: [NavbarComponent, FormsModule],
   templateUrl: './alta-gestor.component.html',
   styleUrl: './alta-gestor.component.scss'
 })

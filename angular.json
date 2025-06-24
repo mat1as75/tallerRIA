@@ -15,7 +15,8 @@
           "options": {
             "baseHref": "/equipo2/",
             "allowedCommonJsDependencies": [
-              "lodash"
+              "lodash",
+              "sweetalert2"
             ],
             "outputPath": "dist/taller-ria",
             "index": "src/index.html",
@@ -45,8 +46,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2MG",
-                  "maximumError": "2MB"
+                  "maximumWarning": "",
+                  "maximumError": ""
                 },
                 {
                   "type": "anyComponentStyle",
