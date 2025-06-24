@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { AlertService } from '../../services/alert/alert.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-reuperarpassword',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './reuperarpassword.component.html',
   styleUrl: './reuperarpassword.component.scss'
 })

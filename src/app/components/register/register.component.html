@@ -1,4 +1,7 @@
-<div class="container" style="width: 1000px">
+<div class="container"> 
+  <div class="container"> <!-- usa .container o .container-fluid -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6"> <!-- full width en móvil, mitad en pantallas medianas+ -->
   <div class="row">
     <div class="col">
       <div class="text-left pt-5">
@@ -58,9 +61,16 @@
           <button type="submit" class="btn btn-secondary btonregi">
             Registrarse
           </button>
-          <br />
+          <br>
+    <div class="my-2 d-grid">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/login']">Volver</button>
+    </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+  </div>
+  </div>
+</div>
+

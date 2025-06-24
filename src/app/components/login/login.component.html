@@ -1,7 +1,7 @@
-<div class="container" style="width: 1000px">
-  <div class="row">
-    <div class="col">
-      <div class="text-left pt-5">
+<div class="container"> <!-- usa .container o .container-fluid -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6"> <!-- full width en móvil, mitad en pantallas medianas+ -->
+        <div class="text-left pt-5">
         <h2 class="fw-bold text-left pt-5 text-center">Bienvenido</h2>
         <hr style="border: 1px solid black" />
       </div>
@@ -50,12 +50,12 @@
         </div>
 
         <div class="d-flex justify-content-between">
-          <div class="form-check mb-4">
+          <!--<div class="form-check mb-4">
             <input type="checkbox" name="connected" class="form-check-input" />
             <label for="connected" class="form-check-label"
               >Mantenerme Conectado</label
             >
-          </div>
+          </div>-->
           <span class="text-end fw-bold">
             <a [routerLink]="['/recuprarpassword']" class="link">
               <p>Recuperar Password</p>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { debounceTime, Subject } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class CambiarpasswordComponent implements OnInit {
 
   private tokenSubject = new Subject<string>();
 
-  constructor(private route: ActivatedRoute, private usrservice: UserServiceService) {}
+  constructor(private router: Router,private route: ActivatedRoute, private usrservice: UserServiceService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -58,7 +58,11 @@ export class CambiarpasswordComponent implements OnInit {
     };
 
     this.usrservice.updatePassword(payload).subscribe({
-      next: () => console.log('Contraseña cambiada con éxito'),
+      next: (res)=>(
+        console.log('Contraseña cambiada con éxito', res),
+        this.router.navigate(['/login'])
+      ),
+      
       error: (err) => console.error('Error:', err)
     });
   }
