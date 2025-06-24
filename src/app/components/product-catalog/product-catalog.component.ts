@@ -2,11 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../interfaces/Product.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Category } from '../../interfaces/Category.interface';
 import { Brand } from '../../interfaces/Brand.interface';
 import { FormsModule } from '@angular/forms';
 import { NgxSliderModule, Options } from '@angular-slider/ngx-slider';
+import { SearchService } from '../../services/search/search.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-catalog',
@@ -18,6 +20,7 @@ import { NgxSliderModule, Options } from '@angular-slider/ngx-slider';
 export class ProductCatalogComponent implements OnInit {
 
   productService = inject(ProductService)
+  searchService = inject(SearchService)
 
   selectedCategoryIds: number[] = []
   selectedBrandIds: number[] = []
@@ -49,10 +52,29 @@ export class ProductCatalogComponent implements OnInit {
     options: this.options,
   }
 
-  constructor(private router: Router) {}
+  searchTerm: string = ''
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.getProductList()
+     // Suscripción a cambios en los query params
+    this.route.queryParams.subscribe(params => {
+    const categoryId = +params['categoryId'];
+
+    if (!isNaN(categoryId) && categoryId > 0) {
+      this.selectedCategoryIds = [categoryId];
+    } else {
+      this.selectedCategoryIds = [];
+    }
+
+    // Solo aplicar filtros si ya tenés productos cargados
+    if (this.productList.length > 0) {
+      this.applyFilters();
+    }
+  });
+
+  // Cargar productos, categorías y marcas (una sola vez)
+  this.getProductList();
     this.getCategoryList()
     this.getBrandList()
   }
@@ -115,8 +137,12 @@ export class ProductCatalogComponent implements OnInit {
         this.selectedBrandIds.length === 0 || this.selectedBrandIds.includes(product.ID_Marca);
       const matchesPrice = 
         price >= this.sliderRange.minValue && price <= this.sliderRange.maxValue;
+      const matchesSearch = 
+        !this.searchTerm || product.Nombre.toLowerCase().includes(this.searchTerm)
+
+      if (matchesSearch) console.log('Coincide: ', this.searchTerm, ' - ', product.Nombre)
     
-      return matchesCategory && matchesBrand && matchesPrice;
+      return matchesCategory && matchesBrand && matchesPrice && matchesSearch;
     });
 
     switch (this.sortOption) {
@@ -144,32 +170,37 @@ export class ProductCatalogComponent implements OnInit {
     .subscribe({
       next: data => {
         this.productList = data as Product[]
-        this.filteredProductList = [...this.productList]
-         // Ahora sí: calcular min y max una vez que ya tenemos productos
-         const priceExtremes = this.getMinAndMaxPriceProducts(this.productList)
-         const rawMin = priceExtremes.min ? parseFloat(priceExtremes.min.Precio) : 0
-         const rawMax = priceExtremes.max ? parseFloat(priceExtremes.max.Precio) : 100
+        
+        // Cargar min/max precios
+        const priceExtremes = this.getMinAndMaxPriceProducts(this.productList)
+        const rawMin = priceExtremes.min ? parseFloat(priceExtremes.min.Precio) : 0
+        const rawMax = priceExtremes.max ? parseFloat(priceExtremes.max.Precio) : 100
 
-         this.minPrice = rawMin > 1 ? rawMin - 1 : 0
-         this.maxPrice = rawMax + 1
+        this.minPrice = rawMin > 1 ? rawMin - 1 : 0
+        this.maxPrice = rawMax + 1
  
-         // Actualizar opciones del slider
-         this.options = {
-           ...this.options,
-           floor: this.minPrice,
-           ceil: this.maxPrice,
-         }
+        this.options = {
+          ...this.options,
+          floor: this.minPrice,
+          ceil: this.maxPrice,
+        }
  
-         this.sliderRange = {
-           minValue: this.minPrice,
-           maxValue: this.maxPrice,
-           options: this.options,
-         }
+        this.sliderRange = {
+          minValue: this.minPrice,
+          maxValue: this.maxPrice,
+          options: this.options,
+        }
+
+        // Obtener el valor actual de busqueda (sincronico)
+        const term = this.searchService['searchTerm'].getValue()
+        this.searchTerm = term.toLowerCase()
+
+        this.applyFilters()
  
-         console.log('PRODUCTS:')
-         this.productList.forEach((product: Product) =>
-           console.log(product.ID + ' - ' + product.Nombre + ' - ' + product.ID_Categoria + ' - ' + product.ID_Marca)
-         )
+        console.log('PRODUCTS:')
+        this.productList.forEach((product: Product) =>
+          console.log(product.ID + ' - ' + product.Nombre + ' - ' + product.ID_Categoria + ' - ' + product.ID_Marca)
+        )
       },
       error: err => {
         console.error(err)

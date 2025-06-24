@@ -81,3 +81,7 @@ ngx-slider .ngx-slider-pointer:after {
   display: none !important; /* elimina el halo blanco duplicado */
 }
 
+.animate__animated {
+  --animate-duration: 0.5s;
+}
+  
