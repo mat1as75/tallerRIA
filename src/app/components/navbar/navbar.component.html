@@ -2,9 +2,21 @@
   <div
     class="container-fluid d-flex justify-content-between align-items-center"
   >
+    <!-- Ícono que abre el offcanvas -->
+    <button
+      class="btn text-white d-lg-none"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#mobileMenu"
+      aria-controls="mobileMenu"
+      (click)="loadCategories()"
+    >
+      <i class="bi bi-list fs-4"></i>
+    </button>
+
     <!-- IZQUIERDA: Logo -->
     <div
-      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1 ms-5"
+      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1 ms-3 ms-md-5"
     >
       <a class="navbar-brand fw-bold text-white mb-0" href="#">MNJ Tecno</a>
     </div>
@@ -83,7 +95,7 @@
 
     <!-- DERECHA: Iconos perfil y carrito -->
     <div
-      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-5"
+      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-3 me-md-5"
     >
       <a
         (click)="checkCookieRedirect('detallesdecuenta')"
@@ -105,3 +117,65 @@
     </div>
   </div>
 </nav>
+
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="mobileMenu"
+  aria-labelledby="mobileMenuLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="mobileMenuLabel">Menú</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- Buscador -->
+    <div class="input-group mb-3 bg-light border-light-gray rounded-2 mb-5">
+      <input
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        class="form-control border-0 bg-light px-1 ms-2"
+        placeholder="Buscar productos..."
+        aria-label="Buscar productos"
+        (keydown.enter)="onSearch()"
+      />
+      <button
+        type="button"
+        class="input-group-text bg-light border-0 me-1"
+        (click)="onSearch()"
+      >
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+
+    <!-- Categorías -->
+    <ul class="list-group small">
+      <p class="fw-semibold">Categoría</p>
+      <li
+        class="list-group-item mt-2"
+        style="cursor: pointer"
+        name="list-group-item"
+        (click)="navigateToCategory(null)"
+        data-bs-dismiss="offcanvas"
+      >
+        Todas
+      </li>
+      <li
+        class="list-group-item"
+        *ngFor="let cat of categories"
+        name="list-group-item"
+        style="cursor: pointer"
+        (click)="navigateToCategory(+cat.ID)"
+        data-bs-dismiss="offcanvas"
+      >
+        {{ cat.Nombre }}
+      </li>
+    </ul>
+  </div>
+</div>
