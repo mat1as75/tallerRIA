@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit{
   quantityProductsCart: number = 0
   searchText = ''
 
+  showMobileMenu: boolean = false
   showCategoryList: boolean = false
   categories: Category[] = []
 
@@ -73,6 +74,10 @@ export class NavbarComponent implements OnInit{
       next: (data) => this.categories = data,
       error: (err) => console.error('Error cargando categorias ', err)
     })
+  }
+
+  toggleMobileMenu() {
+    this.showMobileMenu = !this.showMobileMenu
   }
 
   toggleCategoryMenu() {
