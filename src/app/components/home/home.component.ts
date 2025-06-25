@@ -1,17 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { Product } from '../../interfaces/Product.interface';
 import { ProductService } from '../../services/product/product.service';
 import { Router, RouterLink } from '@angular/router';
+import { EmailContact } from '../../interfaces/EmailContact.interface';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EmailHelperService } from '../../services/email-helper/email-helper.service';
+import { AlertService } from '../../services/alert/alert.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  private emailHelper = inject(EmailHelperService)
+  private alertService = inject(AlertService)
+
   images = [
     'assets/banner1.jpg',
     'assets/banner2.jpg',
@@ -22,11 +29,32 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   bestsellers: Product[] = [];
 
-  constructor(private productService: ProductService, private router: Router) {}
+  contactDataForm: FormGroup
+  contactInformationForm?: EmailContact
+
+  constructor(
+    private productService: ProductService,
+    private router: Router, 
+    private formBuilder: FormBuilder
+  ) {
+    this.contactDataForm = this.formBuilder.group({
+      Nombre: this.formBuilder.control('', Validators.required),
+      Email: this.formBuilder.control('', Validators.required),
+      Asunto: this.formBuilder.control('', Validators.required),
+      Mensaje: this.formBuilder.control('', Validators.required)
+    })
+  }
 
   ngOnInit() {
     this.startAutoSlide();
     this.loadBestsellers();
+
+    this.contactInformationForm = {
+      Nombre: '',
+      Email: '',
+      Asunto: '',
+      Mensaje: ''
+    }
   }
 
   ngOnDestroy() {
@@ -67,5 +95,39 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   viewProduct(id: number) {
     this.router.navigate(['/producto', id]);
+  }
+
+  onSubmitContact() {
+    if (this.contactDataForm.invalid) {
+      this.contactDataForm.markAllAsTouched();
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
+  
+    const formData = this.contactDataForm.value;
+    this.enviarFormularioContacto(formData);
+  }
+  
+  enviarFormularioContacto(formData: any) {
+    this.contactInformationForm = {
+      Nombre: formData.Nombre,
+      Email: formData.Email,
+      Asunto: formData.Asunto,
+      Mensaje: formData.Mensaje,
+    }
+  
+    //console.log("INFO: ", this.contactInformationForm)
+    this.emailHelper.sendEmailContact(this.contactInformationForm)
+    .subscribe({
+      next: data => {
+        console.log("RESPONSE: ", data)
+        this.contactDataForm.reset()
+        this.alertService.showSuccess('Enviado', 'Correo enviado correctamente!')
+      },
+      error: err => {
+        console.error('ERROR AL ENVIAR MAIL: ' + err.error)
+        console.log(err.error)
+      }
+    })
   }
 }

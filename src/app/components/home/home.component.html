@@ -118,12 +118,17 @@
     <div class="row">
       <!-- Formulario -->
       <div class="col-md-6">
-        <form>
+        <form
+          [formGroup]="contactDataForm"
+          (ngSubmit)="onSubmitContact()"
+          id="contactForm"
+        >
           <div class="mb-4">
             <input
               type="text"
               class="form-control"
               placeholder="Nombre Completo"
+              formControlName="Nombre"
             />
           </div>
           <div class="mb-4">
@@ -131,16 +136,23 @@
               type="email"
               class="form-control"
               placeholder="Dirección de correo"
+              formControlName="Email"
             />
           </div>
           <div class="mb-4">
-            <input type="text" class="form-control" placeholder="Asunto" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Asunto"
+              formControlName="Asunto"
+            />
           </div>
           <div class="mb-4">
             <textarea
               class="form-control"
               rows="7"
               placeholder="Mensaje"
+              formControlName="Mensaje"
             ></textarea>
           </div>
           <div class="d-grid w-50 mx-auto">
