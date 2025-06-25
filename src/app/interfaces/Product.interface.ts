@@ -2,10 +2,12 @@ export interface Product {
     ID: number
     Nombre: string
     Descripcion: string
-    Precio: string
+    Precio: number
     Stock: number
     ID_Categoria: number
     ID_Marca: number
     URL_Imagen: string
-    CreatedAt: string
+    CreatedAt?: string
+    Marca?: string
+    Categoria?: string
 }

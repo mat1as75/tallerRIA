@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about-us/about-us.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductOrdersComponent } from './components/product-orders/product-orders.component';
 import { AltaGestorComponent } from './components/alta-gestor/alta-gestor.component';
@@ -29,6 +30,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'altaProducto', component: ProductCreateComponent},
+    {path: 'editarProducto/:id', component: ProductEditComponent},
     {path: 'listaProducto', component: ProductListComponent},
     {path: 'ordenesProducto', component: ProductOrdersComponent},
     {path: 'altaGestor', component: AltaGestorComponent},
