@@ -41,6 +41,7 @@ export const routes: Routes = [
     { path: 'detallesEnvio', component: SendDetailsComponent },
     { path: 'opcionesPago', component: PaymentOptionsComponent },
     { path: 'confirmacionPago', component: PaymentConfirmationComponent },
-    { path: 'MisCompras', component: HistoriaComprasComponent }
+    { path: 'MisCompras', component: HistoriaComprasComponent },
+    { path: 'modificarGestor', component: GestorUpdateComponent }
 
 ];

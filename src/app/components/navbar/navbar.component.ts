@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from '../../services/cookies/cookie.service';
 import { CartService } from '../../services/cart/cart.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
@@ -8,11 +8,13 @@ import { SearchService } from '../../services/search/search.service';
 import { FormsModule } from '@angular/forms';
 import { Category } from '../../interfaces/Category.interface';
 import { ProductService } from '../../services/product/product.service';
+import { UserServiceService } from '../../services/user/user-service.service';
+import { User } from '../../interfaces/User.interface';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -23,17 +25,46 @@ export class NavbarComponent implements OnInit{
   private searchService = inject(SearchService)
   private productService = inject(ProductService)
 
-  sessionId?: number | undefined
-  quantityProductsCart: number = 0
-  searchText = ''
+  sessionId?: number | undefined;
+  
+  //ROL DEL USUARIO
+  rolUsuario: string = '';
 
-  showMobileMenu: boolean = false
-  showCategoryList: boolean = false
-  categories: Category[] = []
+  //PERMISOS SI ES GESTOR
+  esAdmin: boolean = false;
+  esGestor: boolean = false;
+  
 
-  @ViewChild('menuContainer') menuContainerRef!: ElementRef
 
-  constructor(private router: Router, private eRef: ElementRef) {}
+
+
+
+
+  quantityProductsCart: number = 0;
+  searchText = '';
+
+  tipo = '';
+
+  showMobileMenu: boolean = false;
+  showCategoryList: boolean = false;
+  categories: Category[] = [];
+
+  
+  //USUARIO
+  usuario: User | null = null; 
+
+  @ViewChild('menuContainer') menuContainerRef!: ElementRef;
+
+  constructor(
+    
+    
+    private router: Router,
+    private eRef: ElementRef, 
+    private servicecookie: CookieService, 
+    private userservice: UserServiceService
+
+
+  ){}
 
   ngOnInit(): void {
     const cookieValue = this.serviceCookie.getCookie('session_ID') || localStorage.getItem('session_ID');
@@ -49,8 +80,49 @@ export class NavbarComponent implements OnInit{
       this.quantityProductsCart = count;
     });
 
+    //SI HAY ALGUIEN CONECTADO PREGUNTAR POR DATOS
+    const session = this.serviceCookie.getCookie('session_ID');
+
+    // ESTA CONECTADO
+    if (session) {
+        this.userservice.ObtenerUsuario(session).subscribe({
+      next: (userData) => {
+        this.usuario = userData; 
+
+        //SET ROL en localstorage
+        this.localStorageService.setItem('Rol', this.usuario.Rol);
+
+        console.log("Datos del usuario:", userData);
+      },
+      error: (err) => {
+        console.error("Error al obtener el usuario:", err);
+        this.router.navigate(['/login']);
+      }
+    });
+      
+
+
+    }
+
+
+
+    //OBTENER ROL DEL USUARIO
+    const rol = localStorage.getItem('Rol');
+    if (rol) {
+      try {
+        const parsedRol = JSON.parse(rol);
+        this.rolUsuario = parsedRol?.toLowerCase() || '';
+      } catch (e) {
+        console.error('Error al parsear el Rol del usuario del localStorage', e);
+      }
+    }
+
     console.log('SESSION_ID: ' + this.sessionId);
-  }
+    console.log('ROL USUARIO:', this.rolUsuario);
+
+    this.esAdminOGestor();
+    }
+
 
   checkCookieRedirect(url: string) {
     const session = this.serviceCookie.getCookie('session_ID');
@@ -103,4 +175,32 @@ export class NavbarComponent implements OnInit{
       this.showCategoryList = false;
     }
   }
+
+  esAdminOGestor(): boolean {
+    this.tipo = this.rolUsuario;
+
+    if(this.rolUsuario === 'administrador' ){
+
+      this.tipo = 'Administrar';
+      this.esAdmin = true;
+      return true;
+
+    }else if(this.rolUsuario === 'gestor'){
+
+      this.tipo = 'Gestionar';
+      this.esGestor = true;
+
+      return true;
+
+    }
+
+    return false;
+
+  }
+
+
+
+
+
+
 }
