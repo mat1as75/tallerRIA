@@ -41,8 +41,19 @@
     <div
       class="d-flex justify-content-between align-items-center mb-3 flex-wrap"
     >
-      <h2 class="section-title">Lo más vendido</h2>
-      <a [routerLink]="['/catalogo']" class="view-more">Más productos →</a>
+      <h4 class="fw-semibold text-dark">
+        <i class="bi bi-star-fill me-2 fs-5" style="color: #ffd700"></i>
+        Lo más vendido
+      </h4>
+      <a
+        [routerLink]="['/catalogo']"
+        class="view-more text-dark link-underline link-underline-opacity-0"
+      >
+        <h6 class="fw-semibold text-dark">
+          Más productos
+          <i class="bi bi-bag-plus ms-1 fs-5" style="color: #15297c"></i>
+        </h6>
+      </a>
     </div>
 
     <div class="row justify-content-center g-3">
@@ -81,28 +92,28 @@
   <div class="benefits-section py-5">
     <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
       <div class="col">
-        <div class="benefit-card p-4 h-100">
+        <div class="benefit-card p-4 h-100 bg-app-secondary border-light-gray">
           <div class="fs-1 mb-3"><i class="bi bi-truck"></i></div>
           <h6 class="fw-bold">Envíos rápidos</h6>
           <p class="text-muted mb-0">En todo el país</p>
         </div>
       </div>
       <div class="col">
-        <div class="benefit-card p-4 h-100">
+        <div class="benefit-card p-4 h-100 bg-app-secondary border-light-gray">
           <div class="fs-1 mb-3"><i class="bi bi-shield-lock"></i></div>
           <h6 class="fw-bold">Pago seguro</h6>
           <p class="text-muted mb-0">Protección 100%</p>
         </div>
       </div>
       <div class="col">
-        <div class="benefit-card p-4 h-100">
+        <div class="benefit-card p-4 h-100 bg-app-secondary border-light-gray">
           <div class="fs-1 mb-3"><i class="bi bi-telephone-inbound"></i></div>
           <h6 class="fw-bold">Soporte 24/7</h6>
           <p class="text-muted mb-0">Llamanos o escribinos</p>
         </div>
       </div>
       <div class="col">
-        <div class="benefit-card p-4 h-100">
+        <div class="benefit-card p-4 h-100 bg-app-secondary border-light-gray">
           <div class="fs-1 mb-3"><i class="bi bi-shield-check"></i></div>
           <h6 class="fw-bold">Garantía 30 días</h6>
           <p class="text-muted mb-0">Cambios o devoluciones</p>
