@@ -86,6 +86,11 @@ export class SendDetailsComponent implements OnInit {
       next: (data: CartProduct[]) => {
         this.cartProductList = data
         console.log("DETALLES DE ENVIO: Productos carrito cargados!")
+
+        if (this.cartProductList.length === 0) {
+          this.alertService.showError('Error', 'No hay productos en el carrito. Agregá al menos un producto antes de continuar con la compra.')
+          this.router.navigate(['/catalogo'])
+        }
       },
       error: err => {
         console.error(err)

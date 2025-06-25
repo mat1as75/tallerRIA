@@ -147,6 +147,9 @@ export class ViewProductComponent implements OnInit {
   addToCart() {
     const cantidad = this.quantityControl.value ?? 1;
 
+    if (this.productDetails.Stock === 0)
+      this.alertService.showError('Error', 'Actualmente no tenemos stock de este producto!')
+
     if (!this.sessionId || !this.productDetails?.ID || !cantidad || this.quantityControl.invalid) {
       console.error("Datos incompletos al agregar al carrito");
       return;
