@@ -20,6 +20,12 @@
       <div
         class="featured-vertical h-100 d-flex flex-column justify-content-center align-items-center text-white"
       >
+<<<<<<< fix_home
+        <h5>Equipos armados</h5>
+        <a href="#" (click)="goToCategory('PCs'); $event.preventDefault()"
+          >Compra ahora →</a
+        >
+=======
         <h5 class="fw-semibold text-extra-light-gray">Equipos armados</h5>
         <a
           class="fw-semibold text-extra-light-gray link-underline link-underline-opacity-0"
@@ -29,10 +35,23 @@
           Compra ahora
           <i class="bi bi-pc-display ms-1"></i>
         </a>
+>>>>>>> main
       </div>
     </div>
     <div class="col-md-8 d-flex flex-column justify-content-between">
       <div class="featured-horizontal mb-3 text-white">
+<<<<<<< fix_home
+        <h5>Periféricos</h5>
+        <a href="#" (click)="goToCategory('Periféricos'); $event.preventDefault()"
+          >Compra ahora →</a
+        >
+      </div>
+      <div class="featured-horizontal text-white">
+        <h5>Componentes</h5>
+        <a href="#"(click)="goToCategory('Componentes'); $event.preventDefault()"
+          >Compra ahora →</a
+        >
+=======
         <h5 class="fw-semibold text-extra-light-gray">Periféricos</h5>
         <a
           class="fw-semibold text-extra-light-gray link-underline link-underline-opacity-0"
@@ -53,6 +72,7 @@
           Compra ahora
           <i class="bi bi-pci-card-network ms-1"></i>
         </a>
+>>>>>>> main
       </div>
     </div>
   </div>
@@ -83,8 +103,14 @@
         class="col-6 col-sm-4 col-md-3 col-lg-2"
       >
         <div
+<<<<<<< fix_home
+          class="card bg-app-secondary border-custom overflow-hidden h-100"
+          style="cursor: pointer"
+          (click)="viewProduct(product.ID)"
+=======
           class="card bg-app-secondary border-light-gray overflow-hidden d-flex flex-column justify-content-between h-100"
           style="height: 280px"
+>>>>>>> main
         >
           <!-- Imagen -->
           <div
@@ -109,6 +135,10 @@
               "
             />
           </div>
+<<<<<<< fix_home
+          <div class="card-body p-3 small">
+            <p class="card-title mb-1">{{ product.Nombre }}</p>
+=======
 
           <!-- Info -->
           <div class="card-body p-2 small mt-1">
@@ -125,6 +155,7 @@
             <p class="card-title mb-1 text-truncate">
               {{ product.Nombre }}
             </p>
+>>>>>>> main
             <p class="card-primary fw-semibold mb-0">
               USD {{ product.Precio }}
             </p>
