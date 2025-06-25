@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { Product } from '../../interfaces/Product.interface';
 import { ProductService } from '../../services/product/product.service';
+import { Category } from '../../interfaces/Category.interface';
 import { Router, RouterLink } from '@angular/router';
 import { EmailContact } from '../../interfaces/EmailContact.interface';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -20,21 +21,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   private alertService = inject(AlertService)
 
   images = [
-    'assets/banner1.jpg',
-    'assets/banner2.jpg',
+    'assets/banner1.jpg', 
+    'assets/banner2.jpg', 
     'assets/banner3.jpg',
   ];
   currentIndex = 0;
   intervalId: any;
 
   bestsellers: Product[] = [];
+  categoryList: Category[] = [];
 
   contactDataForm: FormGroup
   contactInformationForm?: EmailContact
 
   constructor(
     private productService: ProductService,
-    private router: Router, 
+    private router: Router,
     private formBuilder: FormBuilder
   ) {
     this.contactDataForm = this.formBuilder.group({
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.startAutoSlide();
     this.loadBestsellers();
+    this.getCategoryList();
 
     this.contactInformationForm = {
       Nombre: '',
@@ -83,14 +86,41 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadBestsellers() {
+    const selectedIds = [1, 6, 10, 11, 14, 15]; // IDs seleccionados manualmente
+
     this.productService.getProducts().subscribe({
       next: (products: Product[]) => {
-        this.bestsellers = products.slice(1, 6);
+        this.bestsellers = products.filter((product) =>
+          selectedIds.includes(product.ID)
+        )
       },
       error: (err) => {
         console.error('Error al cargar productos: ', err);
       }
     });
+  }
+
+  getCategoryList() {
+    this.productService.getCategories().subscribe({
+      next: (data) => {
+        this.categoryList = data;
+        //console.log('Categorías cargadas:', this.categoryList);
+      },
+      error: (err) => {
+        console.error('Error al obtener categorías', err);
+      },
+    });
+  }
+
+  goToCategory(categoryName: string) {
+    const category = this.categoryList.find((c) => c.Nombre === categoryName);
+    if (category) {
+      this.router.navigate(['/catalogo'], {
+        queryParams: { categoryId: category.ID },
+      });
+    } else {
+      console.warn(`Categoría "${categoryName}" no encontrada`);
+    }
   }
 
   viewProduct(id: number) {
@@ -103,11 +133,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       alert('Por favor, complete todos los campos.');
       return;
     }
-  
+
     const formData = this.contactDataForm.value;
     this.enviarFormularioContacto(formData);
   }
-  
+
   enviarFormularioContacto(formData: any) {
     this.contactInformationForm = {
       Nombre: formData.Nombre,
@@ -115,7 +145,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       Asunto: formData.Asunto,
       Mensaje: formData.Mensaje,
     }
-  
+
     //console.log("INFO: ", this.contactInformationForm)
     this.emailHelper.sendEmailContact(this.contactInformationForm)
     .subscribe({
