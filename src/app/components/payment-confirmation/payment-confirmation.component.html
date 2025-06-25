@@ -85,6 +85,14 @@
           </div>
         </div>
 
+        <!-- Boton para descargar PDF -->
+        <button
+          class="bg-app-primary text-extra-light-gray border-0 rounded-pill mt-3 px-3 py-1 btn-hover"
+          (click)="downloadPDF()"
+        >
+          Descargar resumen en PDF
+        </button>
+
         <!-- Pie -->
         <p class="text-muted small mt-4 mb-0">
           Enviá el comprobante a: <strong>{{ email }}</strong>

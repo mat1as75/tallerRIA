@@ -8,5 +8,6 @@ export interface OrderConfirmation {
     productos: {
         Nombre: string
         Cantidad: number
+        Precio: number
     }[]
 }
