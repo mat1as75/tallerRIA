@@ -97,6 +97,38 @@
     <div
       class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-3 me-md-5"
     >
+
+    <!-- SEGMENTO SOLO PARA GESTORES -->
+    <div *ngIf="this.esGestor" class="dropdown me-2">
+      <button class="btn text-white dropdown-toggle" data-bs-toggle="dropdown">
+      Gestionar
+      </button>
+      <ul class="dropdown-menu">
+
+        <li><a class="dropdown-item" routerLink="/abm-usuarios">Clientes</a></li>
+        <li><a class="dropdown-item" routerLink="/abm-productos">Productos</a></li>
+        <li><a class="dropdown-item" routerLink="/abm-pedidos">Pedidos</a></li>
+        
+      </ul>
+    </div>
+
+    <!-- SEGMENTO SOLO PARA ADMINISTRADORES -->
+    <div *ngIf="this.esAdmin" class="dropdown me-2">
+      <button class="btn text-white dropdown-toggle" data-bs-toggle="dropdown">
+      Administrar
+      </button>
+      <ul class="dropdown-menu">
+
+        <li><a class="dropdown-item" routerLink="/abm-usuarios">Clientes</a></li>
+        <li><a class="dropdown-item" routerLink="/abm-productos">Productos</a></li>
+        <li><a class="dropdown-item" routerLink="/abm-pedidos">Pedidos</a></li>
+        <li><a class="dropdown-item" routerLink="/abm-gestores">Gestores</a></li>
+        <li><a class="dropdown-item" routerLink="/abm-administradores">Administradores</a></li>
+
+      </ul>
+    </div>
+
+
       <a
         (click)="checkCookieRedirect('detallesdecuenta')"
         class="btn text-white me-2"
