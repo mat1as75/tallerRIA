@@ -19,9 +19,7 @@ export class AppComponent implements OnInit{
   productService = inject(ProductService)
   router = inject(Router)
 
-  constructor() {
-    console.log(environment.apiUrl)
-  }
+  constructor() { }
 
   ngOnInit(): void {
       
