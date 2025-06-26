@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';  // Asegúrate de tener esto
-import { ReactiveFormsModule } from '@angular/forms';  // Ya lo tienes
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../interfaces/Product.interface';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-edit',
-  imports: [CommonModule, ReactiveFormsModule],  // Aquí se importa CommonModule
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
 })
@@ -56,11 +56,11 @@ export class ProductEditComponent implements OnInit {
   obtenerProducto(id: string) {
     this.productService.getProductById(+id).subscribe({
       next: (producto: Product) => {
-        console.log('Producto recibido:', producto); // Agrega este log
+        console.log('Producto recibido:', producto);
         this.productoEditar = producto;
         this.formReactivo.patchValue({
           nombre: producto.Nombre,
-          precio: producto.Precio, // Asegúrate de convertir el precio a número
+          precio: producto.Precio,
           stock: producto.Stock,
           marca: producto.ID_Marca,
           categoria: producto.ID_Categoria,

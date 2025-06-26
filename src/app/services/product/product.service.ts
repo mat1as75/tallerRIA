@@ -79,4 +79,8 @@ export class ProductService {
     });
   }*/
 
+  subirImagen(formData: FormData) {
+    return this.http.post(`${this.apiphp}/productos/imagen`,formData);
+  }
+
 }

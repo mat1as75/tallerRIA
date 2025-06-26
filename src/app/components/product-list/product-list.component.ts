@@ -69,7 +69,7 @@ export class ProductListComponent implements OnInit {
         this.productService.deleteProduct(id).subscribe({
           next: () => {
             Swal.fire('Eliminado!', 'El producto ha sido eliminado.', 'success');
-            this.obtenerProductos();  // Recargar la lista de productos
+            this.obtenerProductos();
           },
           error: (err) => {
             console.error('Error al eliminar producto', err);
