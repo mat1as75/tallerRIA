@@ -175,7 +175,7 @@
     <h2 class="mb-4 fw-bold">Contacto</h2>
     <div class="row">
       <!-- Formulario -->
-      <div class="col-md-6">
+      <div class="col-md-6 mb-3">
         <form
           [formGroup]="contactDataForm"
           (ngSubmit)="onSubmitContact()"
@@ -215,7 +215,9 @@
           </div>
           <div class="d-grid w-50 mx-auto">
             <button type="submit" class="btn bg-app-primary rounded-pill py-2">
-              <span class="fw-semibold text-extra-light-gray">
+              <span
+                class="d-inline-block text-nowrap fw-semibold text-extra-light-gray small"
+              >
                 ENVIAR MENSAJE
               </span>
             </button>
