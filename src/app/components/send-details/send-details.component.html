@@ -109,12 +109,20 @@
           </div>
           <div class="col-md-5">
             <select
-              class="form-select"
+              class="form-select bg-app-secondary border-light-gray"
               name="departament"
               formControlName="departament"
               required
             >
-              <option value="" disabled selected hidden>Departamento</option>
+              <option
+                class="text-placeholder"
+                value=""
+                disabled
+                selected
+                hidden
+              >
+                Departamento
+              </option>
               <option *ngFor="let depto of departaments" [value]="depto">
                 {{ depto }}
               </option>

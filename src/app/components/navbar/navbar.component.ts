@@ -10,6 +10,7 @@ import { Category } from '../../interfaces/Category.interface';
 import { ProductService } from '../../services/product/product.service';
 import { UserServiceService } from '../../services/user/user-service.service';
 import { User } from '../../interfaces/User.interface';
+import { Offcanvas } from 'bootstrap';
 
 @Component({
   selector: 'app-navbar',
@@ -137,8 +138,13 @@ export class NavbarComponent implements OnInit{
 
   onSearch() {
     this.searchService.setSearchTerm(this.searchText)
-    this.router.navigate(['/catalogo'])
     this.searchText = ''
+
+    const closeBtn = document.querySelector('#mobileMenu .btn-close') as HTMLElement
+    if (closeBtn)
+      closeBtn.click()
+
+    this.router.navigate(['/catalogo'])
   }
 
   loadCategories() {

@@ -1,23 +1,22 @@
 <nav class="navbar shadow-sm px-3">
   <div
-    class="container-fluid d-flex justify-content-between align-items-center"
+    class="container-fluid d-flex justify-content-between align-items-center ps-1 ps-md-2"
   >
-    <!-- Ícono que abre el offcanvas -->
-    <button
-      class="btn text-white d-lg-none"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#mobileMenu"
-      aria-controls="mobileMenu"
-      (click)="loadCategories()"
-    >
-      <i class="bi bi-list fs-4"></i>
-    </button>
-
     <!-- IZQUIERDA: Logo -->
     <div
-      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1 ms-3 ms-md-5"
+      class="d-flex align-items-center justify-content-start flex-grow-1 flex-shrink-1 ms-0 ms-md-5"
     >
+      <!-- Ícono que abre el offcanvas -->
+      <button
+        class="btn text-white d-lg-none ps-0"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu"
+        aria-controls="mobileMenu"
+        (click)="loadCategories()"
+      >
+        <i class="bi bi-list fs-4"></i>
+      </button>
       <a class="navbar-brand fw-bold text-white mb-0" href="#">MNJ Tecno</a>
     </div>
 
@@ -95,39 +94,57 @@
 
     <!-- DERECHA: Iconos perfil y carrito -->
     <div
-      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-3 me-md-5"
+      class="d-flex align-items-center justify-content-end flex-grow-1 flex-shrink-1 me-0 me-md-5"
     >
+      <!-- SEGMENTO SOLO PARA GESTORES -->
+      <div *ngIf="this.esGestor" class="dropdown me-2">
+        <button
+          class="btn text-white dropdown-toggle"
+          data-bs-toggle="dropdown"
+        >
+          Gestionar
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" routerLink="/abm-usuarios">Clientes</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/abm-productos">Productos</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/abm-pedidos">Pedidos</a>
+          </li>
+        </ul>
+      </div>
 
-    <!-- SEGMENTO SOLO PARA GESTORES -->
-    <div *ngIf="this.esGestor" class="dropdown me-2">
-      <button class="btn text-white dropdown-toggle" data-bs-toggle="dropdown">
-      Gestionar
-      </button>
-      <ul class="dropdown-menu">
-
-        <li><a class="dropdown-item" routerLink="/abm-usuarios">Clientes</a></li>
-        <li><a class="dropdown-item" routerLink="/abm-productos">Productos</a></li>
-        <li><a class="dropdown-item" routerLink="/abm-pedidos">Pedidos</a></li>
-        
-      </ul>
-    </div>
-
-    <!-- SEGMENTO SOLO PARA ADMINISTRADORES -->
-    <div *ngIf="this.esAdmin" class="dropdown me-2">
-      <button class="btn text-white dropdown-toggle" data-bs-toggle="dropdown">
-      Administrar
-      </button>
-      <ul class="dropdown-menu">
-
-        <li><a class="dropdown-item" routerLink="/abm-usuarios">Clientes</a></li>
-        <li><a class="dropdown-item" routerLink="/abm-productos">Productos</a></li>
-        <li><a class="dropdown-item" routerLink="/abm-pedidos">Pedidos</a></li>
-        <li><a class="dropdown-item" routerLink="/abm-gestores">Gestores</a></li>
-        <li><a class="dropdown-item" routerLink="/abm-administradores">Administradores</a></li>
-
-      </ul>
-    </div>
-
+      <!-- SEGMENTO SOLO PARA ADMINISTRADORES -->
+      <div *ngIf="this.esAdmin" class="dropdown me-2">
+        <button
+          class="btn text-white dropdown-toggle"
+          data-bs-toggle="dropdown"
+        >
+          Administrar
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" routerLink="/abm-usuarios">Clientes</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/abm-productos">Productos</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/abm-pedidos">Pedidos</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/abm-gestores">Gestores</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/abm-administradores"
+              >Administradores</a
+            >
+          </li>
+        </ul>
+      </div>
 
       <a
         (click)="checkCookieRedirect('detallesdecuenta')"
