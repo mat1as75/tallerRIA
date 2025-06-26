@@ -1,13 +1,14 @@
-<div class="container" style="width: 1000px">
-  <div class="row">
-    <div class="col">
-      <div class="text-left pt-5">
-        <h2 class="fw-bold text-left pt-0">Registrarse</h2>
-        <hr style="border: 1px solid black" />
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-6">
+      <div class="pt-5 text-center text-md-start">
+        <h2 class="fw-bold pt-0">Registrarse</h2>
+        <hr class="border border-dark" />
       </div>
+
       <form (ngSubmit)="registrarse()" #formulario="ngForm">
         <div class="mb-4">
-          <label for="email" class="form-label">Correo Electronico</label>
+          <label for="email" class="form-label">Correo Electrónico</label>
           <input
             type="email"
             class="form-control"
@@ -19,7 +20,7 @@
         </div>
 
         <div class="mb-4">
-          <label for="name" class="form-label">Nombre</label>
+          <label for="nombre" class="form-label">Nombre</label>
           <input
             type="text"
             class="form-control"
@@ -53,12 +54,11 @@
             required
           />
         </div>
-        <div class="d-flex justify-content-between"></div>
+
         <div class="my-3 d-grid">
           <button type="submit" class="btn btn-secondary btonregi">
             Registrarse
           </button>
-          <br />
         </div>
       </form>
     </div>

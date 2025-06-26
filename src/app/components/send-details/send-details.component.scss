@@ -24,15 +24,7 @@ textarea {
 }
 
 input::placeholder,
-select::placeholder {
-    color: theme.$placeholder-color;
-}
-
-select::invalid {
-    color: theme.$placeholder-color;
-}
-
-.placeholderDepartamento {
+select:invalid {
     color: theme.$placeholder-color;
 }
 
