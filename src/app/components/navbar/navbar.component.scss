@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as theme;
+
 .navbar {
   background-color: #15297C;
   position: fixed;
@@ -23,5 +25,21 @@
     .input-group {
       background-color: #f1f3f5;
     }
+  }
+}
+
+li[name="list-group-item"]:hover {
+  font-weight: bold;
+  color: theme.$primary-color;
+  background: #efefef;
+  transition: all 0.3s ease-in-out;
+}
+
+input.form-control {
+  &:hover,
+  &:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
   }
 }

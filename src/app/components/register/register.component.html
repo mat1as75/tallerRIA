@@ -1,3 +1,4 @@
+
 <div class="container"> 
   <div class="container"> <!-- usa .container o .container-fluid -->
   <div class="row justify-content-center">
@@ -7,10 +8,12 @@
       <div class="text-left pt-5">
         <h2 class="fw-bold text-left pt-0">Registrarse</h2>
         <hr style="border: 1px solid black" />
+
       </div>
+
       <form (ngSubmit)="registrarse()" #formulario="ngForm">
         <div class="mb-4">
-          <label for="email" class="form-label">Correo Electronico</label>
+          <label for="email" class="form-label">Correo Electrónico</label>
           <input
             type="email"
             class="form-control"
@@ -22,7 +25,7 @@
         </div>
 
         <div class="mb-4">
-          <label for="name" class="form-label">Nombre</label>
+          <label for="nombre" class="form-label">Nombre</label>
           <input
             type="text"
             class="form-control"
@@ -56,15 +59,17 @@
             required
           />
         </div>
-        <div class="d-flex justify-content-between"></div>
+
         <div class="my-3 d-grid">
           <button type="submit" class="btn btn-secondary btonregi">
             Registrarse
           </button>
+
           <br>
     <div class="my-2 d-grid">
         <button type="button" class="btn btn-secondary" [routerLink]="['/login']">Volver</button>
     </div>
+
         </div>
       </form>
     </div>

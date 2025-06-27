@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { FooterComponent } from '../footer/footer.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -11,7 +10,7 @@ import { UserServiceService } from '../../services/user/user-service.service';
 @Component({
 
   selector: 'app-gestor-update',
-  imports: [NavbarComponent, FooterComponent, FormsModule],
+  imports: [NavbarComponent, FormsModule],
   templateUrl: './gestor-update.component.html',
   styleUrl: './gestor-update.component.scss'
 

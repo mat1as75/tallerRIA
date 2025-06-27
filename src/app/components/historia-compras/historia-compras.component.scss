@@ -3,20 +3,15 @@
 
 .btn-hover:hover {
     background-color: rgba(40, 144, 244, 0.2) !important;
-    //color: theme.$background-color !important;
     transition: all 0.3s ease-in-out !important;
 }
 
 .btn-hover-danger:hover {
     background-color: rgba(255, 0, 0, 0.2) !important;
-    //color: theme.$text-color !important;
-    //opacity: 0.4 !important;
     transition: all 0.3s ease-in-out !important;
 }
 
 .btn-hover-danger-trash:hover {
     background-color: rgba(164, 0, 0, 1) !important;
-    //color: theme.$text-color !important;
-    //opacity: 0.4 !important;
     transition: all 0.3s ease-in-out !important;
 }

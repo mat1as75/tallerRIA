@@ -1,3 +1,4 @@
+
 <div class="container"> <!-- usa .container o .container-fluid -->
   <div class="row justify-content-center">
     <div class="col-12 col-md-6"> <!-- full width en móvil, mitad en pantallas medianas+ -->
@@ -5,9 +6,10 @@
         <h2 class="fw-bold text-left pt-5 text-center">Bienvenido</h2>
         <hr style="border: 1px solid black" />
       </div>
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="mb-4">
-          <label for="email" class="form-label">Correo Electronico</label>
+          <label for="email" class="form-label">Correo Electrónico</label>
           <input
             type="email"
             class="form-control"
@@ -49,6 +51,7 @@
           </div>
         </div>
 
+
         <div class="d-flex justify-content-between">
           <!--<div class="form-check mb-4">
             <input type="checkbox" name="connected" class="form-check-input" />
@@ -61,12 +64,14 @@
               <p>Recuperar Password</p>
             </a>
           </span>
-        </div>
-        <div class="d-grid">
-          <button type="submit" class="btn botncolor">Iniciar Sesion</button>
+
         </div>
 
-        <div class="my-3 d-grid">
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn botncolor">Iniciar Sesión</button>
+        </div>
+
+        <div class="d-grid">
           <button
             type="button"
             class="btn btn-secondary"
@@ -74,7 +79,6 @@
           >
             Registrarse
           </button>
-          <br />
         </div>
       </form>
     </div>

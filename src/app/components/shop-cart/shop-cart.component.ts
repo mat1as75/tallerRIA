@@ -6,6 +6,7 @@ import { LocalStorageService } from '../../services/local-storage/local-storage.
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PriceFormatPipe } from '../../shared/price-format.pipe';
+import { AlertService } from '../../services/alert/alert.service';
 
 @Component({
   selector: 'app-shop-cart',
@@ -17,6 +18,7 @@ import { PriceFormatPipe } from '../../shared/price-format.pipe';
 export class ShopCartComponent implements OnInit {
   private cartService = inject(CartService);
   private localStorageService = inject(LocalStorageService);
+  private alertService = inject(AlertService)
   private router = inject(Router);
 
   email = 'soporte@tecnostore.com'
@@ -108,6 +110,11 @@ export class ShopCartComponent implements OnInit {
   }
 
   advanceShippingDetails(cartProductList: CartProduct[]) {
+    if (cartProductList.length === 0) {
+      this.alertService.showError('Error', 'No hay productos en el carrito. Agregá al menos un producto antes de continuar con la compra.')
+      return
+    }
+      
     this.router.navigate(['/detallesEnvio']);
   }
 

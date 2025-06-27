@@ -9,7 +9,6 @@ import { Brand } from '../../interfaces/Brand.interface';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = environment.apiUrl;
   private apiphp = environment.apiphp;
 
   constructor(private http: HttpClient) { }

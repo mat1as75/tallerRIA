@@ -1,4 +1,5 @@
-@use 'variables' as theme;
+@use '../../../styles/variables' as theme;
+@use '../../../styles/styles.scss' as *;
 
 .px-6 {
     padding: 0 4rem 0;
@@ -23,15 +24,7 @@ textarea {
 }
 
 input::placeholder,
-select::placeholder {
-    color: theme.$placeholder-color;
-}
-
-select::invalid {
-    color: theme.$placeholder-color;
-}
-
-.placeholderDepartamento {
+select:invalid {
     color: theme.$placeholder-color;
 }
 

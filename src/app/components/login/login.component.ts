@@ -46,6 +46,14 @@ export class LoginComponent {
 
   this.usrService.postIniciarSesion({email,password}).subscribe({
     next: (response) => {
+
+          //OBTENER ROL
+          if (response && response.Rol) {
+            localStorage.setItem('usuario', JSON.stringify(response));
+          } else {
+            console.warn('El usuario no tiene Rol en la respuesta');
+          }
+
           // Guardar token o datos de usuario si vienen en la respuesta
           // Mostrar la cookie 'session_ID' en la consola:
           const cookies = document.cookie; // Todas las cookies accesibles para la ruta y dominio actual
