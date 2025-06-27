@@ -1,9 +1,10 @@
-<div class="container">
+
+<div class="container"> <!-- usa .container o .container-fluid -->
   <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
-      <div class="pt-5 text-center">
-        <h2 class="fw-bold pt-3">Bienvenido</h2>
-        <hr class="border border-dark" />
+    <div class="col-12 col-md-6"> <!-- full width en móvil, mitad en pantallas medianas+ -->
+        <div class="text-left pt-5">
+        <h2 class="fw-bold text-left pt-5 text-center">Bienvenido</h2>
+        <hr style="border: 1px solid black" />
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -50,27 +51,20 @@
           </div>
         </div>
 
-        <div
-          class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4"
-        >
-          <div class="form-check">
-            <input
-              type="checkbox"
-              name="connected"
-              class="form-check-input"
-              id="connected"
-            />
-            <label for="connected" class="form-check-label">
-              Mantenerme Conectado
-            </label>
-          </div>
 
-          <a
-            [routerLink]="['/recuprarpassword']"
-            class="fw-bold text-decoration-none mt-2 mt-sm-0"
-          >
-            ¿Has olvidado tu contraseña?
-          </a>
+        <div class="d-flex justify-content-between">
+          <!--<div class="form-check mb-4">
+            <input type="checkbox" name="connected" class="form-check-input" />
+            <label for="connected" class="form-check-label"
+              >Mantenerme Conectado</label
+            >
+          </div>-->
+          <span class="text-end fw-bold">
+            <a [routerLink]="['/recuprarpassword']" class="link">
+              <p>Recuperar Password</p>
+            </a>
+          </span>
+
         </div>
 
         <div class="d-grid mb-3">

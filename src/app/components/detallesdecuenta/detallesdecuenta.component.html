@@ -115,31 +115,98 @@
             <div class="bg-light p-3 rounded mb-4">
               <div class="row g-3">
                 <div class="col-12">
+                  
                   <label class="form-label">Contraseña actual</label>
+                  <div class="input-group">
                   <input
-                    type="password"
+                    [type]="showPassword ? 'text' : 'password'"
                     class="form-control"
                     [(ngModel)]="passwordActual"
                     name="passwordactual"
                   />
+                  <button
+              type="button"
+              class="input-group-text"
+              style="
+                position: absolute;
+                right: 10px;
+                background: none;
+                border: none;
+                padding: 5px;
+                margin-top: 3px;
+                cursor: pointer;
+                z-index: 2;
+              "
+              (click)="togglePasswordVisivility()"
+            >
+              <i
+                class="bi"
+                [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+              ></i>
+            </button>
+                </div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Nueva contraseña</label>
+                  <div class="input-group">
                   <input
-                    type="text"
+                    [type]="showPassword2 ? 'text' : 'password'"
                     class="form-control"
                     [(ngModel)]="passwordNueva"
                     name="passwordnueva"
                   />
+                  <button
+              type="button"
+              class="input-group-text"
+              style="
+                position: absolute;
+                right: 10px;
+                background: none;
+                border: none;
+                padding: 5px;
+                margin-top: 3px;
+                cursor: pointer;
+                z-index: 2;
+              "
+              (click)="togglePasswordVisivility2()"
+            >
+              <i
+                class="bi"
+                [ngClass]="showPassword2 ? 'bi-eye-slash' : 'bi-eye'"
+              ></i>
+            </button>
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Confirmar nueva contraseña</label>
+                  <div class="input-group">
                   <input
-                    type="text"
+                    [type]="showPassword2 ? 'text' : 'password'"
                     class="form-control"
                     [(ngModel)]="confirmarPassword"
                     name="confirmarPassword"
                   />
+                  <button
+              type="button"
+              class="input-group-text"
+              style="
+                position: absolute;
+                right: 10px;
+                background: none;
+                border: none;
+                padding: 5px;
+                margin-top: 3px;
+                cursor: pointer;
+                z-index: 2;
+              "
+              (click)="togglePasswordVisivility2()"
+            >
+              <i
+                class="bi"
+                [ngClass]="showPassword2 ? 'bi-eye-slash' : 'bi-eye'"
+              ></i>
+            </button>
+                  </div>
                 </div>
               </div>
             </div>
