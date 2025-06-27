@@ -171,9 +171,9 @@ export class ProductCatalogComponent implements OnInit {
           this.filteredProductList = [...this.productList]
           // Ahora sí: calcular min y max una vez que ya tenemos productos
           const priceExtremes = this.getMinAndMaxPriceProducts(this.productList)
-          this.minPrice = priceExtremes.min?.Precio ?? 0;
-          this.maxPrice = priceExtremes.max?.Precio ?? 100;
-          
+          const rawMin = priceExtremes.min ? priceExtremes.min.Precio : 0
+          const rawMax = priceExtremes.max ? priceExtremes.max.Precio : 100
+
           this.minPrice = rawMin > 1 ? rawMin - 1 : 0
           this.maxPrice = rawMax + 1
 
