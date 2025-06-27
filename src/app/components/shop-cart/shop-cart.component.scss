@@ -1,3 +1,5 @@
+@use '../../../styles/styles.scss' as *;
+
 body {
     font-family: 'public-sans', sans-serif;
 }
@@ -135,4 +137,15 @@ h6 {
       padding-right: 1rem !important;
     }
   }
+
+  img {
+    overflow: hidden;
+  }
+
+  a {
+    all: unset;
+  }
   
+  .cursor-pointer {
+    cursor: pointer !important;
+  }

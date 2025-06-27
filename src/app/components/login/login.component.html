@@ -1,47 +1,86 @@
-<div class="container" style="width: 1000px;">
-    <div class="row">
-        <div class="col">
-            <div class="text-left pt-5">
-                <h2 class="fw-bold text-left pt-5 text-center">
-                    Bienvenido
-                </h2>
-                <hr style="border: 1px solid black;">
-            </div>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="mb-4">
-                    <label for="email" class="form-label">Correo Electronico</label>
-                    <input type="email" class="form-control" name="email" formControlName="email">
-                </div>
-    
-                <div class="mb-4">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" formControlName="password">
-                </div>
-                
-                <div class="d-flex justify-content-between">
-                <div class="form-check mb-4">
-                    <input type="checkbox" name="connected" class="form-check-input">
-                    <label for="connected" class="form-check-label">Mantenerme Conectado</label>
-                   
-             </div>
-                    <span class="text-end fw-bold">
-                       <a [routerLink]="['/recuprarpassword']" class="link">
-                        <p>Recuperar Password</p>
-                        </a>
-                    </span>
-               
-                
-            </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn botncolor">Iniciar Sesion</button>
-                </div>
 
-  <div class="my-3 d-grid">
-    <button type="button" class="btn btn-secondary" [routerLink]="['/register']">Registrarse</button>
-  <br>  
-</div>
+<div class="container"> <!-- usa .container o .container-fluid -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6"> <!-- full width en móvil, mitad en pantallas medianas+ -->
+        <div class="text-left pt-5">
+        <h2 class="fw-bold text-left pt-5 text-center">Bienvenido</h2>
+        <hr style="border: 1px solid black" />
+      </div>
 
-            </form>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            formControlName="email"
+          />
         </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control rounded-2"
+              style="z-index: 1"
+              name="password"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              class="input-group-text"
+              style="
+                position: absolute;
+                right: 10px;
+                background: none;
+                border: none;
+                padding: 5px;
+                margin-top: 3px;
+                cursor: pointer;
+                z-index: 2;
+              "
+              (click)="togglePasswordVisivility()"
+            >
+              <i
+                class="bi"
+                [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+              ></i>
+            </button>
+          </div>
+        </div>
+
+
+        <div class="d-flex justify-content-between">
+          <!--<div class="form-check mb-4">
+            <input type="checkbox" name="connected" class="form-check-input" />
+            <label for="connected" class="form-check-label"
+              >Mantenerme Conectado</label
+            >
+          </div>-->
+          <span class="text-end fw-bold">
+            <a [routerLink]="['/recuprarpassword']" class="link">
+              <p>Recuperar Password</p>
+            </a>
+          </span>
+
+        </div>
+
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn botncolor">Iniciar Sesión</button>
+        </div>
+
+        <div class="d-grid">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            [routerLink]="['/register']"
+          >
+            Registrarse
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

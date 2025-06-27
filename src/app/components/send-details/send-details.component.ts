@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
 import { ShippingInfo } from '../../interfaces/ShippingInfo.interface';
 import { AlertService } from '../../services/alert/alert.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { PriceFormatPipe } from '../../shared/price-format.pipe';
+import { NgSelectModule } from '@ng-select/ng-select'
 
 @Component({
   selector: 'app-send-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, NgSelectModule, ReactiveFormsModule, FormsModule, PriceFormatPipe],
   templateUrl: './send-details.component.html',
   styleUrl: './send-details.component.scss'
 })
@@ -82,9 +84,14 @@ export class SendDetailsComponent implements OnInit {
   getCartProductByClientId(client_id: number) {
     this.cartService.getCartProducts(client_id)
     .subscribe({
-      next: data => {
+      next: (data: CartProduct[]) => {
         this.cartProductList = data
         console.log("DETALLES DE ENVIO: Productos carrito cargados!")
+
+        if (this.cartProductList.length === 0) {
+          this.alertService.showError('Error', 'No hay productos en el carrito. Agregá al menos un producto antes de continuar con la compra.')
+          this.router.navigate(['/catalogo'])
+        }
       },
       error: err => {
         console.error(err)

@@ -23,14 +23,14 @@
     <div class="col-md-7 mt-3 px-5 producto-truncado">
       <h6 class="fw-bold mb-3 ps-4">Productos en el carrito</h6>
       <hr class="m-0" />
-      <!-- Producto 1 -->
+      <!-- Productos -->
       <div
         class="d-flex py-3 px-4 producto-truncado"
         *ngFor="let product of cartProductList; trackByProducts"
       >
         <!-- Imagen -->
         <div
-          class="border rounded me-3"
+          class="border-light-gray rounded me-3"
           style="
             width: 100px;
             height: 100px;
@@ -39,62 +39,73 @@
             flex-shrink: 0;
           "
         >
-          <img [src]="product.URL_Imagen" class="img-fluid" alt="Imagen" />
+          <a [routerLink]="'/producto/' + product.ID_Producto">
+            <img
+              [src]="product.URL_Imagen"
+              class="img-fluid bg-app-secondary cursor-pointer"
+              alt="Imagen"
+            />
+          </a>
         </div>
 
-        <!-- Info del producto: nombre + contador + trash -->
-        <div class="flex-grow-1 d-flex flex-column">
+        <!-- Info del producto: nombre + contador + trash + precio -->
+        <div class="flex-grow-1 d-flex flex-column justify-content-center">
           <!-- Nombre del producto -->
-          <span class="fw-semibold mb-2 small nombre-truncado">
-            {{ product.Nombre }}
-          </span>
-
-          <!-- Contador y trash -->
-          <div class="d-flex align-items-center gap-2 mt-4">
-            <div
-              class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3"
-              style="width: 80px; height: 34px"
+          <a [routerLink]="'/producto/' + product.ID_Producto">
+            <span
+              class="cursor-pointer fw-semibold mb-2 mt-2 mt-md-0 small nombre-truncado"
             >
-              <button
-                class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                type="button"
-                (click)="
-                  updateQuantity(product.ID_Producto, product.Cantidad - 1)
-                "
+              {{ product.Nombre }}
+            </span>
+          </a>
+
+          <!-- Contador + Trash + Precio alineado a la derecha -->
+          <div class="d-flex align-items-center mt-0 mt-md-4 flex-wrap w-100">
+            <!-- Contador + Trash (izquierda) -->
+            <div class="d-flex align-items-center gap-2">
+              <div
+                class="d-flex align-items-center bg-app-secondary border border-light-gray rounded-pill px-3 my-auto"
+                style="width: 80px; height: 34px"
               >
-                −
-              </button>
-              <input
-                type="text"
-                class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
-                style="width: 30px"
-                [value]="product.Cantidad"
-              />
+                <button
+                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                  type="button"
+                  (click)="
+                    updateQuantity(product.ID_Producto, product.Cantidad - 1)
+                  "
+                >
+                  −
+                </button>
+                <input
+                  type="text"
+                  class="form-control form-control-sm text-center border-0 shadow-none p-0 bg-app-secondary"
+                  style="width: 30px"
+                  [value]="product.Cantidad"
+                  readonly
+                />
+                <button
+                  class="btn btn-sm p-0 border-0 shadow-none text-dark"
+                  type="button"
+                  (click)="
+                    updateQuantity(product.ID_Producto, product.Cantidad + 1)
+                  "
+                >
+                  +
+                </button>
+              </div>
               <button
-                class="btn btn-sm p-0 border-0 shadow-none text-dark"
-                type="button"
-                (click)="
-                  updateQuantity(product.ID_Producto, product.Cantidad + 1)
-                "
+                class="btn btn-link text-light-gray p-0"
+                (click)="removeCartProduct(product.ID_Producto)"
               >
-                +
+                <i class="bi bi-trash3 fs-5"></i>
               </button>
             </div>
-            <button
-              class="btn btn-link text-light-gray p-0"
-              (click)="removeCartProduct(product.ID_Producto)"
-            >
-              <i class="bi bi-trash3 fs-5"></i>
-            </button>
-          </div>
-        </div>
 
-        <!-- Precio -->
-        <div
-          class="fw-semibold ms-3 text-end precio-truncado"
-          style="white-space: nowrap; flex-shrink: 0"
-        >
-          USD {{ product.Precio }}
+            <!-- Precio (alineado a la derecha) -->
+            <div class="ms-auto fw-semibold text-nowrap mt-0 mt-md-0">
+              USD {{ product.Precio }}
+            </div>
+          </div>
         </div>
       </div>
       <hr class="m-0" />
@@ -108,7 +119,7 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between pt-3">
           <span>Subtotal</span>
-          <span>USD {{ calculateTotalCartPrice() }}</span>
+          <span>USD {{ calculateTotalCartPrice() | priceFormat }}</span>
         </div>
         <div class="d-flex justify-content-between py-3">
           <span>Envío</span>
@@ -117,7 +128,7 @@
         <hr class="m-0" />
         <div class="d-flex justify-content-between py-3 fw-semibold">
           <span>Total</span>
-          <span>USD {{ calculateTotalCartPrice() }}</span>
+          <span>USD {{ calculateTotalCartPrice() | priceFormat }}</span>
         </div>
         <div class="d-grid mt-3">
           <button

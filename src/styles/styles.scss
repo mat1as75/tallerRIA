@@ -50,6 +50,10 @@ body {
     color: theme.$background-color !important;
 }
 
+.text-placeholder {
+    color: theme.$placeholder-color !important;
+}
+
 ngx-slider .ngx-slider-bubble {
     font-size: 14px !important;
     padding: 2px 6px !important;
@@ -81,3 +85,7 @@ ngx-slider .ngx-slider-pointer:after {
   display: none !important; /* elimina el halo blanco duplicado */
 }
 
+.animate__animated {
+  --animate-duration: 0.5s;
+}
+  

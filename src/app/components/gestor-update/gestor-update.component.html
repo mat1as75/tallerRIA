@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
 
+
 <div style="margin: auto; padding: 1rem; max-width: 800px; margin-top: 1rem;">
 
-  <h2 class="mb-3">Alta Gestor</h2>
+  <h2 class="mb-3">Modificar Gestor</h2>
 
    <hr>
 
@@ -12,10 +13,10 @@
 
     <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
 
-      <input type="text" class="form-control"  placeholder="Nombre" name="nombre" [(ngModel)]="gestor.Nombre" required />
-      <input type="text" class="form-control"  placeholder="Apellido" name="apellido" [(ngModel)]="gestor.Apellido" required />
+
+      <h4 class="mb-3">Ingrese el Email del gestor a modificar. </h4>
+
       <input type="email" class="form-control"  placeholder="Email" name="email" [(ngModel)]="gestor.Email" required />
-      <input type="password" class="form-control"  placeholder="Contraseña" name="password" [(ngModel)]="gestor.Password" required />
 
     </div>
 
@@ -50,4 +51,5 @@
   </form>
 
 </div>
+
 

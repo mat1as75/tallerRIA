@@ -1,4 +1,9 @@
-@use 'variables' as theme;
+@use '../../../../src/styles/variables' as theme;
+@use '../../../../src/styles/styles.scss' as styles;
+
+.btn-hover {
+  @extend .btn-hover;
+}
 
 .px-6 {
     padding: 0 4rem 0;
@@ -25,6 +30,11 @@ input {
     background-color: theme.$background-color;
     border-color: theme.$border-color;
     color: theme.$text-color;
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
 }
 
 input::placeholder {
@@ -44,5 +54,5 @@ img {
     width: 100%; 
     height: 100%; 
     object-fit: contain;
-    background-color: #fff;
+    background-color: theme.$background-color;
 }

@@ -1,41 +1,81 @@
-<div class="container" style="width: 1000px;">
-    <div class="row">
-        <div class="col">
-            <div class="text-left pt-5">
-                <h2 class="fw-bold text-left pt-0">
-                    Registrarse
-                </h2>
-                <hr style="border: 1px solid black;">
-            </div>
-            <form (ngSubmit)="registrarse()" #formulario="ngForm">
-                <div class="mb-4">
-                    <label for="email" class="form-label">Correo Electronico</label>
-                    <input type="email" class="form-control" name="email" id="email" [(ngModel)]="usuario.Email" required />
-                </div>
 
-                <div class="mb-4">
-                    <label for="name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="usuario.Nombre" required />
-                </div>
+<div class="container"> 
+  <div class="container"> <!-- usa .container o .container-fluid -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6"> <!-- full width en móvil, mitad en pantallas medianas+ -->
+  <div class="row">
+    <div class="col">
+      <div class="text-left pt-5">
+        <h2 class="fw-bold text-left pt-0">Registrarse</h2>
+        <hr style="border: 1px solid black" />
 
-                  <div class="mb-4">
-                    <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" name="apellido" id="apellido" [(ngModel)]="usuario.Apellido" required />
-                </div>
+      </div>
 
-                <div class="mb-4">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" [(ngModel)]="usuario.Password" required/>
-                </div>
-                <div class="d-flex justify-content-between">
-            </div>
-<div class="my-3 d-grid">
-  <button type="submit" class="btn btn-secondary btonregi">Registrarse</button>
-    <br>
-    
-</div>
-
-            </form>
+      <form (ngSubmit)="registrarse()" #formulario="ngForm">
+        <div class="mb-4">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            [(ngModel)]="usuario.Email"
+            required
+          />
         </div>
+
+        <div class="mb-4">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombre"
+            id="nombre"
+            [(ngModel)]="usuario.Nombre"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            name="apellido"
+            id="apellido"
+            [(ngModel)]="usuario.Apellido"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            [(ngModel)]="usuario.Password"
+            required
+          />
+        </div>
+
+        <div class="my-3 d-grid">
+          <button type="submit" class="btn btn-secondary btonregi">
+            Registrarse
+          </button>
+
+          <br>
+    <div class="my-2 d-grid">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/login']">Volver</button>
     </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+  </div>
+  </div>
+</div>
+

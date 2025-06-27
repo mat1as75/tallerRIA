@@ -11,7 +11,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = environment.apiUrl;
   private apiphp = environment.apiphp;
 
   categories: Category[] = [];
@@ -63,6 +62,14 @@ export class ProductService {
 
   createProduct(product: Omit<Product, 'ID' | 'CreatedAt'>) {
     return this.http.post(`${this.apiphp}/productos`, product);
+  }
+
+  getCategoryById(id: number) {
+    return this.http.get<Category>(`${this.apiphp}/categorias/${id}`)
+  }
+
+  getBrands() {
+    return this.http.get<Brand[]>(`${this.apiphp}/marcas`) 
   }
 
   updateProduct(id: number, product: Omit<Product, 'ID'>) {

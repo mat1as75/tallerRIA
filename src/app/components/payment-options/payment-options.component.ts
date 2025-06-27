@@ -11,11 +11,12 @@ import { OrderService } from '../../services/order/order.service';
 import { EmailHelperService } from '../../services/email-helper/email-helper.service';
 import { OrderConfirmation } from '../../interfaces/OrderConfirmation.interface';
 import { UserServiceService } from '../../services/user/user-service.service';
+import { PriceFormatPipe } from '../../shared/price-format.pipe';
 
 @Component({
   selector: 'app-payment-options',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, PriceFormatPipe],
   templateUrl: './payment-options.component.html',
   styleUrl: './payment-options.component.scss'
 })
@@ -82,17 +83,33 @@ export class PaymentOptionsComponent implements OnInit {
     if (this.sessionClientId)
       this.getCartProductByClientId(this.sessionClientId)
 
-    // Shipping Data Info
-    const shippingData = this.cartService.getShippingInfo()
-
     this.getClientEmail()
 
-    if (!shippingData) {
+    const shippingData = this.cartService.getShippingInfo()
+
+    if (shippingData) {
+      this.shippingInfo = shippingData
+    } else {
       const localShippingInfo = this.localStorageService.getItem('shippingInfo')
       if (localShippingInfo) {
         this.shippingInfo = typeof localShippingInfo === 'string' ? JSON.parse(localShippingInfo) : localShippingInfo
         this.cartService.setShippingInfo(this.shippingInfo)
       }
+    }
+
+    // Validar que shippingInfo este completo
+    if (
+      !this.shippingInfo || 
+      !this.shippingInfo.DireccionCliente || 
+      !this.shippingInfo.TelefonoCliente || 
+      !this.shippingInfo.DepartamentoCliente || 
+      !this.shippingInfo.CiudadCliente
+    ) {
+      this.alertService.showError('Datos de envío incompletos', 'Por favor, completá tus datos de envío antes de continuar con el pago.')
+      this.router.navigate(['/detallesEnvio'])
+      return
+    } else {
+      console.log("NO ENTRO ")
     }
 
     this.paymentDataForm.get('paymentMethod')?.valueChanges.subscribe(value => {
@@ -154,9 +171,14 @@ export class PaymentOptionsComponent implements OnInit {
   getCartProductByClientId(client_id: number) {
     this.cartService.getCartProducts(client_id)
     .subscribe({
-      next: data => {
+      next: (data: CartProduct[]) => {
         this.cartProductList = data
         console.log("OPCIONES PAGO: Productos carrito cargados!")
+
+        if (this.cartProductList.length === 0) {
+          this.alertService.showError('Error', 'No hay productos en el carrito. Agregá al menos un producto antes de continuar con la compra.')
+          this.router.navigate(['/catalogo'])
+        }
       },
       error: err => {
         console.error(err)
@@ -218,18 +240,29 @@ export class PaymentOptionsComponent implements OnInit {
   }
 
   postCreateOrderDB() {
-    this.orderService.createOrder(this.createDataOrder())
+    const orderData = this.createDataOrder()
+
+    this.orderService.createOrder(orderData)
     .subscribe({
       next: data => {
         const res = JSON.parse(String(data))
         this.newOrderId = res.ID_Pedido
+
         console.log('Pedido creado ID: ' + res.ID_Pedido)
 
-        // Envio Mail Confirmando
+        // Add ID_Pedido
+        const confirmationData = this.createDataConfirmation()
+        confirmationData.ID_Pedido = res.ID_Pedido
+
+        // Save on localStorage
+        this.localStorageService.setItem('lastConfirmation', confirmationData)
+
+        // Send Email Confirmed
         this.sendEmailConfirmation()
 
         this.localStorageService.removeItem('shippingInfo')
         this.clearCart(this.sessionClientId)
+        this.cartService.resetQuantity()
     
         this.router.navigate(['/confirmacionPago'])
       },
@@ -249,20 +282,13 @@ export class PaymentOptionsComponent implements OnInit {
       FechaPedido: new Date().toISOString().split('T')[0],
       productos: this.cartProductList.map(product => ({
         Nombre: product.Nombre,
-        Cantidad: product.Cantidad
+        Cantidad: product.Cantidad,
+        Precio: Number(product.Precio)
       }))
     };
   }
 
   sendEmailConfirmation() {
-    console.log('EMAIL - ' + this.createDataConfirmation().Email)
-    console.log('NOMBRE - ' + this.createDataConfirmation().Nombre)
-    console.log('ID_Pedido - ' + this.createDataConfirmation().ID_Pedido)
-    console.log('Total - ' + this.createDataConfirmation().Total)
-    console.log('MetodoPago - ' + this.createDataConfirmation().MetodoPago)
-    console.log('FechaPedido - ' + this.createDataConfirmation().FechaPedido)
-    console.log('Productos - ' + this.createDataConfirmation().productos.map((p => console.log(p.Nombre + ' - ' + p.Cantidad))))
-
     this.emailHelperService.sendEmail(this.createDataConfirmation())
     .subscribe({
       next: data => {

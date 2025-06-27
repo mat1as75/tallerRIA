@@ -7,11 +7,11 @@ import { User } from '../../interfaces/User.interface';
 import { FormsModule, NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AlertService } from '../../services/alert/alert.service';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-detallesdecuenta',
-  imports: [FormsModule, NavbarComponent, RouterLink],
+  imports: [FormsModule, RouterLink, NgClass],
   templateUrl: './detallesdecuenta.component.html',
   styleUrl: './detallesdecuenta.component.scss'
 })
@@ -28,12 +28,7 @@ export class DetallesdecuentaComponent {
 
 
 
-  constructor(
-    private router: Router, 
-    private servicecookie: CookieService, 
-    private localStorageService: LocalStorageService, 
-    private userservice: UserServiceService
-  ) {}
+constructor(private router: Router, private servicecookie: CookieService, private userservice: UserServiceService){}
 
 
 
@@ -48,7 +43,7 @@ export class DetallesdecuentaComponent {
 
   this.userservice.ObtenerUsuario(session).subscribe({
     next: (userData) => {
-      this.usuario = userData; // Asegurate de tener la propiedad `usuario: User | null = null;`
+      this.usuario = userData; 
       console.log("Datos del usuario:", userData);
     },
     error: (err) => {
@@ -58,8 +53,12 @@ export class DetallesdecuentaComponent {
   });
  }
 
+
  cerrarsesion() {
   const sessionId = this.servicecookie.getCookie('session_ID');
+
+
+
 
   this.userservice.cerrarsesion(sessionId!).subscribe({
     next: (res) => {
@@ -67,7 +66,6 @@ export class DetallesdecuentaComponent {
         // Limpiar almacenamiento local
         this.servicecookie.borrarCookie('session_ID');
         this.servicecookie.borrarCookie('PHPSESSID');
-        this.localStorageService.clear();
       // Redirigir al login
       this.alertService.AlertTopCorner('Cerrado','Cerraste sesion')
       this.router.navigate(['/home']);
@@ -108,7 +106,7 @@ cambiopass() {
   }
 
   if (this.passwordNueva !== this.confirmarPassword) {
-    alert('Las contraseñas nuevas no coinciden');
+    this.alertService.showError('Error', 'Las Password nuevas ingresadas no coinciden');
     return;
   }
 
@@ -132,7 +130,8 @@ cambiopass() {
     error: (err) => {
       console.log('DATOS:', data);
       console.error('Error al cambiar la contraseña', err);
-      this.alertService.showError('Error','Error al cambiar la password')
+      const msg = err.error?.Mensaje;
+      this.alertService.showError('Error',msg);
 
     }
   });
@@ -190,6 +189,16 @@ swalWithBootstrapButtons.fire({
     });
   }
 });
+  }
+
+  showPassword: boolean = false;
+  showPassword2: boolean = false;
+
+  togglePasswordVisivility(): void {
+    this.showPassword = !this.showPassword
+  }
+ togglePasswordVisivility2(): void {
+    this.showPassword2 = !this.showPassword2
   }
 
 }
