@@ -80,6 +80,14 @@ export class ProductService {
     return this.http.delete(`${this.apiphp}/productos/${id}`);
   }
 
+  updateProduct(id: number, product: Omit<Product, 'ID'>) {
+    return this.http.put(`${this.apiphp}/productos/${id}`, product);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(`${this.apiphp}/productos/${id}`);
+  }
+
   /*updateStock(id: number, nuevoStock: number) {
     return this.http.patch(`${this.apiphp}/productos/${id}/stock`, {
       nuevo_stock: nuevoStock
