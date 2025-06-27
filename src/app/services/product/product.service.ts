@@ -68,8 +68,16 @@ export class ProductService {
     return this.http.get<Category>(`${this.apiphp}/categorias/${id}`)
   }
 
-  getBrands() {
-    return this.http.get<Brand[]>(`${this.apiphp}/marcas`) 
+  // getBrands() {
+  //   return this.http.get<Brand[]>(`${this.apiphp}/marcas`) 
+  // }
+
+  updateProduct(id: number, product: Omit<Product, 'ID'>) {
+    return this.http.put(`${this.apiphp}/productos/${id}`, product);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(`${this.apiphp}/productos/${id}`);
   }
 
   updateProduct(id: number, product: Omit<Product, 'ID'>) {

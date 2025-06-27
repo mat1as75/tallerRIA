@@ -13,7 +13,12 @@ export class EmailHelperService {
   constructor(private http: HttpClient) { }
 
   sendEmail(data: OrderConfirmation) {
-    return this.http.post<any>(`${this.apiphp}/enviarMail`, data)
+    return this.http.post<any>(`${this.apiphp}/pedidos/enviarConfirmacionEmail`, data)
+  }
+
+  // data = ID_Pedido, Email, Nombre
+  sendEmailPaymentConfirmation(data: any) {
+    return this.http.post<any>(`${this.apiphp}/pedidos/enviarConfirmacionPagoEmail`, data)
   }
 
   sendEmailContact(data: EmailContact) {
