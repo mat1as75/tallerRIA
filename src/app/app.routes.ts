@@ -31,6 +31,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'altaProducto', component: ProductCreateComponent },
+    { path: 'editarProducto/:id', component: ProductEditComponent },
     { path: 'listaProducto', component: ProductListComponent },
     { path: 'ordenesProducto', component: ProductOrdersComponent },
     { path: 'altaGestor', component: AltaGestorComponent },
