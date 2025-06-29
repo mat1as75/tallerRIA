@@ -1,65 +1,125 @@
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <h1 class="mb-3">Alta Producto</h1>
-            <form [formGroup]="formReactivo" (ngSubmit)="onSubmit()">
-                <hr>
-                <div class="row">
-                <div class="col-md-7">
-                     <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="nombreForm" placeholder="Nombre" formControlName="nombre">
-                    <label for="nombreForm">Nombre</label>
-                    </div>
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="precioForm" placeholder="Precio" formControlName="precio">
-                    <label for="precioForm">Precio</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="stockForm" placeholder="Stock" formControlName="stock">
-                    <label for="stockForm">Stock</label>
-                </div>
-                </div>
-                <div class="col-md-5 text-center" *ngIf="imagenPreview">
-                    <img class="rounded mx-auto d-block" [src]="imagenPreview" width="200" height="200">
-                </div>
-               </div>
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="marcaForm" formControlName="marca" aria-label="Seleccionar marca">
-                        <option disabled selected>Seleccionar marca</option>
-                        <option *ngFor="let m of marcas" [value]="m.ID">{{ m.Nombre }}</option>
-                    </select>
-                    <label for="marcaForm">Marca</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="categoriaForm" formControlName="categoria" aria-label="Seleccionar categoría">
-                        <option disabled selected>Seleccionar categoría</option>
-                        <option *ngFor="let cat of categorias" [value]="cat.ID">{{ cat.Nombre }}</option>
-                    </select>
-                    <label for="categoriaForm">Categoría</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" id="descripcionForm" placeholder="Descripción" style="height: 100px" formControlName="descripcion"></textarea>
-                    <label for="descripcionForm">Descripción</label>
-                </div>
-                <div class="mb-3">
-                    <label for="imagenForm" class="form-label">Imagen del producto</label>
-                    <input class="form-control" type="file" id="imagenForm" (change)="onFileChange($event)" #inputFile>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary w-100">Añadir</button>
-                    </div>
-                    <div class="col-md-6">
-                    <button type="reset" class="btn btn-outline-secondary w-100">Cancelar</button>
-                    </div>
-                </div>
-                <div *ngIf="activarMensaje" class="mb-3 alert alert-success alert-dismissible fade show" role="alert">
-                    {{ exito }}
-                    <button type="button" class="btn-close" (click)="activarMensaje = false" aria-label="Close"></button>
-                </div>
-            </form>
-            <br>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1 class="mb-3">Alta Producto</h1>
+      <form [formGroup]="formReactivo" (ngSubmit)="onSubmit()">
+        <hr />
+        <div class="row">
+          <div class="col-md-7">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="nombreForm"
+                placeholder="Nombre"
+                formControlName="nombre"
+              />
+              <label for="nombreForm">Nombre</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="number"
+                class="form-control"
+                id="precioForm"
+                placeholder="Precio"
+                formControlName="precio"
+              />
+              <label for="precioForm">Precio</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="number"
+                class="form-control"
+                id="stockForm"
+                placeholder="Stock"
+                formControlName="stock"
+              />
+              <label for="stockForm">Stock</label>
+            </div>
+          </div>
+          <div class="col-md-5 text-center" *ngIf="imagenPreview">
+            <img
+              class="rounded mx-auto d-block"
+              [src]="imagenPreview"
+              width="200"
+              height="200"
+            />
+          </div>
         </div>
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            id="marcaForm"
+            formControlName="marca"
+            aria-label="Seleccionar marca"
+          >
+            <option disabled selected>Seleccionar marca</option>
+            <option *ngFor="let m of marcas" [value]="m.ID">
+              {{ m.Nombre }}
+            </option>
+          </select>
+          <label for="marcaForm">Marca</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            id="categoriaForm"
+            formControlName="categoria"
+            aria-label="Seleccionar categoría"
+          >
+            <option disabled selected>Seleccionar categoría</option>
+            <option *ngFor="let cat of categorias" [value]="cat.ID">
+              {{ cat.Nombre }}
+            </option>
+          </select>
+          <label for="categoriaForm">Categoría</label>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            id="descripcionForm"
+            placeholder="Descripción"
+            style="height: 100px"
+            formControlName="descripcion"
+          ></textarea>
+          <label for="descripcionForm">Descripción</label>
+        </div>
+        <div class="mb-3">
+          <label for="imagenForm" class="form-label">Imagen del producto</label>
+          <input
+            class="form-control"
+            type="file"
+            id="imagenForm"
+            (change)="onFileChange($event)"
+            #inputFile
+          />
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary w-100">Añadir</button>
+          </div>
+          <div class="col-md-6">
+            <button type="reset" class="btn btn-outline-secondary w-100">
+              <a class="nav-link" [routerLink]="['/listaProducto']">Cancelar</a>
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="activarMensaje"
+          class="mb-3 alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          {{ exito }}
+          <button
+            type="button"
+            class="btn-close"
+            (click)="activarMensaje = false"
+            aria-label="Close"
+          ></button>
+        </div>
+      </form>
+      <br />
     </div>
+  </div>
 </div>

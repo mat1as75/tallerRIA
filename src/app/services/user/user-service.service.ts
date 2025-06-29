@@ -13,7 +13,6 @@ export class UserServiceService {
 
   constructor(private http: HttpClient) { }
 
-
   postRegisterUser(user : User) {
     return this.http.post<User>(`${this.apiPhp}/usuarios`, user, {withCredentials: true})
   }

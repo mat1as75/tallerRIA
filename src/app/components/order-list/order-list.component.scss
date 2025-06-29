@@ -1,0 +1,41 @@
+@use '../../../styles/variables' as theme;
+@use '../../../styles/styles.scss' as *;
+
+.product-tooltip {
+  transition: opacity 0.2s ease;
+  font-size: 0.85rem;
+
+  @media (max-width: 768px) {
+    min-width: 180px;
+    font-size: 0.875rem;
+    padding: 8px;
+  }
+
+  @media (max-width: 576px) {
+    min-width: 150px;
+    font-size: 0.75rem;
+    padding: 6px;
+  }
+}
+
+.product-name {
+  display: block;
+  max-width: 200px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+td,
+tr,
+th {
+  background-color: theme.$background-color !important;
+}
+
+td,
+tr,
+.table,
+.table-responsive {
+  overflow: visible !important;
+  position: relative;
+}
