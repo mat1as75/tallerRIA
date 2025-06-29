@@ -5,6 +5,9 @@ import { Order } from '../../interfaces/Order.interface';
 import { OrderConfirmation } from '../../interfaces/OrderConfirmation.interface';
 import { Observable } from 'rxjs';
 import { Product } from '../../interfaces/Product.interface';
+import { ShippingInfo } from  '../../interfaces/ShippingInfo.interface';
+import { Pedido } from  '../../interfaces/Pedido.interface';
+import { DatosEnvio } from '../../interfaces/DatosEnvio.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -39,4 +42,15 @@ export class OrderService {
     return this.http.get<Product[]>(`${this.apiphp}/productos/pedido/${id}`)
   }
 
+  getOrderById(id: number) {
+    return this.http.get<Pedido>(`${this.apiphp}/pedidos/${id}`)
+  }
+
+  getDatosEnvioById(id:number){
+    return this.http.get<DatosEnvio>(`${this.apiphp}/pedido/datosenvio/${id}`)
+  }
+
+  updateEstadoPedido(idPedido: number,payload:{Estado:String}){
+    return this.http.patch<DatosEnvio>(`${this.apiphp}/pedidos/${idPedido}`, payload)
+  }
 }

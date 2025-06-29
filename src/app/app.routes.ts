@@ -36,7 +36,7 @@ export const routes: Routes = [
     { path: 'listaProducto', component: ProductListComponent },
     { path: 'ordenesProducto', component: ProductOrdersComponent },
     { path: 'altaGestor', component: AltaGestorComponent },
-    { path: 'modificarPedido', component: ModificarPedidoComponent },
+    { path: 'modificarPedido/:id', component: ModificarPedidoComponent },
     { path: 'listaPedido', component: OrderListComponent },
     { path: 'recuprarpassword', component: ReuperarpasswordComponent },
     { path: 'cambiopassword', component: CambiarpasswordComponent },
