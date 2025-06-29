@@ -1,0 +1,19 @@
+@use '../../../styles/variables' as theme;
+@use '../../../styles/styles.scss' as *;
+
+th {
+    background-color: theme.$background-color !important;
+}
+
+td {
+    background-color: theme.$background-color !important;
+}
+
+tr {
+    background-color: theme.$background-color !important;
+}
+
+img {
+    background-color: theme.$background-color !important;
+    border: 0;
+}

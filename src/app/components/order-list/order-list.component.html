@@ -1,0 +1,138 @@
+<div class="container mt-5">
+  <div class="row align-items-center mb-3">
+    <div class="col-9">
+      <h3 class="mb-0">Lista Pedidos</h3>
+    </div>
+    <!-- <div class="col-3 text-end">
+      <button class="btn btn-outline" (click)="sortByName()" type="button">
+        <i class="bi" [ngClass]="isAscending ? 'bi-sort-down' : 'bi-sort-up'"></i>
+      </button>
+      <a class="btn btn-outline-primary" [routerLink]="'/altaProducto'" role="button">Añadir Producto</a>
+    </div> -->
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table
+          class="table table-hover table-bordered text-center align-middle rounded shadow-sm overflow-hidden"
+        >
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th scope="col">Valor Total</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Productos</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let order of paginatedOrders()">
+              <td
+                class="text-truncate"
+                style="max-width: 300px"
+                [attr.title]="order.ID"
+              >
+                {{ order.ID }}
+              </td>
+              <td
+                class="text-truncate"
+                style="max-width: 100px"
+                [attr.title]="order.Total"
+              >
+                {{ order.Total }}
+              </td>
+              <td
+                class="text-truncate"
+                style="max-width: 300px"
+                [attr.title]="order.Estado"
+              >
+                {{ order.Estado }}
+              </td>
+              <td
+                class="text-truncate"
+                style="max-width: 300px"
+                [attr.title]="order.Nombre_Cliente"
+              >
+                {{ order.Nombre_Cliente }}
+              </td>
+              <td
+                class="text-truncate position-relative"
+                style="max-width: 100px; cursor: pointer; overflow: visible"
+                (mouseenter)="handleMouseEnter(order.ID)"
+                (mouseleave)="hideProductDetails()"
+              >
+                Ver Detalles
+                <div
+                  class="product-tooltip position-absolute bg-white border p-2 shadow rounded text-start"
+                  *ngIf="
+                    hoveredOrderId === order.ID &&
+                    productsByOrderId[order.ID]?.length
+                  "
+                  (mouseenter)="clearHideTimeout()"
+                  (mouseleave)="hideProductDetails()"
+                  style="
+                    z-index: 999;
+                    top: 50%;
+                    right: 100%;
+                    left: auto;
+                    transform: translateY(-50%);
+                    min-width: 250px;
+                    background-color: white;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    border: 1px solid #ccc;
+                  "
+                >
+                  <div
+                    class="small"
+                    *ngFor="
+                      let product of productsByOrderId[order.ID];
+                      let i = index
+                    "
+                  >
+                    <strong class="product-name">{{ product.Nombre }}</strong
+                    ><br />
+                    Precio: {{ product.Precio }}<br />
+                    Cantidad: {{ product.Cantidad }}
+                    <hr *ngIf="i < productsByOrderId[order.ID].length - 1" />
+                  </div>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-link" (click)="editOrder(order.ID)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-4">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="changePage(currentPage - 1)">
+              &laquo;
+            </button>
+          </li>
+
+          <li
+            class="page-item"
+            *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="currentPage === i + 1"
+          >
+            <button class="page-link" (click)="changePage(i + 1)">
+              {{ i + 1 }}
+            </button>
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="changePage(currentPage + 1)">
+              &raquo;
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

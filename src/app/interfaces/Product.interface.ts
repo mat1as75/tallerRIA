@@ -10,4 +10,5 @@ export interface Product {
     CreatedAt?: string
     Marca?: string
     Categoria?: string
+    Cantidad: number
 }

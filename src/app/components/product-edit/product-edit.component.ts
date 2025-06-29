@@ -103,7 +103,8 @@ export class ProductEditComponent implements OnInit {
       ID_Marca: this.formReactivo.value.marca,
       ID_Categoria: this.formReactivo.value.categoria,
       Descripcion: this.formReactivo.value.descripcion,
-      URL_Imagen: this.imagenBase64
+      URL_Imagen: this.imagenBase64,
+      Cantidad: Number('')
     };
 
     if (this.productoEditar && this.productoEditar.ID) {
