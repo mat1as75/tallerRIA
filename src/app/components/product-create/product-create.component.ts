@@ -103,7 +103,7 @@ export class ProductCreateComponent {
 }
 
 onCancel() {
-  this.router.navigate(['/listaProductos'])
+  this.router.navigate(['/listaProducto'])
 }
 
 async onSubmit() {
@@ -138,6 +138,7 @@ async onSubmit() {
         this.rutaImagen = '';
         this.archivoSeleccionado = null;
         this.inputFile.nativeElement.value = '';
+        this.router.navigate(['/listaProducto'])
       },
       error: (err) => {
         console.error(err);

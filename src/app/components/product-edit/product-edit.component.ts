@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../interfaces/Product.interface';
 import { Brand } from '../../interfaces/Brand.interface';
@@ -24,7 +24,8 @@ export class ProductEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {
     this.formReactivo = new FormGroup({
       nombre: new FormControl('', Validators.required),
@@ -111,6 +112,7 @@ export class ProductEditComponent implements OnInit {
       this.productService.updateProduct(this.productoEditar.ID, datosProducto).subscribe({
         next: () => {
           Swal.fire('Producto actualizado', 'El producto se ha actualizado correctamente.', 'success');
+          this.router.navigate(['/listaProducto'])
         },
         error: (err) => {
           console.error('Error al actualizar el producto', err);

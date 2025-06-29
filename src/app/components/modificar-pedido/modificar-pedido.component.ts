@@ -187,6 +187,8 @@ export class ModificarPedidoComponent implements OnInit{
           confirmButtonText: 'Aceptar'      
     
         });
+
+        this.router.navigate(['/listaPedido'])
               
       },
       error: (err: unknown) => {
