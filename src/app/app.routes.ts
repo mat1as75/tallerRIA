@@ -20,6 +20,7 @@ import { PaymentOptionsComponent } from './components/payment-options/payment-op
 import { PaymentConfirmationComponent } from './components/payment-confirmation/payment-confirmation.component';
 import { HistoriaComprasComponent } from './components/historia-compras/historia-compras.component';
 import { GestorUpdateComponent } from './components/gestor-update/gestor-update.component';
+import { DetallesdepedidoComponent } from './components/detallesdepedido/detallesdepedido.component';
 
 
 export const routes: Routes = [
@@ -44,5 +45,7 @@ export const routes: Routes = [
     { path: 'opcionesPago', component: PaymentOptionsComponent },
     { path: 'confirmacionPago', component: PaymentConfirmationComponent },
     { path: 'MisCompras', component: HistoriaComprasComponent },
-    { path: 'modificarGestor', component: GestorUpdateComponent }
+    { path: 'modificarGestor', component: GestorUpdateComponent },
+    { path: 'detallesPedido/:id', component: DetallesdepedidoComponent },
+
 ];
