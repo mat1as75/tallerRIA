@@ -220,7 +220,9 @@ export class PaymentOptionsComponent implements OnInit {
 
   createDataOrder(): Order {                                                                                              
     return {
+      ID: Number(''),
       ID_Cliente: this.sessionClientId,
+      Nombre_Cliente: '',
       Total: this.cartProductList.reduce((total, product) => {
         return total + parseFloat(product.Precio) * product.Cantidad
       }, this.shippingCost),

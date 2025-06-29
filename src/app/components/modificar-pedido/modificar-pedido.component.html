@@ -1,6 +1,8 @@
-<div style="display: flex; justify-content: center; padding: 1rem; gap: 1rem; margin-top: 1rem; ">
+<div class="container my-3 "  >
 
-  <div style="flex: 1; max-width: 500px;">
+  <form [formGroup]="formReactivo">
+
+    <div>
     <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 1.5rem;">Modificar Pedido</h2>
 
     <!-- datos del envío -->
@@ -8,10 +10,12 @@
       <p style="font-weight: bold; margin-bottom: 1rem;">Datos del envío</p>
 
       <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <input type="text" placeholder="Teléfono" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" />
-        <input type="text" placeholder="Dirección" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" />
-        <input type="text" placeholder="Departamento" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" />
-        <input type="text" placeholder="Ciudad" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" />
+
+        <input readonly type="text" placeholder="Teléfono" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" formControlName="TelefonoCliente" />
+        <input readonly type="text" placeholder="Dirección" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" formControlName="DireccionCliente" />
+        <input readonly type="text" placeholder="Departamento" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" formControlName="DepartamentoCliente" />
+        <input readonly type="text" placeholder="Ciudad" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;" formControlName="CiudadCliente" />
+      
       </div>
     </div>
 
@@ -19,19 +23,22 @@
     <div style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem;">
       <p style="font-weight: bold; margin-bottom: 1rem;">Estado del pedido</p>
 
-      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-        <label><input type="radio" name="estado" checked /> Pendiente</label>
-        <label><input type="radio" name="estado" /> Pago</label>
-        <label><input type="radio" name="estado" /> Cancelado</label>
-        <label><input type="radio" name="estado" /> Entregado</label>
+      <div [formGroup]="formReactivo" style="display: flex; flex-direction: column; gap: 0.5rem;">
+
+        <label><input type="radio" name="Estado" value="pendiente" formControlName="Estado"   checked /> Pendiente</label >
+        <label><input type="radio" name="Estado" value="cancelado" formControlName="Estado"  /> Cancelado</label>
+        <label><input type="radio" name="Estado" value="entregado" formControlName="Estado"  /> Entregado</label>
+        
       </div>
+
     </div>
 
+    <!-- botones -->
     <div style="display: flex; flex-direction: column; gap: 1rem;">
     <br>
-    <button type="submit" style="background-color: #132A8E; color: white; padding: 0.5rem 2rem; border: none; border-radius: 6px;">MODIFICAR</button>
-    <button type="reset" style="background-color: #132A8E; color: white; padding: 0.5rem 2rem; border: none; border-radius: 6px;">LIMPIAR</button>
-    <button type="button" style="background-color: #f2f2f2; color: #000; padding: 0.5rem 2rem; border: 1px solid #ccc; border-radius: 6px;">CANCELAR</button>
+
+    <button type="submit" (click)="enviarFormulario()" style="background-color: #132A8E; color: white; padding: 0.5rem 2rem; border: none; border-radius: 6px;">MODIFICAR</button>
+    <button type="button" (click)="cancelar()" style="background-color: #f2f2f2; color: #000; padding: 0.5rem 2rem; border: 1px solid #ccc; border-radius: 6px;">CANCELAR</button>
 
     </div>
 
@@ -39,7 +46,11 @@
 
   </div>
 
-  <!-- botones -->
+  </form>
+
+ 
+
+ 
   
     
   

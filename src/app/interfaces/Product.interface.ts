@@ -12,4 +12,5 @@ export interface Product {
     Categoria?: string
     Cantidad?: number
     ID_Producto?: number
+    Cantidad: number
 }

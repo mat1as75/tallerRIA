@@ -5,10 +5,11 @@ import { ProductService } from '../../services/product/product.service';
 import { Category } from '../../interfaces/Category.interface';
 import { Brand } from '../../interfaces/Brand.interface';
 import Swal from 'sweetalert2';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-create',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.scss']
 })
@@ -34,7 +35,7 @@ export class ProductCreateComponent {
   @ViewChild('inputFile') inputFile!: ElementRef;
 
 
-  constructor(private servicioAPI: ProductService) {
+  constructor(private servicioAPI: ProductService, private router: Router) {
     this.nombre = new FormControl('', Validators.required);
     this.precio = new FormControl('', Validators.required);
     this.stock = new FormControl('', Validators.required);
@@ -101,6 +102,9 @@ export class ProductCreateComponent {
   });
 }
 
+onCancel() {
+  this.router.navigate(['/listaProductos'])
+}
 
 async onSubmit() {
   if (this.formReactivo.invalid) {
@@ -122,7 +126,8 @@ async onSubmit() {
       ID_Marca: this.formReactivo.value.marca,
       ID_Categoria: this.formReactivo.value.categoria,
       Descripcion: this.formReactivo.value.descripcion,
-      URL_Imagen: imagenUrl
+      URL_Imagen: imagenUrl,
+      Cantidad: Number('')
     };
 
     this.servicioAPI.createProduct(nuevoProducto).subscribe({
