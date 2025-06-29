@@ -45,7 +45,7 @@ constructor(private route: ActivatedRoute,
 
 
   CargarProductos(id: number){
-    this.pedidoService.ObtenerProductosdePedido(id).subscribe({
+    this.pedidoService.getProductsByOrderId(id).subscribe({
   next:(res: Product[])=>{
     console.log("se obtuvieron los Productos del pedido");
     this.product = res;
@@ -59,7 +59,7 @@ constructor(private route: ActivatedRoute,
 
    cargarPedido(id: number) {
     const session = this.servicecookie.getCookie('session_ID');
-    this.pedidoService.ObtenerPedidoporID(id).subscribe({
+    this.pedidoService.getPedidoById(id).subscribe({
       next: (res: Pedido) => {
         console.log('Pedido recibido:', res);
         this.pedido = res; // o adaptar a lo que necesites
