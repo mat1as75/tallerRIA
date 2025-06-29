@@ -11,6 +11,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 //INTERFACES
 import { ShippingInfo } from '../../interfaces/ShippingInfo.interface';
+import { UserServiceService } from '../../services/user/user-service.service';
+import { Order } from '../../interfaces/Order.interface';
+import { EmailHelperService } from '../../services/email-helper/email-helper.service';
 
 @Component({
   selector: 'app-modificar-pedido',
@@ -40,7 +43,13 @@ export class ModificarPedidoComponent implements OnInit{
 
   payload = {
     Estado: "",
+  }
 
+  pedidoInfo?: Order
+  dataCliente: any = {
+    ID_Pedido: 0,
+    Email: '',
+    Nombre: ''
   }
 
   constructor(
@@ -49,6 +58,8 @@ export class ModificarPedidoComponent implements OnInit{
     private http: HttpClient,
     private router: Router,
     private OrderService: OrderService,
+    private userService: UserServiceService,
+    private emailHelper: EmailHelperService
   
   ){
 
@@ -160,6 +171,13 @@ export class ModificarPedidoComponent implements OnInit{
       next: (data3) => {;
     
         console.log('Pedido modificado:', data3);
+        
+        if (this.payload.Estado === 'entregado') {
+          this.dataCliente.ID_Pedido = this.idPedido
+          console.log('SEND ', this.dataCliente)
+          this.getInfoClienteAndSendEmail()
+        }
+          
              
         Swal.fire({
     
@@ -188,6 +206,41 @@ export class ModificarPedidoComponent implements OnInit{
     
     }); 
     
+  }
+
+  sendEmailPaymentConfirmation() {
+    this.emailHelper.sendEmailPaymentConfirmation(this.dataCliente).subscribe({
+      next: (data) => {
+        console.log('DATOS: ', this.dataCliente)
+        console.log('RESPONSE EMAIL DATA: ', data)
+      },
+      error: (err) => {
+        console.error('Error al enviar mail', err)
+      }
+    })
+  }
+
+  getInfoClienteAndSendEmail() {
+    this.OrderService.getOrderById(this.idPedido).subscribe({
+      next: (pedido) => {
+        const idCliente = pedido.ID_Cliente
+
+        this.userService.ObtenerUsuario(String(idCliente)).subscribe({
+          next: (cliente) => {
+            this.dataCliente.Nombre = cliente.Nombre
+            this.dataCliente.Email = cliente.Email
+
+            this.sendEmailPaymentConfirmation()
+          },
+          error: (err) => {
+            console.error('Error al obtener usuario', err)
+          }
+        })
+      },
+      error: (err) => {
+        console.error('Error al obtener pedido', err)
+      }
+    })
   }
     
   
