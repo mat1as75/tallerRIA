@@ -42,10 +42,6 @@ export class OrderService {
     return this.http.get<Product[]>(`${this.apiphp}/productos/pedido/${id}`)
   }
 
-  getOrderById(id: number) {
-    return this.http.get<Pedido>(`${this.apiphp}/pedidos/${id}`)
-  }
-
   getDatosEnvioById(id:number){
     return this.http.get<DatosEnvio>(`${this.apiphp}/pedido/datosenvio/${id}`)
   }
