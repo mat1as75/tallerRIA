@@ -89,12 +89,12 @@
           </thead>
           <tbody>
             <tr *ngIf="pedido">
-              <td>{{ pedido?.ID }}</td>
-              <td>{{ pedido?.CreatedAt | date : "shortDate" }}</td>
+              <td>{{ pedido.ID }}</td>
+              <td>{{ pedido.CreatedAt | date : "shortDate" }}</td>
               <td>
-                <span class="badge text-bg-warning">{{ pedido?.Estado }}</span>
+                <span class="badge text-bg-warning">{{ pedido.Estado }}</span>
               </td>
-              <td>{{ pedido?.Total | currency }}</td>
+              <td>{{ pedido.Total | currency }}</td>
             </tr>
           </tbody>
         </table>
