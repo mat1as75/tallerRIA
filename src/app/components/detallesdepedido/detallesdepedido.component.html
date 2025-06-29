@@ -74,35 +74,66 @@
 
     <!-- Contenido principal -->
     <main class="col-12 col-md-9 col-lg-10 p-4 mt-0 mt-md-5">
-      <h1 class="fw-semibold mb-4">Mis Compras</h1>
-      <hr />
-      <div class="col-12 pt-2">
-        <table class="table table-striped table-hover mt-4">
-          <thead class="table-dark">
-            <tr>
-              <th>ID</th>
-              <th>Fecha</th>
-              <th>Estado</th>
-              <th>Valor</th>
-              <th>Detalles</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let compra of compras">
-              <td>{{ compra.ID }}</td>
-              <td>{{ compra.CreatedAt | date : "short" }}</td>
-              <td><p class="badge text-bg-primary">{{ compra.Estado }}</p></td>
-              <td>{{ compra.Total }}</td>
-              <td><a [routerLink]="['/detallesPedido', compra.ID]">Detalles</a></td>
-            </tr>
-          </tbody>
-        </table>
+  <h2 class="fw-semibold mb-4">Mis Compras > Detalles</h2>
+      <hr/>
+  <!-- Tabla resumen del pedido -->
+  <div class="table-responsive col-12 col-md-10">
+    <table class="table align-middle bg-transparent">
+      <thead>
+  <tr>
+    <th>ID</th>
+    <th>Fecha</th>
+    <th>Estado</th>
+    <th>Valor Total</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngIf="pedido">
+    <td>{{ pedido?.ID }}</td>
+    <td>{{ pedido?.CreatedAt| date: 'shortDate' }}</td>
+    <td>
+      <span class="badge text-bg-warning">{{ pedido?.Estado }}</span>
+    </td>
+    <td>{{ pedido?.Total| currency }}</td>
+  </tr>
+</tbody>
+    </table>
+  </div>
+<hr/>
+  <!-- Lista de productos -->
+  <h5 class="mt-5 mb-3">Lista de productos</h5>
+  <div class="table-responsive col-12 col-md-11">
+    <table class="table table-sm table-borderless align-middle text-center">
+      <thead class="border-bottom">
+        <tr class="text-nowrap">
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Valor Unitario</th>
+          <th>Subtotal</th>
+          <th>Producto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of product">
+    <td><img [src]="prod.URL_Imagen" alt="{{prod.Nombre}}" class="img-fluid rounded" style="max-width: 60px; height: auto;" /></td>
+    <td>{{prod.Nombre}}</td>
+    <td>{{prod.Cantidad}}</td>
+    <td>{{prod.Precio}}</td>
+    <td>{{ prod.Precio && prod.Cantidad ? prod.Precio * prod.Cantidad : 0 }}</td>
+    <td><a [routerLink]="['/producto/', prod.ID_Producto]">Ver Producto</a></td>
+  </tr>
+      </tbody>
+    </table>
+  </div>
 
-        <div *ngIf="compras.length === 0" class="alert alert-info">
-          No se encontraron compras para este usuario.
-        </div>
-      </div>
-    </main>
+  <!-- Botón para volver -->
+  <div class="text-end mt-4">
+    <a [routerLink]="['/MisCompras']" class="btn btn-primary rounded-pill px-4">
+      <i class="bi bi-arrow-left me-2"></i> Volver a Pedidos
+    </a>
+  </div>
+</main>
 
     <!-- Offcanvas para móvil -->
     <div

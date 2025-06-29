@@ -4,10 +4,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Order } from '../../interfaces/Order.interface';
 import { OrderConfirmation } from '../../interfaces/OrderConfirmation.interface';
 import { Observable } from 'rxjs';
+import { Pedido } from '../../interfaces/Pedido.interface';
 import { Product } from '../../interfaces/Product.interface';
 import { ShippingInfo } from  '../../interfaces/ShippingInfo.interface';
-import { Pedido } from  '../../interfaces/Pedido.interface';
 import { DatosEnvio } from '../../interfaces/DatosEnvio.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class OrderService {
     });
   }
 
+
   getProductsByOrderId(id: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiphp}/productos/pedido/${id}`)
   }
@@ -53,4 +55,5 @@ export class OrderService {
   updateEstadoPedido(idPedido: number,payload:{Estado:String}){
     return this.http.patch<DatosEnvio>(`${this.apiphp}/pedidos/${idPedido}`, payload)
   }
+
 }
