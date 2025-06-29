@@ -14,7 +14,7 @@ import { ShippingInfo } from '../../interfaces/ShippingInfo.interface';
 
 @Component({
   selector: 'app-modificar-pedido',
-  imports: [NavbarComponent,FormsModule,RouterLink,ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './modificar-pedido.component.html',
   styleUrl: './modificar-pedido.component.scss'
 })
@@ -82,7 +82,7 @@ export class ModificarPedidoComponent implements OnInit{
 
   //OBTENEMOS PEDIDO
   obtenerPedido(id: String) {
-    this.OrderService.getOrderById(+id).subscribe({
+    this.OrderService.getPedidoById(+id).subscribe({
       next: (data) => {
 
 
@@ -144,9 +144,7 @@ export class ModificarPedidoComponent implements OnInit{
 
 
   cancelar() {
-
-    this.router.navigate(['/']);
-
+    this.router.navigate(['/listaPedido']);
   }
   
   enviarFormulario() {

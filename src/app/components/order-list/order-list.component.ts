@@ -48,7 +48,6 @@ export class OrderListComponent implements OnInit {
       this.orderService.getProductsByOrderId(id).subscribe({
         next: (data) => {
           this.productsByOrderId[id] = data
-          console.log('PRODUCTS: ', data)
           this.cd.detectChanges()
         },
         error: (err) => {
